@@ -217,6 +217,91 @@
             
 
   
+    <article id="post-lua使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2024/02/04/lua%E4%BD%BF%E7%94%A8/" target="_blank">lua使用</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2024/02/04/lua%E4%BD%BF%E7%94%A8/" class="archive-article-date">
+        <time datetime="2024-02-04T10:21:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-04</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="lua使用"><a href="#lua使用" class="headerlink" title="lua使用"></a>lua使用</h1><h2 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1.环境搭建"></a>1.环境搭建</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install lua5.4</span><br><span class="line">lua -v </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">lua -v</span></span><br><span class="line">Lua 5.1.5  Copyright (C) 1994-2012 Lua.org, PUC-Ri</span><br><span class="line"></span><br><span class="line">sudo apt install luarockso  #安装lua库管理工具</span><br><span class="line"></span><br><span class="line">sudo luarocks install lua-readline</span><br></pre></td></tr></table></figure>
+
+<h3 id="两种执行方式："><a href="#两种执行方式：" class="headerlink" title="两种执行方式："></a>两种执行方式：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lua hello.lua</span><br><span class="line">./hello.lua  #加上了解释器</span><br></pre></td></tr></table></figure>
+
+<p>hello.lua</p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env lua</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 打印 Hello, World!</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello, World!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>lua工具库的管理工具</p>
+<h2 id="2-命令行demo"><a href="#2-命令行demo" class="headerlink" title="2.命令行demo"></a>2.命令行demo</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env lua</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Simple CLI program without lua-term</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- Command execution function</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">executeCommand</span><span class="params">(command)</span></span></span><br><span class="line">    <span class="keyword">if</span> command == <span class="string">&quot;show&quot;</span> <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Executing &#x27;show&#x27; command&quot;</span>)</span><br><span class="line">    <span class="keyword">elseif</span> command == <span class="string">&quot;exit&quot;</span> <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Exiting CLI&quot;</span>)</span><br><span class="line">        <span class="built_in">os</span>.<span class="built_in">exit</span>(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elseif</span> command == <span class="string">&quot;help&quot;</span> <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Available commands:&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;  1. show&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;  2. exit&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;  3. help&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;  4. run&quot;</span>)</span><br><span class="line">        <span class="comment">-- Add other commands...</span></span><br><span class="line">    <span class="keyword">elseif</span> command == <span class="string">&quot;run&quot;</span> <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Executing &#x27;run&#x27; command&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Unknown command. Type &#x27;help&#x27; for available commands.&quot;</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- CLI main loop</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">io</span>.<span class="built_in">write</span>(<span class="string">&quot;&gt; &quot;</span>)  <span class="comment">-- Display prompt</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> command = <span class="built_in">io</span>.<span class="built_in">read</span>()  <span class="comment">-- Read user input</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> command <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">break</span>  <span class="comment">-- Exit loop if user presses Ctrl-D (EOF)</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    executeCommand(command)  <span class="comment">-- Parse and execute command</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;CLI terminated.&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-执行程序"><a href="#3-执行程序" class="headerlink" title="3.执行程序:"></a>3.执行程序:</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">./appDemo.lua</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="built_in">help</span></span></span><br><span class="line">Available commands:</span><br><span class="line">  1. show</span><br><span class="line">  2. exit</span><br><span class="line">  3. help</span><br><span class="line">  4. run</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="built_in">exit</span></span></span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2024/02/04/lua%E4%BD%BF%E7%94%A8/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
