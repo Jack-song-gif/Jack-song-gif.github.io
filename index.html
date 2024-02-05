@@ -294,7 +294,20 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="lua使用"><a href="#lua使用" class="headerlink" title="lua使用"></a>lua使用</h1><h2 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1.环境搭建"></a>1.环境搭建</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install lua5.4</span><br><span class="line">lua -v </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">lua -v</span></span><br><span class="line">Lua 5.1.5  Copyright (C) 1994-2012 Lua.org, PUC-Ri</span><br><span class="line"></span><br><span class="line">sudo apt install luarockso  #安装lua库管理工具</span><br><span class="line"></span><br><span class="line">sudo luarocks install lua-readline</span><br></pre></td></tr></table></figure>
+    <h2 id="一-lua诞生背景和应用领域"><a href="#一-lua诞生背景和应用领域" class="headerlink" title="一.lua诞生背景和应用领域"></a>一.lua诞生背景和应用领域</h2><p>Lua是一种轻量级、可嵌入的脚本语言，由巴西的里约热内卢天主教大学的Roberto Ierusalimschy、Waldemar Celes和Luiz Henrique de Figueiredo于1993年开发。<code>Lua的设计目的是为了提供一种灵活的扩展和定制功能，使得应用程序可以通过嵌入Lua代码来增加灵活性和可定制性。</code></p>
+<p>Lua的诞生背景是在巴西石油公司和一些合作项目需要一个领域特定语言（DSL）来处理数据输入和数据配置，而当时已有的编程语言要么不容易嵌入，要么语法过于复杂。于是，Lua的开发者们决定开发一门新的编程语言，以满足这些需求。</p>
+<p>Lua的主要应用场景包括：游戏开发、移动应用开发、嵌入式系统开发、网络服务开发以及脚本扩展等。在游戏开发中，Lua常用于定义游戏逻辑、控制游戏流程、处理游戏事件等。在移动应用开发中，Lua可以用于跨平台开发，例如使用Lua进行Android和iOS的应用开发。<code>在嵌入式系统开发中，Lua的轻量级和易扩展性使其成为嵌入式系统开发的理想选择，可以用于嵌入式设备的控制和配置</code>。在网络服务开发中，Lua可以用于开发高性能的网络服务，例如Web应用程序、服务器端应用、代理服务器等。此外，许多软件和应用程序也支持使用Lua进行扩展和定制。</p>
+<h2 id="二-如何学习【How-to-learn-lua】"><a href="#二-如何学习【How-to-learn-lua】" class="headerlink" title="二.如何学习【How to learn lua】"></a>二.如何学习【How to learn lua】</h2><p>以下是几个Lua的学习网站和资料：</p>
+<ol>
+<li>Lua官网：<code>http://www.lua.org/</code>，这是Lua的官方网站，提供了Lua的详细文档、教程和示例代码。</li>
+<li>Lua官方文档：<code>http://www.lua.org/manual/</code>，这是Lua的官方文档，包含了Lua的语法、标准库、扩展方式等方面的详细说明。</li>
+<li>菜鸟教程：<code>http://www.runoob.com/lua/lua-basic-syntax.html</code>，这是一个在线教程，提供了Lua的基础语法和示例代码。</li>
+<li>CPPLua：<code>http://sourceforge.net/projects/cpplua/</code>，这是一个将Lua与C++结合使用的项目，提供了详细的文档和示例代码。]</li>
+<li>Lua交流论坛：<code>http://lua.10000fruits.com/</code>，这是一个Lua的中文交流论坛，可以找到许多Lua的使用经验和问题解答。</li>
+<li>GitHub上的Lua项目：在GitHub上可以找到许多Lua的项目和代码库，可以通过阅读这些项目来学习Lua的编程技巧和最佳实践。</li>
+</ol>
+<p>这些网站和资料提供了丰富的Lua学习资源，可以帮助你深入了解Lua的语法、标准库、扩展方式等方面的知识，以及掌握Lua在各种领域中的应用技巧。</p>
+<h2 id="三-lua快速入门【Qick-Start】"><a href="#三-lua快速入门【Qick-Start】" class="headerlink" title="三.lua快速入门【Qick Start】"></a>三.lua快速入门【Qick Start】</h2><h2 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1.环境搭建"></a>1.环境搭建</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install lua5.4</span><br><span class="line">lua -v </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">lua -v</span></span><br><span class="line">Lua 5.1.5  Copyright (C) 1994-2012 Lua.org, PUC-Ri</span><br><span class="line"></span><br><span class="line">sudo apt install luarockso  #安装lua库管理工具</span><br><span class="line"></span><br><span class="line">sudo luarocks install lua-readline</span><br></pre></td></tr></table></figure>
 
 <h3 id="两种执行方式："><a href="#两种执行方式：" class="headerlink" title="两种执行方式："></a>两种执行方式：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lua hello.lua</span><br><span class="line">./hello.lua  #加上了解释器</span><br></pre></td></tr></table></figure>
 
@@ -1356,7 +1369,7 @@
           
             <li class="search-li">
               <a href="https://zhousiwei.gitee.io/ibooks/" target="_blank" 
-                class="search-title" title="记录工作和学习过程中的笔记：Java、前端开发、Hexo博客、聚合支付、Linux笔记、ElasticSearch、ELK日志分析">
+                class="search-title" title="记录工作和学习过程中的笔记：Java、前端开发、Hexo博客、Linux学习、DPDK学习，深入理解">
                 
                   <img src="https://jack-song-gif.github.io/favicon.ico">
                 
@@ -1413,7 +1426,7 @@
     	<section class="tools-section tools-section-me" q-show="aboutme">
         
           
-  	  		<div class="aboutme-wrap" id="aboutme">主要涉及技术：<br>Java后端开发、聚合支付、<br>公众号开发、开源爱好者、Linux<br><br>联系QQ:2434387555<br><br>很惭愧<br><br>只做了一点微小的工作<br>谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="aboutme">主要涉及技术：<br>Java后端开发、Linux开发、<br>公众号开发、开源爱好者、Linux<br><br>联系QQ:562054870<br></div>
   	  	
     	</section>
     
