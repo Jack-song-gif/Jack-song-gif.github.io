@@ -309,7 +309,8 @@
 <p>注意：<code>tftp服务器需要在配置文件中指定tftp根目录，并且在linux中创建对应的目录，并赋予读写权限。</code></p>
 </li>
 </ol>
-<p><img src="/2024/02/28/%E4%BD%BF%E7%94%A8tftp%E5%8D%8F%E8%AE%AE%E4%BC%A0%E8%BE%93%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E5%88%B0%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B8%8A/tftp000.png" alt="loading-ag-10618"></p>
+<img title="" src="tftp000.png" alt="loading-ag-10630" data-align="center">
+
 <h2 id="二-服务器安装tftp服务器"><a href="#二-服务器安装tftp服务器" class="headerlink" title="二.服务器安装tftp服务器"></a>二.服务器安装tftp服务器</h2><p>步骤：</p>
 <h3 id="1-安装tftp服务"><a href="#1-安装tftp服务" class="headerlink" title="1.安装tftp服务"></a>1.安装tftp服务</h3><p>以ubuntu服务器为例：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update  </span><br><span class="line">sudo apt-get install tftpd-hpa</span><br></pre></td></tr></table></figure>
@@ -334,13 +335,14 @@
 <h2 id="三-开发板使用tftpboot下载文件"><a href="#三-开发板使用tftpboot下载文件" class="headerlink" title="三.开发板使用tftpboot下载文件"></a>三.开发板使用tftpboot下载文件</h2><p>从tftp服务器下载文件，<strong>注意使用绝对路径</strong> 启动开发板，进入Uboot目录 <code>tftpboot $loadaddr /var/lib/tftpboot/Image-SDK12.23.10-ramdisk 注：将tftp服务器上/var/lib/tftpboot/目录下的Image文件加载到内存地址$laodaddr上。</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">crb106s&gt; tftpboot <span class="variable">$loadaddr</span> /var/lib/tftpboot/Image-SDK12.23.10-ramdisk</span><br><span class="line">Waiting <span class="keyword">for</span> RPM0 LMAC3 <span class="built_in">link</span> status... SGMII [1G]</span><br><span class="line">Using rvu_pf<span class="comment">#3 device</span></span><br><span class="line">TFTP from server 192.168.2.2; our IP address is 192.168.2.10</span><br><span class="line">Filename <span class="string">&#x27;/var/lib/tftpboot/Image-SDK12.23.10-ramdisk&#x27;</span>.</span><br><span class="line">Load address: 0x40080000</span><br><span class="line">Loading: <span class="comment">##################################################  904.8 MiB</span></span><br><span class="line">         26.4 MiB/s</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">Bytes transferred = 948787712 (388d5a00 hex)</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2024/02/28/%E4%BD%BF%E7%94%A8tftp%E5%8D%8F%E8%AE%AE%E4%BC%A0%E8%BE%93%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E5%88%B0%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B8%8A/tftp001.png" alt="loading-ag-10620"></p>
+<img title="" src="tftp001.png" alt="loading-ag-10630" data-align="center">
+
 <h2 id="四-boot启动镜像Image-ramdisk"><a href="#四-boot启动镜像Image-ramdisk" class="headerlink" title="四. boot启动镜像Image-ramdisk"></a>四. boot启动镜像Image-ramdisk</h2><p><strong>直接在内存启动Image和Kenel</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crb106s&gt; booti <span class="variable">$loadaddr</span> - <span class="variable">$fdtaddr</span></span><br></pre></td></tr></table></figure>
 
-<img title="" src="tftp002.png" alt="loading-ag-10622" data-align="center">
+<img title="" src="tftp003.png" alt="loading-ag-10630" data-align="center">
 
-<p><img src="/2024/02/28/%E4%BD%BF%E7%94%A8tftp%E5%8D%8F%E8%AE%AE%E4%BC%A0%E8%BE%93%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E5%88%B0%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B8%8A/tftp003.png" alt="loading-ag-10624"></p>
+<img title="" src="tftp002.png" alt="loading-ag-10630" data-align="center">
 
     
 
