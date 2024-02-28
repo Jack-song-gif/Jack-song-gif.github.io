@@ -309,7 +309,7 @@
 <p>注意：<code>tftp服务器需要在配置文件中指定tftp根目录，并且在linux中创建对应的目录，并赋予读写权限。</code></p>
 </li>
 </ol>
-<img title="" src="file:///C:/Users/test/AppData/Roaming/marktext/images/2024-01-08-17-31-46-image.png" alt="" width="546" data-align="center">
+<img title="" src="file:///img/assets/2024-01-08-17-31-46-image.png" alt="loading-ag-10602" width="546" data-align="center">
 
 <h2 id="二-服务器安装tftp服务器"><a href="#二-服务器安装tftp服务器" class="headerlink" title="二.服务器安装tftp服务器"></a>二.服务器安装tftp服务器</h2><p>步骤：</p>
 <h3 id="1-安装tftp服务"><a href="#1-安装tftp服务" class="headerlink" title="1.安装tftp服务"></a>1.安装tftp服务</h3><p>以ubuntu服务器为例：</p>
@@ -335,14 +335,14 @@
 <h2 id="三-开发板使用tftpboot下载文件"><a href="#三-开发板使用tftpboot下载文件" class="headerlink" title="三.开发板使用tftpboot下载文件"></a>三.开发板使用tftpboot下载文件</h2><p>从tftp服务器下载文件，<strong>注意使用绝对路径</strong> 启动开发板，进入Uboot目录 <code>tftpboot $loadaddr /var/lib/tftpboot/Image-SDK12.23.10-ramdisk 注：将tftp服务器上/var/lib/tftpboot/目录下的Image文件加载到内存地址$laodaddr上。</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">crb106s&gt; tftpboot <span class="variable">$loadaddr</span> /var/lib/tftpboot/Image-SDK12.23.10-ramdisk</span><br><span class="line">Waiting <span class="keyword">for</span> RPM0 LMAC3 <span class="built_in">link</span> status... SGMII [1G]</span><br><span class="line">Using rvu_pf<span class="comment">#3 device</span></span><br><span class="line">TFTP from server 192.168.2.2; our IP address is 192.168.2.10</span><br><span class="line">Filename <span class="string">&#x27;/var/lib/tftpboot/Image-SDK12.23.10-ramdisk&#x27;</span>.</span><br><span class="line">Load address: 0x40080000</span><br><span class="line">Loading: <span class="comment">##################################################  904.8 MiB</span></span><br><span class="line">         26.4 MiB/s</span><br><span class="line"><span class="keyword">done</span></span><br><span class="line">Bytes transferred = 948787712 (388d5a00 hex)</span><br></pre></td></tr></table></figure>
 
-<img src="assets/2024-01-08-18-08-41-image.png" title="" alt="" data-align="center"> 
+<img title="" src="file:///img/assets/2024-01-08-18-08-41-image.png" alt="loading-ag-10603" data-align="center"> 
 
 <h2 id="四-boot启动镜像Image-ramdisk"><a href="#四-boot启动镜像Image-ramdisk" class="headerlink" title="四. boot启动镜像Image-ramdisk"></a>四. boot启动镜像Image-ramdisk</h2><p><strong>直接在内存启动Image和Kenel</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crb106s&gt; booti <span class="variable">$loadaddr</span> - <span class="variable">$fdtaddr</span></span><br></pre></td></tr></table></figure>
 
-<img src="assets/2024-01-08-18-16-12-image.png" title="" alt="" data-align="center">
+<img title="" src="file:///img/assets/2024-01-08-18-16-12-image.png" alt="loading-ag-10605" data-align="center">
 
-<p><img src="/assets/2024-02-28-14-53-49-image.png"></p>
+<img title="" src="file:///img/assets/2024-02-28-14-53-49-image.png" alt="loading-ag-10607" data-align="left">
 
     
 
@@ -1510,14 +1510,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">读后感</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">book</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">meson项目构建</a>
               </li>
              
@@ -1526,19 +1518,27 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">kernel</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">服务器内核</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">marvell</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">嵌入式开发板</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">读后感</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">book</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">kernel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">服务器内核</a>
               </li>
             
             <div class="clearfix"></div>
