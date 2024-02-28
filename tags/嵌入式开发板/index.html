@@ -6,22 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://jack-song-gif.github.io">
-  <title>一分钟学会meson构建项目 | CoderSong&#39;s blog</title>
+  <title>Tag: 嵌入式开发板 | CoderSong&#39;s blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="一分钟快速学会使用meson构建C语言项目meson是用python写的一个程序构建工具， meson的官网在https:&#x2F;&#x2F;mesonbuild.com&#x2F;index.html，这里有meson的使用手册，这个手册很好用。meson和make一样，需要写描述文件告诉meson要构建什么，这个描述文件 就是meson.build，meson根据meson.build中的定义生成具体的构建定义文件bu">
-<meta property="og:type" content="article">
-<meta property="og:title" content="一分钟学会meson构建项目">
-<meta property="og:url" content="https://jack-song-gif.github.io/2024/02/28/%E4%B8%80%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9Ameson%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE/index.html">
+  <meta name="description" content="recording study linux c programming and so on">
+<meta property="og:type" content="website">
+<meta property="og:title" content="CoderSong&#39;s blog">
+<meta property="og:url" content="https://jack-song-gif.github.io/tags/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91%E6%9D%BF/index.html">
 <meta property="og:site_name" content="CoderSong&#39;s blog">
-<meta property="og:description" content="一分钟快速学会使用meson构建C语言项目meson是用python写的一个程序构建工具， meson的官网在https:&#x2F;&#x2F;mesonbuild.com&#x2F;index.html，这里有meson的使用手册，这个手册很好用。meson和make一样，需要写描述文件告诉meson要构建什么，这个描述文件 就是meson.build，meson根据meson.build中的定义生成具体的构建定义文件bu">
+<meta property="og:description" content="recording study linux c programming and so on">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-02-28T06:21:30.000Z">
-<meta property="article:modified_time" content="2024-02-28T06:24:00.576Z">
 <meta property="article:author" content="CoderSong">
-<meta property="article:tag" content="meson项目构建">
-<meta property="article:tag" content="C语言工程">
+<meta property="article:tag" content="linux,">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="CoderSong&#39;s blog" type="application/atom+xml">
@@ -255,298 +252,84 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-一分钟学会meson构建项目" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
+            
+  
+  
     
-      <header class="article-header">
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2024" class="archive-year">2024</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	
+<a href="/2024/02/28/%E4%BD%BF%E7%94%A8tftp%E5%8D%8F%E8%AE%AE%E4%BC%A0%E8%BE%93%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E5%88%B0%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B8%8A/" class="archive-article-date">
+        <time datetime="2024-02-28T06:42:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-28</time>
+</a>
+
+        </div>
+    	 
   
+    <h1 itemprop="name">
+	
+	  <a class="archive-article-title" href="/2024/02/28/%E4%BD%BF%E7%94%A8tftp%E5%8D%8F%E8%AE%AE%E4%BC%A0%E8%BE%93%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E5%88%B0%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B8%8A/" target="_blank">使用tftp协议传输镜像文件到开发板上</a>
   
-    <h1 class="article-title" itemprop="name">
-      一分钟学会meson构建项目
     </h1>
   
 
 
-  
-  
-        
-        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
-              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
-        </span>
-
-<a href="/2024/02/28/%E4%B8%80%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9Ameson%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
-        <time datetime="2024-02-28T06:21:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-28</time>
-</a>
-
-  
-  
-    
-<div style="margin-top:10px;">
-  <span class="post-time">
-    <span class="post-meta-item-icon">
-      <!-- fonts.scss -->
-      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
-      <i class="icon-statistics"></i>
-      <span class="post-meta-item-text"> 字数统计:</span>
-      <span class="post-count">1.3k字</span>
-    </span>
-  </span>
-
-  <span class="post-time">
-    &nbsp; | &nbsp;
-    <span class="post-meta-item-icon">
-      <i class="icon-book icon"></i>
-      <span class="post-meta-item-text"> 阅读时长≈</span>
-      <span class="post-count">6分</span>
-    </span>
-  </span>
-</div>
-
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="一分钟快速学会使用meson构建C语言项目"><a href="#一分钟快速学会使用meson构建C语言项目" class="headerlink" title="一分钟快速学会使用meson构建C语言项目"></a>一分钟快速学会使用meson构建C语言项目</h1><p>meson是用python写的一个程序构建工具，</p>
-<p>meson的官网在<code>https://mesonbuild.com/index.html</code>，这里有meson的使用手册，<br>这个手册很好用。meson和make一样，需要写描述文件告诉meson要构建什么，这个描述文件 就是<code>meson.build</code>，<code>meson</code>根据<code>meson.build</code>中的定义生成具体的构建定义文件<code>build.ninja</code>， <code>ninja</code>根据<code>build.ninja</code>完成具体构建。所以，不像make直接根据Makefile文件完成构建，<strong>meson 需要和ninja配合一起完成构建。</strong></p>
-<h2 id="一-不同系统安装Meson和Ninja工具包"><a href="#一-不同系统安装Meson和Ninja工具包" class="headerlink" title="一.不同系统安装Meson和Ninja工具包"></a>一.不同系统安装Meson和Ninja工具包</h2><h3 id="在-Ubuntu-上安装-Meson-和-Ninja："><a href="#在-Ubuntu-上安装-Meson-和-Ninja：" class="headerlink" title="在 Ubuntu 上安装 Meson 和 Ninja："></a>在 Ubuntu 上安装 Meson 和 Ninja：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新软件包列表</span></span><br><span class="line">sudo apt-get update</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 Meson 和 Ninja</span></span><br><span class="line">sudo apt-get install meson ninja-build</span><br></pre></td></tr></table></figure>
-
-<h3 id="在-CentOS-上安装-Meson-和-Ninja："><a href="#在-CentOS-上安装-Meson-和-Ninja：" class="headerlink" title="在 CentOS 上安装 Meson 和 Ninja："></a>在 CentOS 上安装 Meson 和 Ninja：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新软件包列表</span></span><br><span class="line">sudo yum update</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 Meson 和 Ninja</span></span><br><span class="line">sudo yum install meson ninja-build</span><br></pre></td></tr></table></figure>
-
-<h2 id="二-构建简单的C语言项目"><a href="#二-构建简单的C语言项目" class="headerlink" title="二.构建简单的C语言项目"></a>二.构建简单的C语言项目</h2><p>建立一个项目目录meson_project，包括多个源文件和头文件,在这个示例中，我将展示如何组织一个稍微复杂的项目。</p>
-<h3 id="2-1-项目结构"><a href="#2-1-项目结构" class="headerlink" title="2.1 项目结构"></a>2.1 项目结构</h3><p>假设你的项目有以下结构：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">project_root/ #项目源码目录</span><br><span class="line">|-- src/</span><br><span class="line">|   |-- main.c</span><br><span class="line">|   |-- util/</span><br><span class="line">|       |-- helper.c</span><br><span class="line">|       |-- helper.h</span><br><span class="line">|-- include/</span><br><span class="line">|   |-- project.h</span><br><span class="line">|-- meson.build # 描述meson如何组织文件进行构建</span><br><span class="line">|-- native-file.txt  #指定gcc，g++,cpu架构版本信息</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">构建的时候，新建一个Build目录放构建的产出，可以根据不同的编译配置创建不同的build目录</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">示范如下</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">meson arm-build --cross-file config_file.txt  <span class="comment">#指定arm架构的编译器构建</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ninja -C build_dir <span class="comment">#输出到build_dir目录下</span></span></span><br><span class="line">project_root/ </span><br><span class="line">|-- x86_build/</span><br><span class="line">|-- arm_build/</span><br></pre></td></tr></table></figure>
-
-<h4 id="main-c"><a href="#main-c" class="headerlink" title="main.c"></a>main.c</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;project.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;util/helper.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello, Meson!\n&quot;</span>);</span><br><span class="line">    print_hello_from_helper();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="util-helper-c"><a href="#util-helper-c" class="headerlink" title="util&#x2F;helper.c"></a>util&#x2F;helper.c</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">include <span class="string">&quot;helper.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">void print_hello_from_helper() &#123;</span><br><span class="line">    printf(&quot;Hello from helper!\n&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="util-helper-h"><a href="#util-helper-h" class="headerlink" title="util&#x2F;helper.h"></a>util&#x2F;helper.h</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">ifndef HELPER_H</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">define HELPER_H</span></span><br><span class="line"></span><br><span class="line">void print_hello_from_helper();</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">endif</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="include-project-h"><a href="#include-project-h" class="headerlink" title="include&#x2F;project.h"></a>include&#x2F;project.h</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">ifndef PROJECT_H</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">define PROJECT_H</span></span><br><span class="line"></span><br><span class="line">// Your project-specific declarations go here</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">endif</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="meson-build"><a href="#meson-build" class="headerlink" title="meson.build"></a>meson.build</h4><p>这个文件定义了一个my_project的工程，并且定义了my_hello这个构建目标，以及使用的源文件，头文件等等。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">project(&#x27;my_project&#x27;, &#x27;c&#x27;)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Define sources</span></span><br><span class="line">src_files = files([&#x27;src/main.c&#x27;, &#x27;src/util/helper.c&#x27;])</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Define include directories</span></span><br><span class="line">inc_path = include_directories(&#x27;include&#x27;)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set CC environment variable to specify the compiler</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Add an executable</span></span><br><span class="line">executable(&#x27;my_hello&#x27;, src_files, include_directories: inc_path)</span><br></pre></td></tr></table></figure>
-
-<h4 id="native-file-txt"><a href="#native-file-txt" class="headerlink" title="native-file.txt"></a>native-file.txt</h4><p><strong>该文件指定一些构建要用的参数</strong></p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[binaries]</span><br><span class="line">c = [&#x27;ccache&#x27;, &#x27;x86_64-linux-gnu-gcc&#x27;]</span><br><span class="line">cpp = [&#x27;ccache&#x27;, &#x27;x86_64-linux-gnu-g++&#x27;]</span><br><span class="line">ar = &#x27;x86_64-linux-gnu-gcc-ar&#x27;</span><br><span class="line">strip = &#x27;x86_64-linux-gnu-strip&#x27;</span><br><span class="line">pkgconfig = &#x27;x86_64-linux-gnu-pkg-config&#x27;</span><br><span class="line">pcap-config = &#x27;&#x27;</span><br><span class="line">cmake = &#x27;cmake&#x27;</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-2-完整构建meson-project项目"><a href="#2-2-完整构建meson-project项目" class="headerlink" title="2.2 完整构建meson_project项目"></a>2.2 完整构建meson_project项目</h3><h4 id="1-meson-setup-build-创建构建目录"><a href="#1-meson-setup-build-创建构建目录" class="headerlink" title="1. meson setup build 创建构建目录"></a>1. meson setup build 创建构建目录</h4><p>这个是告诉meson在哪个目录下构建(这里是源码根目录下的build目录)，<strong>meson一定要在一个和源码独立的目录里做构建</strong>，这样多次构建可以指定不同的构建目录和构建配置，相互之间不受影响，比如对于同样的程序，构建一个riscv版本可以这样指定构建目录：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meson setup --cross-file ./rv_cross_file rv_builddir</span><br></pre></td></tr></table></figure>
-
-<p>开始创建build目录</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">meson setup build  <span class="comment"># 创建build目录</span></span></span><br><span class="line">The Meson build system</span><br><span class="line">Version: 0.61.2</span><br><span class="line">Source dir: /home/meson_project</span><br><span class="line">Build dir: /home/meson_project/build</span><br><span class="line">Build type: native build</span><br><span class="line">Project name: my_project</span><br><span class="line">Project version: undefined</span><br><span class="line">C compiler for the host machine: cc (gcc 11.4.0 &quot;cc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0&quot;)</span><br><span class="line">C linker for the host machine: cc ld.bfd 2.38</span><br><span class="line">Host machine cpu family: x86_64</span><br><span class="line">Host machine cpu: x86_64</span><br><span class="line">Build targets in project: 1</span><br><span class="line"></span><br><span class="line">Found ninja-1.10.1 at /usr/bin/ninja</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-根据native-file-txt配置文件，指定构建目录"><a href="#2-根据native-file-txt配置文件，指定构建目录" class="headerlink" title="2.根据native_file.txt配置文件，指定构建目录"></a>2.根据native_file.txt配置文件，指定构建目录</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">meson_project$ </span><span class="language-bash"><span class="built_in">ls</span></span></span><br><span class="line">build  include  meson.build  native-file.txt  src</span><br><span class="line"><span class="meta prompt_">meson_project$ </span><span class="language-bash">meson build --cross-file native-file.txt</span></span><br><span class="line">Directory already configured.</span><br><span class="line"></span><br><span class="line">Just run your build command (e.g. ninja) and Meson will regenerate as necessary.</span><br><span class="line">If ninja fails, run &quot;ninja reconfigure&quot; or &quot;meson --reconfigure&quot;</span><br><span class="line">to force Meson to regenerate.</span><br><span class="line"></span><br><span class="line">If build failures persist, run &quot;meson setup --wipe&quot; to rebuild from scratch</span><br><span class="line">using the same options as passed when configuring the build.</span><br><span class="line">To change option values, run &quot;meson configure&quot; instead.</span><br></pre></td></tr></table></figure>
-
-<h4 id="3-使用ninja将源码编译并输出到build目录下"><a href="#3-使用ninja将源码编译并输出到build目录下" class="headerlink" title="3.使用ninja将源码编译并输出到build目录下"></a>3.使用ninja将源码编译并输出到build目录下</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">meson_project$ </span><span class="language-bash">ninja -C build -v</span></span><br><span class="line">ninja: Entering directory `build&#x27;</span><br><span class="line">[1/3] cc -Imy_hello.p -I. -I.. -I../include -fdiagnostics-color=always -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -g -MD -MQ my_hello.p/src_util_helper.c.o -MF my_hello.p/src_util_helper.c.o.d -o my_hello.p/src_util_helper.c.o -c ../src/util/helper.c</span><br><span class="line">[2/3] cc -Imy_hello.p -I. -I.. -I../include -fdiagnostics-color=always -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -g -MD -MQ my_hello.p/src_main.c.o -MF my_hello.p/src_main.c.o.d -o my_hello.p/src_main.c.o -c ../src/main.c</span><br><span class="line">[3/3] cc  -o my_hello my_hello.p/src_main.c.o my_hello.p/src_util_helper.c.o -Wl,--as-needed -Wl,--no-undefined</span><br><span class="line"><span class="meta prompt_">meson_project$</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash">meson_project$</span></span><br><span class="line"><span class="meta prompt_">meson_project$ </span><span class="language-bash"><span class="built_in">ls</span></span></span><br><span class="line">build  include  meson.build  native-file.txt  src</span><br></pre></td></tr></table></figure>
-
-<h4 id="4-进入build目录查看构建结果"><a href="#4-进入build目录查看构建结果" class="headerlink" title="4.进入build目录查看构建结果"></a>4.进入build目录查看构建结果</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入build目录查看构建结果</span></span><br><span class="line"><span class="meta prompt_">meson_project$ </span><span class="language-bash"><span class="built_in">cd</span> build/</span></span><br><span class="line"><span class="meta prompt_">meson_project/build$ </span><span class="language-bash"><span class="built_in">ls</span></span></span><br><span class="line">build.ninja  compile_commands.json  meson-info  meson-logs  meson-private  my_hello  my_hello.p</span><br><span class="line"><span class="meta prompt_">meson_project/build$ </span><span class="language-bash">./my_hello</span></span><br><span class="line">Hello, Meson!</span><br><span class="line">Hello from helper!</span><br><span class="line"><span class="meta prompt_">meson_project/build$</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="5-修改main-c文件-重新构建项目"><a href="#5-修改main-c文件-重新构建项目" class="headerlink" title="5.修改main.c文件,重新构建项目"></a>5.修改main.c文件,重新构建项目</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim main.c</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">include <span class="string">&quot;project.h&quot;</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">include <span class="string">&quot;util/helper.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    printf(&quot;Hello, Meson!\n&quot;);</span><br><span class="line">    printf(&quot;Hello, now you can you use it to build project!\n&quot;);</span><br><span class="line">    print_hello_from_helper();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>回到根目录meson_project重新构建.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">meson_project $ meson build --cross-file native-file.txt</span><br><span class="line">Directory already configured.</span><br><span class="line"></span><br><span class="line">Just run your build command (e.g. ninja) and Meson will regenerate as necessary.</span><br><span class="line">If ninja fails, run &quot;ninja reconfigure&quot; or &quot;meson --reconfigure&quot;</span><br><span class="line">to force Meson to regenerate.</span><br><span class="line"></span><br><span class="line">If build failures persist, run &quot;meson setup --wipe&quot; to rebuild from scratch</span><br><span class="line">using the same options as passed when configuring the build.</span><br><span class="line">To change option values, run &quot;meson configure&quot; instead.</span><br><span class="line"><span class="meta prompt_">meson_project$ </span><span class="language-bash">ninja -C build</span></span><br><span class="line">ninja: Entering directory `build&#x27;</span><br><span class="line">[2/2] Linking target my_hello</span><br><span class="line"><span class="meta prompt_">meson_project$ </span><span class="language-bash"><span class="built_in">cd</span> build/</span></span><br><span class="line"><span class="meta prompt_">meson_project/build$ </span><span class="language-bash">./my_hello</span></span><br><span class="line">Hello, Meson!</span><br><span class="line">Hello, now you can you use it to build project!</span><br><span class="line">Hello from helper!</span><br><span class="line"><span class="meta prompt_">meson_project/build$</span></span><br></pre></td></tr></table></figure>
-
-    
-
-    
-    <div class="page-reward">
-      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
-        <div class="tooltip tooltip-east">
-          <span class="tooltip-item">
-            赏
-          </span>
-          <span class="tooltip-content">
-            <span class="tooltip-text">
-              <span class="tooltip-inner">
-                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
-                    class="icon icon-quo-right"></i></p>
-                <div class="reward-box">
-                  
-                  <div class="reward-box-item">
-                    <img class="reward-img" src="/img/alipay.jpg">
-                    <span class="reward-type">支付宝</span>
-                  </div>
-                  
-                  
-                  <div class="reward-box-item">
-                    <img class="reward-img" src="/img/weixin.png">
-                    <span class="reward-type">微信</span>
-                  </div>
-                  
-                </div>
-              </span>
-            </span>
-          </span>
-        </div>
-      </a>
-    </div>
-    
-
-    
-    <div class="declare"> 
-      <ul class="post-copyright">
-        <li>
-          <strong>本文作者：</strong>
-          CoderSong
-        </li>
-        <li>
-          <strong>本文链接：</strong>
-          <a href="https://jack-song-gif.github.io/2024/02/28/一分钟学会meson构建项目/" title="一分钟学会meson构建项目" target="_blank">https://jack-song-gif.github.io/2024/02/28/一分钟学会meson构建项目/</a>
-        </li>
-        
-        <li>
-          <strong>版权声明： </strong>
+        <div class="article-info info-on-right">
           
-          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
-        </li>
-        
-      </ul>
-    </div>
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">meson项目构建</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">marvell</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C语言工程</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">嵌入式开发板</a>
         		</li>
       		
 		</ul>
 	</div>
 
-    
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/Program-Language//" class="article-tag-list-link color2">Program_Language</a>
+        			<a href="/categories/marvell//" class="article-tag-list-link color3">marvell</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/marvell/嵌入式开发//" class="article-tag-list-link color1">嵌入式开发</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-    
-
-    
-    
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a> -->
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://jack-song-gif.github.io/2024/02/28/%E4%B8%80%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9Ameson%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE/" alt="微信分享二维码"> -->
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-
-    
-    <div class="clearfix"></div>
-  </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-
-<nav id="article-nav">
-  
-    <a href="/2024/02/28/%E5%8E%9F%E6%9D%A5%E8%BF%99%E5%B0%B1%E6%98%AFLinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          原来这就是Linux服务器的内核模块
-        
-      </div>
-    </a>
   
   
-    <a href="/2024/02/05/lua%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">lua快速入门</div>
-      <i class="icon-circle-right"></i>
-    </a>
+    </div></section>
   
-</nav>
 
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 
           </div>
@@ -587,9 +370,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
