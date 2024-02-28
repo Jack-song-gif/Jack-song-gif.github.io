@@ -259,6 +259,176 @@
             
 
   
+    <article id="post-原来这就是Linux服务器的内核模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2024/02/28/%E5%8E%9F%E6%9D%A5%E8%BF%99%E5%B0%B1%E6%98%AFLinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/" target="_blank">原来这就是Linux服务器的内核模块</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2024/02/28/%E5%8E%9F%E6%9D%A5%E8%BF%99%E5%B0%B1%E6%98%AFLinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/" class="archive-article-date">
+        <time datetime="2024-02-28T06:28:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-28</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="原来这就是Linux服务器的内核模块"><a href="#原来这就是Linux服务器的内核模块" class="headerlink" title="原来这就是Linux服务器的内核模块"></a>原来这就是Linux服务器的内核模块</h1><h2 id="简单介绍一下什么是内核？"><a href="#简单介绍一下什么是内核？" class="headerlink" title="简单介绍一下什么是内核？"></a>简单介绍一下什么是内核？</h2><blockquote>
+<p>我们的应用是跑在服务器上的，不同的服务器的有不同的操作系统，最常见的是linux系统，windows系统，macOS系统，而操作系统最核心的功能就是内核提供的，内核就相当于服务器的心脏，没有了内核操作系统就工作不了了。</p>
+</blockquote>
+<p>内核是操作系统的核心部分，负责管理计算机的硬件资源并提供基本的系统服务。它是一个运行在特权模式下的软件，直接访问计算机的硬件，并提供了一个抽象层，使应用程序能够与硬件交互而不必关心底层硬件的具体细节。</p>
+<p>以下是内核的主要职责和功能：</p>
+<ol>
+<li><p><strong>进程管理：</strong> 内核负责管理系统中运行的进程。它为每个进程分配资源，调度它们的执行，并提供进程间通信的机制。</p>
+</li>
+<li><p><strong>内存管理：</strong> 内核管理系统的内存，包括内存分配、释放、虚拟内存管理和页面交换等功能。</p>
+</li>
+<li><p><strong>文件系统：</strong> 内核提供文件系统抽象，允许应用程序通过文件系统接口访问存储设备上的文件和目录。</p>
+</li>
+<li><p><strong>设备驱动程序：</strong> 内核包含各种设备驱动程序，用于与硬件设备进行通信。这些驱动程序允许应用程序通过标准接口与硬件设备交互。</p>
+</li>
+<li><p><strong>系统调用：</strong> 内核提供系统调用接口，使用户空间程序能够请求操作系统的服务。这些服务包括文件操作、进程管理、网络通信等。</p>
+</li>
+<li><p><strong>中断和异常处理：</strong> 内核负责处理硬件产生的中断和异常。它会响应这些事件，并执行相应的处理程序。</p>
+</li>
+<li><p><strong>调度器：</strong> 内核包含调度器，负责决定哪个进程在给定的时间片内运行。这样可以实现多任务和多进程的并发执行。</p>
+</li>
+<li><p><strong>安全性和权限管理：</strong> 内核确保系统的安全性，通过权限机制控制对系统资源的访问。</p>
+</li>
+</ol>
+<h2 id="什么是内核模块？"><a href="#什么是内核模块？" class="headerlink" title="什么是内核模块？"></a>什么是内核模块？</h2><p>内核模块是 Linux 内核的一部分，它是一种动态加载到运行中内核的代码。这些模块允许系统管理员在<code>不重新启动操作系统的情况下添加或移除功能</code>。内核模块可以提供新的<code>设备驱动程序、文件系统支持、网络协议</code>等。</p>
+<p>比如你增加了一种设备的驱动，不需要重新编译内核，只要增加新的内核驱动模块即可。</p>
+<p>内核模块允许在运行时<code>动态加载和卸载</code>，从而扩展或缩减操作系统的功能。这样的设计使得 Linux 内核可以更加灵活和可配置，<strong>无需重新编译整个内核就能够引入新的功能或者去掉不需要的功能。</strong></p>
+<p>通过加载适当的内核模块，用户或者系统管理员可以：</p>
+<ol>
+<li><p><strong>支持新硬件：</strong> 添加设备驱动模块以支持新硬件设备，而无需重新启动系统。</p>
+</li>
+<li><p><strong>引入新的文件系统：</strong> 加载文件系统模块，以支持在系统上挂载新的文件系统。</p>
+</li>
+<li><p><strong>网络配置：</strong> 动态加载网络协议模块，以支持不同的网络通信方式。</p>
+</li>
+<li><p><strong>调整内存管理：</strong> 使用不同的内存管理模块，以满足特定需求。</p>
+</li>
+<li><p><strong>加强安全性：</strong> 启用或禁用安全模块，以实施不同级别的安全策略。</p>
+</li>
+<li><p><strong>引入加密功能：</strong> 加载加密模块，提供对数据的加密和解密支持。</p>
+</li>
+</ol>
+<p>这种模块化的设计使得 Linux 内核非常灵活，适应了各种硬件和应用场景的需求。</p>
+<p>当你想要安装、卸载或使用一个内核模块时，通常需要编写相应的模块代码，并使用一些命令来进行操作。下面是一个简单的示例，演示了如何创建、编译、安装、卸载和使用一个简单的内核模块。</p>
+<p><strong>1. 编写一个简单的内核模块：</strong></p>
+<p>创建一个名为 <code>hello_module.c</code> 的文件，内容如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hello_module.c</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/init.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;linux/module.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">MODULE_LICENSE(<span class="string">&quot;GPL&quot;</span>);</span><br><span class="line">MODULE_AUTHOR(<span class="string">&quot;Your Name&quot;</span>);</span><br><span class="line">MODULE_DESCRIPTION(<span class="string">&quot;A simple kernel module&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> __init <span class="title function_">hello_init</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;Hello, this is your kernel module!\n&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> __exit <span class="title function_">hello_exit</span><span class="params">(<span class="type">void</span>)</span> &#123;</span><br><span class="line">    printk(KERN_INFO <span class="string">&quot;Goodbye, kernel module!\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">module_init(hello_init);</span><br><span class="line">module_exit(hello_exit);</span><br></pre></td></tr></table></figure>
+
+<p>Makefile文件</p>
+<p>注意：在 <code>Makefile</code> 文件中，每个命令行都应该以一个制表符（Tab）作为开头，确保 <code>Makefile</code> 文件中的 <code>all</code> 和 <code>clean</code> 目标的命令行开头都是以 Tab 键开始的。</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">obj-m += hello_module.o</span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    make -C /lib/modules/<span class="variable">$(<span class="built_in">shell</span> uname -r)</span>/build M=<span class="variable">$(PWD)</span> modules</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    make -C /lib/modules/<span class="variable">$(<span class="built_in">shell</span> uname -r)</span>/build M=<span class="variable">$(PWD)</span> clean</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 编译内核模块：</strong></p>
+<p>使用以下命令编译内核模块：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make -C /lib/modules/$(uname -r)/build M=$(pwd) modules</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 安装内核模块：</strong></p>
+<p>使用以下命令将模块安装到内核中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo insmod hello_module.ko</span><br></pre></td></tr></table></figure>
+
+<p><strong>4. 查看内核日志：</strong></p>
+<p>使用以下命令查看内核日志，确认模块已经加载：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dmesg | tail</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo dmesg | <span class="built_in">tail</span></span></span><br><span class="line">[3648038.384947] VFIO - User Level meta-driver version: 0.3</span><br><span class="line">[4172445.177772] hello_module: loading out-of-tree module taints kernel.</span><br><span class="line">[4172445.177883] hello_module: module verification failed: signature and/or required key missing - tainting kernel</span><br><span class="line">[4172445.178629] Hello, this is your kernel module!</span><br></pre></td></tr></table></figure>
+
+<p><strong>5. 卸载内核模块：</strong></p>
+<p>使用以下命令卸载已加载的模块：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo rmmod hello_module</span><br></pre></td></tr></table></figure>
+
+<p><strong>6. 再次查看内核日志：</strong></p>
+<p>使用以下命令查看内核日志，确认模块已经卸载：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">dmesg | tail</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo dmesg | <span class="built_in">tail</span></span></span><br><span class="line">[3648038.384947] VFIO - User Level meta-driver version: 0.3</span><br><span class="line">[4172445.177772] hello_module: loading out-of-tree module taints kernel.</span><br><span class="line">[4172445.177883] hello_module: module verification failed: signature and/or required key missing - tainting kernel</span><br><span class="line">[4172445.178629] Hello, this is your kernel module!</span><br><span class="line">[4172962.943603] Goodbye, kernel module!</span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">kernel</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">服务器内核</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2024/02/28/%E5%8E%9F%E6%9D%A5%E8%BF%99%E5%B0%B1%E6%98%AFLinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-一分钟学会meson构建项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1126,92 +1296,6 @@
 
 
   
-    <article id="post-数据存储系列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/02/05/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%B3%BB%E5%88%97/" target="_blank">数据存储系列</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/02/05/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%B3%BB%E5%88%97/" class="archive-article-date">
-        <time datetime="2024-02-05T09:01:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>欢迎收看数据存储系列笔记</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/data-store//" class="article-tag-list-link color1">data_store</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/02/05/%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E7%B3%BB%E5%88%97/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1366,6 +1450,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">C语言工程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">kernel</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">服务器内核</a>
               </li>
             
             <div class="clearfix"></div>
