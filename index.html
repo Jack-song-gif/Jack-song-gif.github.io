@@ -265,6 +265,162 @@
             
 
   
+    <article id="post-Linux下查看进程的线程任务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2024/03/08/Linux%E4%B8%8B%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1/" target="_blank">Linux下查看进程的线程任务</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2024/03/08/Linux%E4%B8%8B%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1/" class="archive-article-date">
+        <time datetime="2024-03-08T08:36:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-08</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="查看进程每个线程的执行任务"><a href="#查看进程每个线程的执行任务" class="headerlink" title="查看进程每个线程的执行任务"></a>查看进程每个线程的执行任务</h1><p>在Linux中，你可以使用多种方法来查看一个进程中的多个线程以及每个线程正在执行的任务。以下是一些常用的方法：</p>
+<h3 id="1-使用ps命令"><a href="#1-使用ps命令" class="headerlink" title="1. 使用ps命令"></a>1. 使用<code>ps</code>命令</h3><p>你可以使用<code>ps</code>命令结合<code>-eLf</code>选项来查看每个线程及其状态。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | grep 进程ID</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>进程ID</code>是你想要查看的进程的ID。这个命令会列出该进程下的所有线程及其详细信息。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ps -eLf | grep 807</span></span><br><span class="line">root         807       1     807  0    1 1月29 ?       00:00:00 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups</span><br><span class="line">root      137466     807  137466  0    1 3月04 ?       00:00:00 sshd: byzoro [priv]</span><br><span class="line">root      137810     807  137810  0    1 3月04 ?       00:00:00 sshd: byzoro [priv]</span><br><span class="line">root      142099     807  142099  0    1 3月04 ?       00:00:00 sshd: byzoro [priv]</span><br><span class="line">root      156998     807  156998  0    1 14:06 ?        00:00:00 sshd: byzoro [priv]</span><br><span class="line">root      158075       2  158075  0    1 15:17 ?        00:00:00 [kworker/7:0]</span><br><span class="line">byzoro    158598  137850  158598  0    1 15:28 pts/1    00:00:00 grep --color=auto 807</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf</span><br><span class="line">UID          PID    PPID     LWP  C NLWP STIME TTY          TIME CMD</span><br><span class="line">root           1       0       1  0    1 1月29 ?       00:02:03 /sbin/init splash</span><br><span class="line">root           2       0       2  0    1 1月29 ?       00:00:02 [kthreadd]</span><br><span class="line">root           3       2       3  0    1 1月29 ?       00:00:00 [rcu_gp]</span><br></pre></td></tr></table></figure>
+
+<p>输出列表说明：</p>
+<p>这些是Linux系统中<code>ps</code>命令的输出，用于显示当前系统中的进程信息。下面是每个字段的解释：</p>
+<ol>
+<li><strong>UID</strong> (User ID): 进程的所有者ID。在这个例子中，所有进程都是<code>root</code>用户，这意味着它们是系统进程或由<code>root</code>用户启动的。</li>
+<li><strong>PID</strong> (Process ID): 进程的唯一标识符。它是系统中每个进程的唯一数字。</li>
+<li><strong>PPID</strong> (Parent Process ID): 父进程的PID。每个进程通常都有一个父进程，它创建了该进程。在这个例子中，我们可以看到许多进程的父进程是<code>init</code>进程（PID为1），这是系统的第一个进程。</li>
+<li><strong>LWP</strong> (Light Weight Process): 线程ID。在多线程程序中，每个线程都有一个唯一的LWP。对于非多线程程序，LWP通常与PID相同。</li>
+<li><strong>C</strong> (CPU Utilization): CPU利用率。这表示进程当前占用的CPU使用率。<code>0</code>表示该进程当前没有使用CPU。</li>
+<li><strong>NLWP</strong> (Number of Light Weight Processes): 进程中的线程数量。对于单线程进程，这通常是<code>1</code>。</li>
+<li><strong>STIME</strong> (Start Time): 进程的启动时间。</li>
+<li><strong>TTY</strong> (Controlling Terminal): 进程关联的终端。<code>?</code>表示该进程没有与任何终端关联。</li>
+<li><strong>TIME</strong> (CPU Time): 进程使用的CPU总时间。这通常包括用户模式和内核模式的CPU时间。</li>
+<li><strong>CMD</strong> (Command Name&#x2F;Line): 启动进程的命令名称或命令行。</li>
+</ol>
+<p>在这个输出中，你可以看到各种系统进程，如<code>init</code>、<code>kthreadd</code>和<code>rcu_gp</code>。这些都是Linux内核和初始化系统的一部分，它们在系统启动时自动启动，并在系统运行时持续运行。</p>
+<h3 id="2-使用top命令"><a href="#2-使用top命令" class="headerlink" title="2. 使用top命令"></a>2. 使用<code>top</code>命令</h3><p><code>top</code>命令是一个实时显示系统中各个进程的资源占用状况的监控工具。你可以通过按<code>H</code>键来显示线程，而不是进程。</p>
+<p>在<code>top</code>命令运行时，按<code>H</code>，然后按<code>P</code>（按CPU使用率排序）或<code>M</code>（按内存使用率排序）来查看线程的详细信息。</p>
+<h3 id="3-使用htop命令"><a href="#3-使用htop命令" class="headerlink" title="3. 使用htop命令"></a>3. 使用<code>htop</code>命令</h3><p><code>htop</code>是<code>top</code>的一个增强版，它提供了一个彩色的界面，并支持鼠标操作。在<code>htop</code>中，你可以直接看到每个进程下的线程，并按需要排序和筛选。</p>
+<p>首先，你需要安装<code>htop</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install htop  <span class="comment"># 对于Debian/Ubuntu系统  sudo yum install htop  # 对于CentOS/RedHat系统</span></span><br></pre></td></tr></table></figure>
+
+<p>然后，运行<code>htop</code>并查看进程和线程信息。</p>
+<p><img src="/2024/03/08/Linux%E4%B8%8B%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1/htop.png" alt="loading-ag-2577"></p>
+<h3 id="4-使用gdb"><a href="#4-使用gdb" class="headerlink" title="4. 使用gdb"></a>4. 使用<code>gdb</code></h3><p><code>gdb</code>是一个强大的调试工具，你也可以使用它来查看进程中的线程和它们的堆栈跟踪。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb -p 进程ID  (gdb) info threads</span><br></pre></td></tr></table></figure>
+
+<p>这将显示所有线程的列表。你可以使用<code>thread 线程ID</code>来切换到特定的线程，并使用<code>bt</code>命令来查看该线程的堆栈跟踪。</p>
+<p>如何使用gdb调试一个多线程的程序：</p>
+<p>multithread_example.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;pthread.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span> <span class="comment">// 用于sleep函数</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">print_message_function</span><span class="params">(<span class="type">void</span> *ptr)</span> &#123;</span><br><span class="line">    <span class="type">long</span> tid;</span><br><span class="line">    tid = (<span class="type">long</span>)ptr;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;线程 #%ld 正在运行\n&quot;</span>, tid);</span><br><span class="line">    sleep(<span class="number">100</span>); <span class="comment">// 每个线程等待100秒</span></span><br><span class="line">    pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">pthread_t</span> thread1, thread2;</span><br><span class="line">    <span class="type">const</span> <span class="type">long</span> num_threads = <span class="number">2</span>;</span><br><span class="line">    <span class="type">int</span> rc;</span><br><span class="line">    <span class="type">long</span> t;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(t = <span class="number">0</span>; t &lt; num_threads; t++) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;创建线程 %ld\n&quot;</span>, t);</span><br><span class="line">        <span class="keyword">if</span> (t == <span class="number">0</span>) &#123;</span><br><span class="line">            rc = pthread_create(&amp;thread1, <span class="literal">NULL</span>, print_message_function, (<span class="type">void</span> *)t);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            rc = pthread_create(&amp;thread2, <span class="literal">NULL</span>, print_message_function, (<span class="type">void</span> *)t);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (rc) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;Error:无法创建线程, %d\n&quot;</span>, rc);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 等待线程1和线程2完成</span></span><br><span class="line">    pthread_join(thread1, <span class="literal">NULL</span>);</span><br><span class="line">    pthread_join(thread2, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 所有线程已经结束，现在主线程可以退出</span></span><br><span class="line">    pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>编译这个程序，确保链接了pthread库：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -o multithread_example multithread_example.c -lpthread</span><br></pre></td></tr></table></figure>
+
+<p>然后，你可以运行这个程序，并使用<code>gdb</code>来附加到它：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./multithread_example &amp;  # 在后台运行程序  </span><br><span class="line">gdb -p &lt;进程ID&gt;          # 使用gdb附加到进程</span><br></pre></td></tr></table></figure>
+
+<p>在<code>gdb</code>提示符下，你可以使用<code>info threads</code>来查看所有线程的列表，然后使用<code>thread &lt;线程ID&gt;</code>来切换到特定的线程，并使用<code>bt</code>（backtrace）命令来查看该线程的堆栈跟踪。</p>
+<p>示例<code>gdb</code>会话如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(gdb) info threads  </span><br><span class="line">  Id   Target Id         Frame   </span><br><span class="line">* 1    Thread 0x7ffff7fd6700 (LWP 12345) &quot;multithread_exam&quot; 0x00007ffff7a9c94d in __GI___nanosleep () at ../sysdeps/unix/syscall-template.S:81  </span><br><span class="line">  2    Thread 0x7ffff77d5700 (LWP 12346) &quot;multithread_exam&quot; 0x00007ffff7a9c94d in __GI___nanosleep () at ../sysdeps/unix/syscall-template.S:81  </span><br><span class="line"></span><br><span class="line">(gdb) thread 2  </span><br><span class="line">[Switching to thread 2 (Thread 0x7ffff77d5700 (LWP 12346))]  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">0  0x00007ffff7a9c94d <span class="keyword">in</span> __GI___nanosleep () at ../sysdeps/unix/syscall-template.S:81</span>  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">1  0x00007ffff7a9c884 <span class="keyword">in</span> <span class="built_in">sleep</span> () at ../sysdeps/unix/sysv/linux/sleep.c:50</span>  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">2  0x0000555555555114 <span class="keyword">in</span> print_message_function (ptr=0x555555754f8c) at multithread_example.c:9</span>  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">3  0x00007ffff7b936db <span class="keyword">in</span> start_thread (arg=0x7ffff77d5700) at pthread_create.c:463</span>  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">4  0x00007ffff78c988f <span class="keyword">in</span> <span class="built_in">clone</span> () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:95</span>  </span><br><span class="line"></span><br><span class="line">(gdb) bt  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">0  0x00007ffff7a9c94d <span class="keyword">in</span> __GI___nanosleep () at ../sysdeps/unix/syscall-template.S:81</span>  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">1  0x00007ffff7a9c884 <span class="keyword">in</span> <span class="built_in">sleep</span> () at ../sysdeps/unix/sysv/linux/sleep.c:50</span>  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">2  0x0000555555555114 <span class="keyword">in</span> print_message_function (ptr=0x55</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-查看线程正在执行的任务"><a href="#5-查看线程正在执行的任务" class="headerlink" title="5. 查看线程正在执行的任务"></a>5. 查看线程正在执行的任务</h3><p>要查看线程正在执行的具体任务（即它们当前的函数调用堆栈），你可以使用<code>gdb</code>的<code>bt</code>命令（如上所述），或者使用<code>perf</code>工具。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perf top -p 进程ID</span><br></pre></td></tr></table></figure>
+
+<p>这将显示按CPU使用率排序的进程和线程列表。你可以看到每个线程当前正在执行的函数。</p>
+<p>注意：<code>perf</code>工具可能需要root权限来运行。</p>
+<p><img src="/2024/03/08/Linux%E4%B8%8B%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1/perf.png" alt="loading-ag-2583"></p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">thread</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/linux//" class="article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2024/03/08/Linux%E4%B8%8B%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-C语言中级开发进阶路线" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1590,100 +1746,9 @@
 
 
   
-    <article id="post-读书破万卷" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/02/05/%E8%AF%BB%E4%B9%A6%E7%A0%B4%E4%B8%87%E5%8D%B7/" target="_blank">读书破万卷</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/02/05/%E8%AF%BB%E4%B9%A6%E7%A0%B4%E4%B8%87%E5%8D%B7/" class="archive-article-date">
-        <time datetime="2024-02-05T09:05:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>引言</p>
-<blockquote>
-<p>读书破万卷，下笔如有神</p>
-<p>读万卷书，行万里路</p>
-</blockquote>
-<p>在这里我会记录一些读书笔记</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/book//" class="article-tag-list-link color5">book</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/02/05/%E8%AF%BB%E4%B9%A6%E7%A0%B4%E4%B8%87%E5%8D%B7/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1868,6 +1933,14 @@
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">net</a>
               </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">thread</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
@@ -1938,7 +2011,7 @@
             </li>
           
             <li class="search-li">
-              <a href="#" target="_blank" 
+              <a href="https://gitee.com/to_song" target="_blank" 
                 class="search-title" >
                 
                   <i class="icon-link icon"></i>
