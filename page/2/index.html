@@ -265,6 +265,92 @@
             
 
   
+    <article id="post-一些思考" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2024/02/05/%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83/" target="_blank">一些思考</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2024/02/05/%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83/" class="archive-article-date">
+        <time datetime="2024-02-05T09:05:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-05</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>一些思考</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/thoughts//" class="article-tag-list-link color4">thoughts</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2024/02/05/%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-读书破万卷" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1103,359 +1189,6 @@
 
 
   
-    <article id="post-c语言入门总篇" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/02/04/c%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%80%BB%E7%AF%87/" target="_blank">c语言入门总篇</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/02/04/c%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%80%BB%E7%AF%87/" class="archive-article-date">
-        <time datetime="2024-02-04T11:45:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-04</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="C语言语法篇"><a href="#C语言语法篇" class="headerlink" title="C语言语法篇"></a>C语言语法篇</h1><p><a target="_blank" rel="noopener" href="https://wangdoc.com/">参考网站：https://wangdoc.com/</a></p>
-<h2 id="结构体基础知识"><a href="#结构体基础知识" class="headerlink" title="结构体基础知识"></a>结构体基础知识</h2><p>a.认识结构体</p>
-<p>结构体是一些值的集合,这些值称为成员变量.结构体的每个成员可以是不同类型的变量.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明一个结构体类型</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//声明一个学生类型(Stu就是你对这个结构体的称呼)</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stu</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> name[<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> tele[<span class="number">12</span>];  <span class="comment">//成员变量</span></span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> sex[<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">&#125;s4,s5,s6;<span class="comment">//全局变量</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stu</span> <span class="title">s3</span>;</span><span class="comment">//全局变量</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建结构体变量(局部的)</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Stu</span> <span class="title">s1</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Stu</span> <span class="title">s2</span>;</span> </span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>b.结构体自引用</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//结构体的自引用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//struct Node n; sizeof(struct Node)无限包含下去错误</span></span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">next</span>;</span><span class="comment">//找到同类型的其它变量</span></span><br><span class="line"></span><br><span class="line">&#125;Node;<span class="comment">//你只用关心这里就好了,我们给结构体创建了另一个名字</span></span><br></pre></td></tr></table></figure>
-
-<p>c.结构体嵌套使用</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">T</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> weight;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span>  age;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">S</span></span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> c;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> a;</span><br><span class="line"></span><br><span class="line">    <span class="type">double</span> d;</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> arr[<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">T</span> <span class="title">st</span>;</span><span class="comment">//嵌套了上一个结构体</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">S</span> <span class="title">s</span> =</span> &#123; <span class="string">&#x27;c&#x27;</span>,<span class="number">100</span>,<span class="number">3.14</span>,<span class="string">&quot;hello disposable&quot;</span>,&#123;<span class="number">55.6</span>,<span class="number">20</span>&#125; &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%c %d %lf %s %lf %d\n&quot;</span>, s.c, s.a, s.d, s.arr,s.st.weight,s.st.age);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="C语言内存模型"><a href="#C语言内存模型" class="headerlink" title="C语言内存模型"></a>C语言内存模型</h2><p>C语言的内存模型是基于物理内存的抽象模型，它将物理内存划分为不同的区域，每个区域有不同的作用和特点。C语言的内存模型主要包括以下几个部分：</p>
-<p>代码区：存放程序的指令代码，通常是只读的。(字符串常量也会放这)</p>
-<p>数据区：存放程序中已经初始化的全局变量和静态变量。</p>
-<p>BSS段：存放未初始化的全局变量和静态变量，<strong>通常被初始化为0</strong>。</p>
-<p>堆区：<strong>动态分配内存的区域，由程序员手动管理。(malloc free)</strong></p>
-<p>栈区：存放函数的局部变量和函数调用的上下文信息，<strong>由编译器自动管理</strong>。</p>
-<blockquote>
-<p>在C语言中，变量的存储位置和生命周期由其作用域和存储类别决定。作用域指的是变量<u>在程序中的可见范围</u>，存储类别指的是变量在内存中的存储方式和生命周期。C语言中的存储类别包括自动存储类别、静态存储类别、寄存器存储类别和外部存储类别。</p>
-</blockquote>
-<p><strong>自动存储类别的变量</strong>通常存储在<strong>栈区</strong>，它们的生命周期与<strong>函数调用的生命周期相同</strong>。<strong>静态存储类别的变量</strong>通常存储在<strong>数据区或BSS段</strong>，它们的生命周期与<strong>程序的运行周期相同</strong>。寄存器存储类别的变量通常存储在<strong>CPU的寄存器</strong>中，它们的生命周期与<strong>函数调用的生命周期相同</strong>。<strong>外部存储类别的变量</strong>通常存储在<strong>数据区或BSS段</strong>，它们的生命周期与程序的运行周期相同，<strong>但它们可以被其他文件访问</strong>。</p>
-<p>当我们定义一个变量时，它的存储位置和生命周期由其作用域和存储类别决定。下面是一些不同类型变量存储在不同区域的例子：</p>
-<p>全局变量：<code>全局变量通常存储在数据区或BSS段中，它们的生命周期与程序的运行周期相同</code>。例如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> global_var = <span class="number">10</span>; <span class="comment">// 存储在数据区</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> static_global_var = <span class="number">20</span>; <span class="comment">// 存储在BSS段</span></span><br></pre></td></tr></table></figure>
-
-<p>局部变量：<code>局部变量通常存储在栈区中，它们的生命周期与函数调用的生命周期相同</code>。例如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">func</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> local_var = <span class="number">30</span>; <span class="comment">// 存储在栈区</span></span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> static_local_var = <span class="number">40</span>; <span class="comment">// 存储在数据区</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>动态分配内存：<code>动态分配内存通常存储在堆区中，由程序员手动管理</code>。例如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>* ptr = (<span class="type">int</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>)); <span class="comment">// 存储在堆区</span></span><br></pre></td></tr></table></figure>
-
-<p>字符串常量：<code>字符串常量通常存储在代码区中，它们是只读的</code>。例如：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span>* str = <span class="string">&quot;Hello, world!&quot;</span>; <span class="comment">// 存储在代码区</span></span><br></pre></td></tr></table></figure>
-
-<p>需要注意的是，这些变量的存储位置和生命周期可能会因为编译器、操作系统和硬件平台的不同而有所差异。</p>
-<h2 id="C基本数据类型"><a href="#C基本数据类型" class="headerlink" title="C基本数据类型"></a>C基本数据类型</h2><p>C语言中基本变量的类型及字节长度如下：</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>字节长度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>char</td>
-<td>1</td>
-</tr>
-<tr>
-<td>short</td>
-<td>2</td>
-</tr>
-<tr>
-<td>int</td>
-<td>4</td>
-</tr>
-<tr>
-<td>long</td>
-<td>4或8</td>
-</tr>
-<tr>
-<td>float</td>
-<td>4</td>
-</tr>
-<tr>
-<td>double</td>
-<td>8</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>下面给出数组、字符数组、链表、队列、栈、图的数据结构用C语言定义的示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//数组是一种线性数据结构，它由一组相同类型的元素组成，这些元素在内存中是连续存储的。数组的定义方式如下：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个包含5个int类型元素的数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> arr[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//字符数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//字符数组是一种特殊的数组，它的元素类型为char，用于存储字符串。字符数组的定义方式如下：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个包含10个字符的字符数组</span></span><br><span class="line"></span><br><span class="line"><span class="type">char</span> str[<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">//链表</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//链表是一种非线性数据结构，它由一组节点组成，每个节点包含一个数据元素和一个指向下一个节点的指针。链表的定义方式如下：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个包含int类型数据的链表节点</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span> &#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ListNode</span> *<span class="title">next</span>;</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 队列</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 队列是一种先进先出（FIFO）的线性数据结构，它由一组元素组成，支持在队尾插入元素，在队头删除元素。队列的定义方式如下：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个包含int类型数据的队列</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Queue</span> &#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> *data;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> front;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> rear;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 栈</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 栈是一种后进先出（LIFO）的线性数据结构，它由一组元素组成，支持在栈顶插入元素，在栈顶删除元素。栈的定义方式如下：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个包含int类型数据的栈</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Stack</span> &#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> *data;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> top;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 图</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 图是一种非线性数据结构，它由一组节点和一组边组成，每个节点包含一个数据元素和一组指向其他节点的边。图的定义方式如下：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个包含int类型数据的图节点</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GraphNode</span> &#123;</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line"></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">GraphNode</span> **<span class="title">neighbors</span>;</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> neighborsSize;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<h2 id="C语言中静态局部变量和局部变量的区别是什么"><a href="#C语言中静态局部变量和局部变量的区别是什么" class="headerlink" title="C语言中静态局部变量和局部变量的区别是什么?"></a>C语言中静态局部变量和局部变量的区别是什么?</h2><p>C语言中，静态局部变量和普通局部变量的区别主要有以下几点：</p>
-<blockquote>
-<p><strong>存储位置不同</strong></p>
-<p>静态局部变量存储在静态数据区，而普通局部变量存储在栈中。静态数据区是程序在编译时就分配好的一块内存，它在程序运行期间一直存在，直到程序结束才被释放。而栈是程序在运行时动态分配的一块内存，它的生命周期与函数调用的生命周期相同。</p>
-<p><strong>生命周期不同</strong></p>
-<p><strong>静态局部变量的生命周期与程序的生命周期相同，即在程序运行期间一直存在</strong>，<strong>直到程序结束才被释放</strong>。而普通局部变量的生命周期与函数调用的生命周期相同，即在函数调用结束时被释放。</p>
-<p><strong>初值不同</strong></p>
-<p>静态局部变量在第一次使用之前会被<strong>自动初始化为0或者NULL</strong>，而普通局部变量不会被自动初始化，它们的初值是<strong>未定义</strong>的。</p>
-<p><strong>可见性不同</strong></p>
-<p>静态局部变量的作用域仅限于定义它的函数内部，但是它的值在函数调用结束后仍然保持不变，下次调用该函数时仍然可以使用。而普通局部变量的作用域也仅限于定义它的函数内部，但是它的值在函数调用结束后就被销毁了，下次调用该函数时需要重新初始化。</p>
-<p>需要注意的是，<strong>静态局部变量和普通局部变量的使用场景不同。静态局部变量适用于需要在函数调用之间保持状态的情况，而普通局部变量适用于临时存储数据的情况</strong>。在使用静态局部变量时，需要注意它的生命周期和可见性，避免出现意外的错误。</p>
-</blockquote>
-<h2 id="C语言关于字符串的处理函数"><a href="#C语言关于字符串的处理函数" class="headerlink" title="C语言关于字符串的处理函数"></a>C语言关于字符串的处理函数</h2><p>C语言中关于字符串赋值、比较、反转、初始化、拼接、截取的函数如下：</p>
-<h4 id="字符串赋值-strcpy"><a href="#字符串赋值-strcpy" class="headerlink" title="字符串赋值 strcpy"></a>字符串赋值 strcpy</h4><p>字符串赋值可以使用<strong>strcpy函数</strong>，它的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> <span class="title function_">strcpy</span><span class="params">(<span class="type">char</span> dest, <span class="type">const</span> <span class="type">char</span> *src)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>其中，dest是目标字符串的指针，src是源字符串的指针。该函数将源字符串复制到目标字符串中，并返回目标字符串的指针。</p>
-<h4 id="字符串比较-strcmp"><a href="#字符串比较-strcmp" class="headerlink" title="字符串比较 strcmp"></a>字符串比较 strcmp</h4><p>字符串比较可以使用<strong>strcmp函数</strong>，它的原型如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">strcmp</span><span class="params">(<span class="type">const</span> <span class="type">char</span> s1, <span class="type">const</span> <span class="type">char</span> s2)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>其中，s1和s2是要比较的两个字符串的指针。该函数比较两个字符串的大小，如果s1小于s2，则返回一个负数；如果s1等于s2，则返回0；如果s1大于s2，则返回一个正数。</p>
-<h4 id="字符串反转-strrev"><a href="#字符串反转-strrev" class="headerlink" title="字符串反转 strrev"></a>字符串反转 strrev</h4><p>字符串反转可以使用<strong>strrev函数</strong>，它的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> <span class="title function_">strrev</span><span class="params">(<span class="type">char</span> str)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>其中，str是要反转的字符串的指针。该函数将字符串中的字符顺序反转，并返回反转后的字符串的指针。</p>
-<h4 id="字符串初始化-memset"><a href="#字符串初始化-memset" class="headerlink" title="字符串初始化 memset"></a>字符串初始化 memset</h4><p>字符串初始化可以使用memset函数，它的原型如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">memset</span><span class="params">(<span class="type">void</span> s, <span class="type">int</span> c, <span class="type">size_t</span> n)</span></span>;</span><br></pre></td></tr></table></figure>
-
-<p>其中，s是要初始化的字符串的指针，c是要初始化的字符，n是要初始化的字符数。该函数将字符串中的每个字符都设置为指定的字符。</p>
-<h4 id="字符串拼接-strcat"><a href="#字符串拼接-strcat" class="headerlink" title="字符串拼接 strcat"></a>字符串拼接 strcat</h4><p>字符串拼接可以使用<strong>strcat函数</strong>，它的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> <span class="title function_">strcat</span><span class="params">(<span class="type">char</span> dest, <span class="type">const</span> <span class="type">char</span> *src)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>其中，dest是目标字符串的指针，src是要拼接的字符串的指针。该函数将源字符串拼接到目标字符串的末尾，并返回目标字符串的指针。</p>
-<h4 id="字符串截取-strncpy"><a href="#字符串截取-strncpy" class="headerlink" title="字符串截取 strncpy"></a>字符串截取 strncpy</h4><p>字符串截取可以使用<strong>strncpy</strong>函数，它的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> <span class="title function_">strncpy</span><span class="params">(<span class="type">char</span> dest, <span class="type">const</span> <span class="type">char</span> *src, <span class="type">size_t</span> n)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>其中，dest是目标字符串的指针，src是源字符串的指针，n是要截取的字符数。该函数将源字符串中的前n个字符复制到目标字符串中，并返回目标字符串的指针。</p>
-<p>需要注意的是，上述函数的使用需要注意字符串的长度和内存分配，避免出现缓冲区溢出等问题。在使用字符串函数时，需要仔细阅读函数的文档，了解函数的使用方法和注意事项。</p>
-<h4 id="计算字符串长度-strlen函数"><a href="#计算字符串长度-strlen函数" class="headerlink" title="计算字符串长度 strlen函数"></a>计算字符串长度 strlen函数</h4><p>strlen函数用于计算字符串的长度，它的原型如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">size_t strlen(const char *s);</span><br></pre></td></tr></table></figure>
-
-<p>其中，s是要计算长度的字符串的指针。该函数返回字符串的长度，不包括字符串末尾的空字符。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> str[] = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">size_t</span> len = <span class="built_in">strlen</span>(str);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;字符串的长度为：%zu\n&quot;</span>, len);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//输出结果：</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串的长度为：11</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="查找指定字符-strchr函数"><a href="#查找指定字符-strchr函数" class="headerlink" title="查找指定字符 strchr函数"></a>查找指定字符 strchr函数</h4><p>strchr函数用于在字符串中查找指定字符的位置，它的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> <span class="title function_">strchr</span><span class="params">(<span class="type">const</span> <span class="type">char</span> s, <span class="type">int</span> c)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>其中，s是要查找的字符串的指针，c是要查找的字符。该函数返回指向第一个匹配字符的指针，如果未找到匹配字符，则返回NULL。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#incude <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> str[] = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">    <span class="type">char</span> *p = <span class="built_in">strchr</span>(str, <span class="string">&#x27;o&#x27;</span>);</span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;找到了字符&#x27;o&#x27;，位置为：%ld\n&quot;</span>, p - str);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;未找到字符&#x27;o&#x27;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">找到了字符<span class="string">&#x27;o&#x27;</span>，位置为：<span class="number">4</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="查找子串-strstr函数"><a href="#查找子串-strstr函数" class="headerlink" title="查找子串 strstr函数"></a>查找子串 strstr函数</h4><p>strstr函数用于在字符串中查找指定子串的位置，它的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> <span class="title function_">strstr</span><span class="params">(<span class="type">const</span> <span class="type">char</span> haystack, <span class="type">const</span> <span class="type">char</span> *needle)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>其中，haystack是要查找的字符串的指针，needle是要查找的子串的指针。该函数返回指向第一个匹配子串的指针，如果未找到匹配子串，则返回NULL。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> str[] = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">    <span class="type">char</span> *p = <span class="built_in">strstr</span>(str, <span class="string">&quot;world&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;找到了子串&#x27;world&#x27;，位置为：%ld\n&quot;</span>, p - str);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;未找到子串&#x27;world&#x27;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">找到了子串<span class="string">&#x27;world&#x27;</span>，位置为：<span class="number">6</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="格式化数据写入-sprintf函数"><a href="#格式化数据写入-sprintf函数" class="headerlink" title="格式化数据写入 sprintf函数"></a>格式化数据写入 sprintf函数</h4><p>sprintf函数用于将格式化的数据写入字符串中，它的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sprintf</span><span class="params">(<span class="type">char</span> str, <span class="type">const</span> <span class="type">char</span> format, ...)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>其中，str是要写入的字符串的指针，format是格式化字符串，…是可变参数列表。该函数将格式化的数据写入字符串中，并返回写入的字符数。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> str[<span class="number">100</span>];</span><br><span class="line">    <span class="type">int</span> num = <span class="number">123</span>;</span><br><span class="line">    <span class="type">float</span> f = <span class="number">3.14</span>;</span><br><span class="line">    <span class="built_in">sprintf</span>(str, <span class="string">&quot;num=%d, f=%.2f&quot;</span>, num, f);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%s\n&quot;</span>, str);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">num=<span class="number">123</span>, f=<span class="number">3.14</span></span><br></pre></td></tr></table></figure>
-
-<p>需要注意的是，在使用sprintf函数时，需要确保目标字符串的长度足够大，以避免缓冲区溢出等问题。</p>
-<blockquote>
-<p>以上字符串处理函数的头文件为&lt;string.h&gt;</p>
-</blockquote>
-<h2 id="C语言中野指针和空指针，悬浮指针"><a href="#C语言中野指针和空指针，悬浮指针" class="headerlink" title="C语言中野指针和空指针，悬浮指针"></a>C语言中野指针和空指针，悬浮指针</h2><h2 id="C语言中，动态申请内存、释放内存、保证内存安全的函数如下："><a href="#C语言中，动态申请内存、释放内存、保证内存安全的函数如下：" class="headerlink" title="C语言中，动态申请内存、释放内存、保证内存安全的函数如下："></a>C语言中，动态申请内存、释放内存、保证内存安全的函数如下：</h2><h4 id="动态申请内存-malloc"><a href="#动态申请内存-malloc" class="headerlink" title="动态申请内存 malloc"></a>动态申请内存 malloc</h4><p>动态申请内存可以使用malloc函数，它的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">malloc</span><span class="params">(<span class="type">size_t</span> size)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>其中，size是要申请的内存大小，单位是字节。该函数返回一个指向申请到的内存块的指针，如果申请失败，则返回NULL。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> p = (<span class="type">int</span> )<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        *p = <span class="number">123</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;申请到的内存地址为：%p，值为：%d\n&quot;</span>, p, *p);</span><br><span class="line">        <span class="built_in">free</span>(p);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;申请内存失败\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">申请到的内存地址为：<span class="number">0x7f8c7ac02a40</span>，值为：<span class="number">123</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="释放内存-free"><a href="#释放内存-free" class="headerlink" title="释放内存 free"></a>释放内存 free</h4><p>释放内存可以使用free函数，它的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">free</span><span class="params">(<span class="type">void</span> *ptr)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>其中，ptr是要释放的内存块的指针。该函数将指定的内存块释放回系统，以便其他程序可以使用。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> p = (<span class="type">int</span> )<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        *p = <span class="number">123</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;申请到的内存地址为：%p，值为：%d\n&quot;</span>, p, *p);</span><br><span class="line">        <span class="built_in">free</span>(p);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;内存已释放\n&quot;</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;申请内存失败\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">申请到的内存地址为：<span class="number">0x7f8c7ac02a40</span>，值为：<span class="number">123</span></span><br><span class="line">内存已释放</span><br></pre></td></tr></table></figure>
-
-<p>需要注意的是，在使用free函数释放内存时，需要确保指定的内存块是通过malloc函数申请的，否则可能会导致程序崩溃或者内存泄漏等问题。</p>
-<p>保证内存安全</p>
-<p>为了保证内存安全，C语言提供了一些函数，可以检查内存访问是否越界，避免出现缓冲区溢出等问题。常用的内存安全函数如下：</p>
-<blockquote>
-<p>memset函数：用于将一段内存块清零，可以避免出现敏感信息泄露的问题。</p>
-<p>memcpy函数：用于将一段内存块复制到另一段内存块中，可以避免出现内存访问越界的问题。</p>
-<p>memmove函数：与memcpy函数类似，但是可以处理内存块重叠的情况。</p>
-<p>calloc函数：与malloc函数类似，但是会将申请到的内存块清零，可以避免出现敏感信息泄露的问题。</p>
-</blockquote>
-<p>当然，下面给出一些常用的C语言保证内存安全函数的用法示例：</p>
-<h4 id="memset函数"><a href="#memset函数" class="headerlink" title="memset函数"></a>memset函数</h4><p>memset函数用于将一段内存块清零，它的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">memset</span><span class="params">(<span class="type">void</span> s, <span class="type">int</span> c, <span class="type">size_t</span> n)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>其中，s是要清零的内存块的指针，c是要设置的值，n是要清零的字节数。该函数将指定的内存块中的每个字节都设置为指定的值。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> str[<span class="number">100</span>] = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;清零前的字符串为：%s\n&quot;</span>, str);</span><br><span class="line">    <span class="built_in">memset</span>(str, <span class="number">0</span>, <span class="keyword">sizeof</span>(str));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;清零后的字符串为：%s\n&quot;</span>, str);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">清零前的字符串为：hello world</span><br><span class="line">清零后的字符串为：</span><br></pre></td></tr></table></figure>
-
-<h4 id="memcpy函数"><a href="#memcpy函数" class="headerlink" title="memcpy函数"></a>memcpy函数</h4><p>memcpy函数用于将一段内存块复制到另一段内存块中，它的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">memcpy</span><span class="params">(<span class="type">void</span> dest, <span class="type">const</span> <span class="type">void</span> *src, <span class="type">size_t</span> n)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>其中，dest是目标内存块的指针，src是源内存块的指针，n是要复制的字节数。该函数将源内存块中的内容复制到目标内存块中。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> src[<span class="number">100</span>] = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">    <span class="type">char</span> dest[<span class="number">100</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;复制前的字符串为：%s\n&quot;</span>, src);</span><br><span class="line">    <span class="built_in">memcpy</span>(dest, src, <span class="keyword">sizeof</span>(src));</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;复制后的字符串为：%s\n&quot;</span>, dest);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">复制前的字符串为：hello world</span><br><span class="line">复制后的字符串为：hello world</span><br></pre></td></tr></table></figure>
-
-<h4 id="memmove函数"><a href="#memmove函数" class="headerlink" title="memmove函数"></a>memmove函数</h4><p>memmove函数与memcpy函数类似，但是可以处理内存块重叠的情况，它的原型如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">memmove</span><span class="params">(<span class="type">void</span> dest, <span class="type">const</span> <span class="type">void</span> *src, <span class="type">size_t</span> n)</span>;</span><br></pre></td></tr></table></figure>
-
-<p>其中，dest是目标内存块的指针，src是源内存块的指针，n是要复制的字节数。该函数将源内存块中的内容复制到目标内存块中，可以处理内存块重叠的情况。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">char</span> str[<span class="number">100</span>] = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;反转前的字符串为：%s\n&quot;</span>, str);</span><br><span class="line">    memmove(str + <span class="number">3</span>, str, <span class="number">5</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;反转后的字符串为：%s\n&quot;</span>, str);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">反转前的字符串为：hello world</span><br><span class="line">反转后的字符串为：helhelrld</span><br></pre></td></tr></table></figure>
-
-<h4 id="calloc函数"><a href="#calloc函数" class="headerlink" title="calloc函数"></a>calloc函数</h4><p>calloc函数与malloc函数类似，但是会将申请到的内存块清零，它的原型如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void *calloc(size_t nmemb, size_t size);</span><br></pre></td></tr></table></figure>
-
-<p>其中，nmemb是要申请的内存块数量，size是每个内存块的大小，单位是字节。该函数返回一个指向申请到的内存块的指针，如果申请失败，则返回NULL。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> p = (<span class="type">int</span> )<span class="built_in">calloc</span>(<span class="number">5</span>, <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">5</span>; i++) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;p[%d]=%d\n&quot;</span>, i, p[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">free</span>(p);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">       <span class="built_in">printf</span>(<span class="string">&quot;申请内存失败\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">p[<span class="number">0</span>]=<span class="number">0</span></span><br><span class="line">p[<span class="number">1</span>]=<span class="number">0</span></span><br><span class="line">p[<span class="number">2</span>]=<span class="number">0</span></span><br><span class="line">p[<span class="number">3</span>]=<span class="number">0</span></span><br><span class="line">p[<span class="number">4</span>]=<span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="C语言中野指针，空指针和悬浮指针的区别和示例"><a href="#C语言中野指针，空指针和悬浮指针的区别和示例" class="headerlink" title="C语言中野指针，空指针和悬浮指针的区别和示例"></a>C语言中野指针，空指针和悬浮指针的区别和示例</h2><p>C语言中，野指针、空指针和悬浮指针是指针的一些特殊情况，它们的区别和示例如下：</p>
-<h4 id="野指针"><a href="#野指针" class="headerlink" title="野指针"></a>野指针</h4><p>野指针是指没有被初始化或者已经被释放的指针，它指向的内存地址是不确定的，可能是一个随机的值，也可能是一个已经被释放的内存地址。使用野指针会导致程序崩溃或者出现其他不可预测的错误。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> *p;<span class="comment">//没有初始化</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;野指针的值为：%p\n&quot;</span>, p);</span><br><span class="line">    *p = <span class="number">123</span>;<span class="comment">//指针解引用赋值有问题，野指针的指向内存为随机的</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">野指针的值为：<span class="number">0x7f8c7ac02a40</span></span><br><span class="line">Segmentation <span class="title function_">fault</span> <span class="params">(core dumped)</span></span><br></pre></td></tr></table></figure>
-
-<p>在上面的示例中，指针p没有被初始化，它指向的内存地址是不确定的，因此在对它进行解引用操作时，会导致程序崩溃。</p>
-<h4 id="空指针"><a href="#空指针" class="headerlink" title="空指针"></a>空指针</h4><p>空指针是指没有指向任何内存地址的指针，它的值为NULL。空指针可以用来表示指针不指向任何有效的内存地址，可以避免野指针的问题。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> *p = <span class="literal">NULL</span>;<span class="comment">//定义指针并初始化，不指向任何的内存空间，后面再对该指针赋值，主意吧赋值前要判断是否为空指针</span></span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        *p = <span class="number">123</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;指针为空\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">指针为空</span><br></pre></td></tr></table></figure>
-
-<p>在上面的示例中，指针p被初始化为NULL，它不指向任何有效的内存地址，因此在对它进行解引用操作时，不会导致程序崩溃。</p>
-<h4 id="悬浮指针"><a href="#悬浮指针" class="headerlink" title="悬浮指针"></a>悬浮指针</h4><p>悬浮指针是指指向已经被释放的内存地址的指针，它指向的内存地址已经不再属于当前程序的内存空间，使用悬浮指针会导致程序崩溃或者出现其他不可预测的错误。</p>
-<p>示例：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> p = (<span class="type">int</span> )<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        *p = <span class="number">123</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;申请到的内存地址为：%p，值为：%d\n&quot;</span>, p, *p);</span><br><span class="line">        <span class="built_in">free</span>(p);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;内存已释放\n&quot;</span>);</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;悬浮指针的值为：%p\n&quot;</span>, p);</span><br><span class="line">        *p = <span class="number">456</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;申请内存失败\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">输出结果：</span><br><span class="line">申请到的内存地址为：<span class="number">0x7f8c7ac02a40</span>，值为：<span class="number">123</span></span><br><span class="line">内存已释放</span><br><span class="line">悬浮指针的值为：<span class="number">0x7f8c7ac02a40</span></span><br><span class="line">Segmentation <span class="title function_">fault</span> <span class="params">(core dumped)</span></span><br></pre></td></tr></table></figure>
-
-<p>在上面的示例中，指针p被初始化为申请到的内存地址，然后又被释放了。在释放后，指针p变成了悬浮指针，它指向的内存地址已经不再属于当前程序的内存空间，因此在对它进行解引用操作时，会导致程序崩溃。</p>
-<h2 id="设计Debug日志系统"><a href="#设计Debug日志系统" class="headerlink" title="设计Debug日志系统"></a>设计Debug日志系统</h2><p>在大型C语言项目开发中，设计调试debug日志表框架是非常重要的，可以帮助开发人员快速定位和解决问题。下面是一些设计调试debug日志表框架的建议：</p>
-<h4 id="定义日志级别"><a href="#定义日志级别" class="headerlink" title="定义日志级别"></a>定义日志级别</h4><p>在设计调试debug日志表框架时，需要定义不同的日志级别，以便开发人员可以根据需要选择输出哪些日志信息。常见的日志级别包括：</p>
-<p>DEBUG：用于输出调试信息，通常只在开发阶段使用。</p>
-<p>INFO：用于输出一般信息，例如程序启动、配置文件加载等。</p>
-<p>WARNING：用于输出警告信息，例如文件读写失败、网络连接断开等。</p>
-<p>ERROR：用于输出错误信息，例如内存分配失败、函数调用失败等。</p>
-<p>FATAL：用于输出致命错误信息，例如程序崩溃、系统错误等。</p>
-<h4 id="定义日志格式"><a href="#定义日志格式" class="headerlink" title="定义日志格式"></a>定义日志格式</h4><p>在设计调试debug日志表框架时，需要定义日志的格式，以便开发人员可以快速定位和解决问题。常见的日志格式包括：</p>
-<p>时间戳：记录日志的时间，以便开发人员可以知道问题发生的时间。</p>
-<p>日志级别：记录日志的级别，以便开发人员可以根据需要选择输出哪些日志信息。</p>
-<p>文件名和行号：记录日志所在的文件名和行号，以便开发人员可以快速定位问题。</p>
-<p>日志内容：记录日志的具体内容，例如函数调用参数、返回值等。</p>
-<h4 id="实现日志输出函数"><a href="#实现日志输出函数" class="headerlink" title="实现日志输出函数"></a>实现日志输出函数</h4><p>在设计调试debug日志表框架时，需要实现日志输出函数，以便开发人员可以调用该函数输出日志信息。常见的日志输出函数包括：</p>
-<p>printf函数：可以使用printf函数输出日志信息，但是需要手动添加时间戳、日志级别、文件名和行号等信息。</p>
-<p>syslog函数：可以使用syslog函数输出日志信息，它可以自动添加时间戳、日志级别等信息，但是需要在系统中配置syslog服务。</p>
-<p>自定义函数：可以根据项目的需要自定义日志输出函数，例如使用第三方日志库、使用自定义的日志格式等。</p>
-<h4 id="配置日志级别"><a href="#配置日志级别" class="headerlink" title="配置日志级别"></a>配置日志级别</h4><p>在设计调试debug日志表框架时，需要提供配置日志级别的接口，以便开发人员可以根据需要选择输出哪些日志信息。常见的配置日志级别的接口包括：</p>
-<p>命令行参数：可以在程序启动时通过命令行参数指定日志级别。</p>
-<p>配置文件：可以在配置文件中指定日志级别，例如使用INI文件、XML文件等。</p>
-<p>环境变量：可以在系统中设置环境变量，以便指定日志级别。</p>
-<h4 id="实现日志轮换"><a href="#实现日志轮换" class="headerlink" title="实现日志轮换"></a>实现日志轮换</h4><p>在设计调试debug日志表框架时，需要考虑日志文件的大小和数量，以免占用过多的磁盘空间。常见的日志轮换方式包括：</p>
-<p>按文件大小轮换：当日志文件达到一定大小时，自动创建新的日志文件。</p>
-<p>按时间轮换：当一定时间内没有写入日志时，自动创建新的日志文件。</p>
-<p>压缩日志文件：当日志文件达到一定大小时，自动压缩日志文件，以节省磁盘空间。</p>
-<p>总之，在设计调试debug日志表框架时，需要考虑项目的实际需求和开发人员的使用习惯，以便提高开发效率和代码质量</p>
-<p>设计一个日志系统时，需要考虑以下几个方面：</p>
-<blockquote>
-<p>日志级别</p>
-<p>定义不同的日志级别，例如DEBUG、INFO、WARNING、ERROR和FATAL。</p>
-<p>日志格式</p>
-<p>定义日志的格式，例如时间戳、日志级别、文件名和行号、日志内容等。</p>
-<p>日志输出</p>
-<p>实现日志输出函数，例如使用printf函数输出日志信息。</p>
-<p>日志轮换</p>
-<p>实现日志轮换功能，例如按文件大小轮换、按时间轮换、压缩日志文件等。</p>
-</blockquote>
-<h4 id="日志系统设计示例"><a href="#日志系统设计示例" class="headerlink" title="日志系统设计示例"></a>日志系统设计示例</h4><p>下面是一个简单的日志系统设计示例，包括日志级别、日志格式、日志输出和日志轮换功能。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOG_LEVEL_DEBUG     0</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOG_LEVEL_INFO      1</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOG_LEVEL_WARNING   2</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOG_LEVEL_ERROR     3</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOG_LEVEL_FATAL     4</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOG_FILE_SIZE       (1024  1024  10)   <span class="comment">// 10MB</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOG_FILE_COUNT      10</span></span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">const</span> <span class="type">char</span> *log_level_str[] = &#123;</span><br><span class="line">    <span class="string">&quot;DEBUG&quot;</span>,</span><br><span class="line">    <span class="string">&quot;INFO&quot;</span>,</span><br><span class="line">    <span class="string">&quot;WARNING&quot;</span>,</span><br><span class="line">    <span class="string">&quot;ERROR&quot;</span>,</span><br><span class="line">    <span class="string">&quot;FATAL&quot;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> FILE *log_file = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> log_level = LOG_LEVEL_DEBUG;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> log_file_size = LOG_FILE_SIZE;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> log_file_count = LOG_FILE_COUNT;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> <span class="type">void</span> <span class="title function_">log_rotate</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> old_file_name[<span class="number">256</span>];</span><br><span class="line">    <span class="type">char</span> new_file_name[<span class="number">256</span>];</span><br><span class="line">    fclose(log_file);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = log_file_count - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">        <span class="built_in">snprintf</span>(old_file_name, <span class="keyword">sizeof</span>(old_file_name), <span class="string">&quot;log.%d&quot;</span>, i - <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">snprintf</span>(new_file_name, <span class="keyword">sizeof</span>(new_file_name), <span class="string">&quot;log.%d&quot;</span>, i);</span><br><span class="line">        rename(old_file_name, new_file_name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">snprintf</span>(new_file_name, <span class="keyword">sizeof</span>(new_file_name), <span class="string">&quot;log.0&quot;</span>);</span><br><span class="line">    log_file = fopen(new_file_name, <span class="string">&quot;w&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">log_init</span><span class="params">(<span class="type">int</span> level, <span class="type">const</span> <span class="type">char</span> *file_name)</span></span><br><span class="line">&#123;</span><br><span class="line">    log_level = level;</span><br><span class="line">    log_file = fopen(file_name, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">log_set_level</span><span class="params">(<span class="type">int</span> level)</span></span><br><span class="line">&#123;</span><br><span class="line">    log_level = level;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">log_set_file_size</span><span class="params">(<span class="type">int</span> size)</span></span><br><span class="line">&#123;</span><br><span class="line">    log_file_size = size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">log_set_file_count</span><span class="params">(<span class="type">int</span> count)</span></span><br><span class="line">&#123;</span><br><span class="line">    log_file_count = count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">log_write</span><span class="params">(<span class="type">int</span> level, <span class="type">const</span> <span class="type">char</span> file, <span class="type">int</span> line, <span class="type">const</span> <span class="type">char</span> fmt, ...)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (level &lt; log_level) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">time_t</span> now = time(<span class="literal">NULL</span>);</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">tm</span> *<span class="title">tm</span> =</span> localtime(&amp;now)</span><br><span class="line">    <span class="type">char</span> time_str[<span class="number">64</span>];</span><br><span class="line"></span><br><span class="line">    strftime(time_str, <span class="keyword">sizeof</span>(time_str), <span class="string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>, tm);</span><br><span class="line">    va_list args;</span><br><span class="line">    va_start(args, fmt);</span><br><span class="line"></span><br><span class="line">    <span class="type">char</span> buf[<span class="number">1024</span>];</span><br><span class="line">    vsnprintf(buf, <span class="keyword">sizeof</span>(buf), fmt, args);</span><br><span class="line">    va_end(args);</span><br><span class="line">    <span class="built_in">fprintf</span>(log_file, <span class="string">&quot;[%s] [%s:%d] %s\n&quot;</span>, log_level_str[level], file, line, buf);</span><br><span class="line">    fflush(log_file);</span><br><span class="line">    <span class="type">long</span> file_size = ftell(log_file);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (file_size &gt;= log_file_size) &#123;</span><br><span class="line">        log_rotate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> LOG(level, fmt, ...) \</span></span><br><span class="line"><span class="meta"></span></span><br><span class="line">    log_write(level, FILE, LINE, fmt, ##__VA_ARGS__)</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    log_init(LOG_LEVEL_DEBUG, <span class="string">&quot;log.0&quot;</span>);</span><br><span class="line"></span><br><span class="line">    LOG(LOG_LEVEL_DEBUG, <span class="string">&quot;debug message&quot;</span>);</span><br><span class="line"></span><br><span class="line">    LOG(LOG_LEVEL_INFO, <span class="string">&quot;info message&quot;</span>);</span><br><span class="line"></span><br><span class="line">    LOG(LOG_LEVEL_WARNING, <span class="string">&quot;warning message&quot;</span>);</span><br><span class="line"></span><br><span class="line">    LOG(LOG_LEVEL_ERROR, <span class="string">&quot;error message&quot;</span>);</span><br><span class="line"></span><br><span class="line">    LOG(LOG_LEVEL_FATAL, <span class="string">&quot;fatal message&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在上面的示例中，定义了日志级别、日志格式、日志输出和日志轮换功能。日志级别使用了宏定义，方便开发人员根据需要选择输出哪些日志信息。日志格式包括时间戳、日志级别、文件名和行号、日志内容等。日志输出使用了log_write函数，它可以根据日志级别输出不同的日志信息。日志轮换使用了log_rotate函数，它可以按文件大小轮换日志文件。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">c_basic</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Program-Language//" class="article-tag-list-link color2">Program_Language</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/02/04/c%E8%AF%AD%E8%A8%80%E5%85%A5%E9%97%A8%E6%80%BB%E7%AF%87/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1650,6 +1383,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">thread</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">linux应用切换</a>
               </li>
             
             <div class="clearfix"></div>
