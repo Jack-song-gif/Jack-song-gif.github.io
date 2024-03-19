@@ -265,6 +265,142 @@
             
 
   
+    <article id="post-编译可以直接在RAM下运行的镜像Image" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2024/03/19/%E7%BC%96%E8%AF%91%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E5%9C%A8RAM%E4%B8%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E9%95%9C%E5%83%8FImage/" target="_blank">编译可以直接在RAM下运行的镜像Image</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2024/03/19/%E7%BC%96%E8%AF%91%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E5%9C%A8RAM%E4%B8%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E9%95%9C%E5%83%8FImage/" class="archive-article-date">
+        <time datetime="2024-03-19T07:49:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-19</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="编译可以直接在RAM下运行的镜像Image"><a href="#编译可以直接在RAM下运行的镜像Image" class="headerlink" title="编译可以直接在RAM下运行的镜像Image"></a>编译可以直接在RAM下运行的镜像Image</h1><h2 id="一-前置条件："><a href="#一-前置条件：" class="headerlink" title="一.前置条件："></a>一.前置条件：</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建目录保存已经生成的Image,flash-cn10ka.img  rootfs.tar文件</span></span><br><span class="line"><span class="built_in">mkdir</span> -p  /home/byzoro/work/ipbu/SDK-12.23.10</span><br><span class="line"><span class="built_in">cp</span> /home/byzoro/work/cn10ka-switches-release-output/images/Image   /home/byzoro/work/ipbu/SDK-12.23.10/Image-SDK12.23.10-kernel_only</span><br><span class="line"><span class="built_in">cp</span> /home/byzoro/work/cn10ka-switches-release-output/images/flash-cn10ka.img   /home/byzoro/work/ipbu/SDK-12.23.10/flash-cn10ka.img</span><br><span class="line"><span class="built_in">cp</span> /home/byzoro/work/cn10ka-switches-release-output/images/rootfs.tar   /home/byzoro/work/ipbu/SDK-12.23.10/rootfs.tar</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cd</span> /home/ipbu/SDK-12.23.10/</span><br><span class="line">$ bzip2 rootfs.tar  <span class="comment">#压缩成bz模式</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 清理已经构建的内容，重新设置config,构建带ramdisk的Image</span></span><br><span class="line">在xx_output目录下：</span><br><span class="line">make clean; make menuconfig</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-修改config配置，编译出带ramdisk的Image"><a href="#二-修改config配置，编译出带ramdisk的Image" class="headerlink" title="二.修改config配置，编译出带ramdisk的Image"></a>二.修改config配置，编译出带ramdisk的Image</h2><p>在xx_output目录下： <strong>make clean; make menuconfig</strong></p>
+<p>输入Y表示选择，然后会出现✳，接着选择compression方法</p>
+<p>设置压缩方法为xz,按空格确认</p>
+<p>保存退出，然后在<code>cn10ka-switches-release-output</code>目录下：</p>
+<p><img src="/2024/03/19/%E7%BC%96%E8%AF%91%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E5%9C%A8RAM%E4%B8%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E9%95%9C%E5%83%8FImage/config.png" alt="loading-ag-4267"></p>
+<p><strong>sudo make</strong></p>
+<h3 id="修改报错"><a href="#修改报错" class="headerlink" title="修改报错"></a>修改报错</h3><p>注意在make过程中会报错config缺少分隔符，修改以下两个文件：</p>
+<p>这是由于cpss-SDK12.23.10源码的config文件注释符号多了&#x2F;,需要把&#x2F;去掉。</p>
+<p><code>vi /home/byzoro/work/cn10ka-switches-release-output/build/cpss-SDK12.23.10/.config</code></p>
+<p>修改 <code>vi /home/byzoro/work/cn10ka-switches-release-output/build/cpss-SDK12.23.10/cpssEnabler/mainExtDrv/src/gtExtDrv/linuxNoKernelModule/drivers/_Makefile</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Generated FIT image successfully</span><br><span class="line">INFO: cmd: <span class="string">&quot;mkdir -p &quot;</span>/home/byzoro/work/cn10ka-switches-release-output/build/genimage.tmp<span class="string">&quot;&quot;</span> (stderr):</span><br><span class="line">INFO: cmd: <span class="string">&quot;rm -rf &quot;</span>/home/byzoro/work/cn10ka-switches-release-output/build/genimage.tmp<span class="string">&quot;/*&quot;</span> (stderr):</span><br><span class="line">INFO: cmd: <span class="string">&quot;mkdir -p &quot;</span>/home/byzoro/work/cn10ka-switches-release-output/build/genimage.tmp<span class="string">&quot;&quot;</span> (stderr):</span><br><span class="line">INFO: cmd: <span class="string">&quot;cp -a &quot;</span>/home/byzoro/work/cn10ka-switches-release-output/target<span class="string">&quot; &quot;</span>/home/byzoro/work/cn10ka-switches-release-output/build/genimage.tmp/root<span class="string">&quot;&quot;</span> (stderr):</span><br><span class="line">INFO: cmd: <span class="string">&quot;find &#x27;/home/byzoro/work/cn10ka-switches-release-output/build/genimage.tmp/root&#x27; -depth -type d -printf &#x27;%P\0&#x27; | xargs -0 -I &#123;&#125; touch -r &#x27;/home/byzoro/work/cn10ka-switches-release-output/target/&#123;&#125;&#x27; &#x27;/home/byzoro/work/cn10ka-switches-release-output/build/genimage.tmp/root/&#123;&#125;&#x27;&quot;</span> (stderr):</span><br><span class="line">INFO: cmd: <span class="string">&quot;mkdir -p &quot;</span>/home/byzoro/work/cn10ka-switches-release-output/images<span class="string">&quot;&quot;</span> (stderr):</span><br><span class="line">INFO: vfat(boot.vfat): cmd: <span class="string">&quot;dd if=/dev/zero of=&quot;</span>/home/byzoro/work/cn10ka-switches-release-output/images/boot.vfat<span class="string">&quot; seek=959447040 count=0 bs=1 2&gt;/dev/null&quot;</span> (stderr):</span><br><span class="line">INFO: vfat(boot.vfat): cmd: <span class="string">&quot;mkdosfs   &#x27;/home/byzoro/work/cn10ka-switches-release-output/images/boot.vfat&#x27;&quot;</span> (stderr):</span><br><span class="line">INFO: vfat(boot.vfat): adding file <span class="string">&#x27;Image&#x27;</span> as <span class="string">&#x27;Image&#x27;</span> ...</span><br><span class="line">INFO: vfat(boot.vfat): cmd: <span class="string">&quot;MTOOLS_SKIP_CHECK=1 mcopy -sp -i &#x27;/home/byzoro/work/cn10ka-switches-release-output/images/boot.vfat&#x27; &#x27;/home/byzoro/work/cn10ka-switches-release-output/images/Image&#x27; &#x27;::&#x27;&quot;</span> (stderr):</span><br><span class="line">INFO: hdimage(hdimage.img): adding partition <span class="string">&#x27;boot&#x27;</span> (<span class="keyword">in</span> MBR) from <span class="string">&#x27;boot.vfat&#x27;</span> ...</span><br><span class="line">INFO: hdimage(hdimage.img): adding partition <span class="string">&#x27;rootfs&#x27;</span> (<span class="keyword">in</span> MBR) from <span class="string">&#x27;rootfs.ext4&#x27;</span> ...</span><br><span class="line">INFO: hdimage(hdimage.img): adding partition <span class="string">&#x27;[MBR]&#x27;</span> ...</span><br><span class="line">INFO: hdimage(hdimage.img): writing MBR</span><br></pre></td></tr></table></figure>
+
+<p>注意现在生成的Image的大小是大于300MB的。</p>
+<p><img src="/2024/03/19/%E7%BC%96%E8%AF%91%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E5%9C%A8RAM%E4%B8%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E9%95%9C%E5%83%8FImage/output1.png" alt="loading-ag-4420"></p>
+<p><strong>构建成功之后把Image，复制并命名为Image-SDK12.23.10-ramdisk</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> cn10ka-switches-release-output/images/Image ipbu/SDK-12.23.10/Image-SDK12.23.10-ramdisk</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2024/03/19/%E7%BC%96%E8%AF%91%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E5%9C%A8RAM%E4%B8%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E9%95%9C%E5%83%8FImage/output2.png" alt="loading-ag-4572"></p>
+<h2 id="三-在开发板的内存中运行Image-ramdisk"><a href="#三-在开发板的内存中运行Image-ramdisk" class="headerlink" title="三.在开发板的内存中运行Image-ramdisk"></a>三.在开发板的内存中运行Image-ramdisk</h2><p>注意：<code>不要使用dhcp</code></p>
+<p>1.确认开发板和tftp服务器的连通性。</p>
+<blockquote>
+<p>printenv serverip</p>
+<p>ping 192.168.2.2</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">crb106s&gt; ping 192.168.2.2</span><br><span class="line">Waiting <span class="keyword">for</span> RPM0 LMAC3 <span class="built_in">link</span> status... SGMII [1G]</span><br><span class="line">Using rvu_pf<span class="comment">#3 device</span></span><br><span class="line">host 192.168.2.2 is alive</span><br></pre></td></tr></table></figure>
+
+<p>2.从tftp服务器上下载Image-ramdisk镜像</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tftpboot <span class="variable">$loadaddr</span> /var/lib/tftpboot/Image-SDK12.23.10-ramdisk</span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">marvell</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">SDK交叉编译</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">嵌入式</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/linux//" class="article-tag-list-link color1">linux</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2024/03/19/%E7%BC%96%E8%AF%91%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E5%9C%A8RAM%E4%B8%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E9%95%9C%E5%83%8FImage/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Linux应用程序流畅切换" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1733,92 +1869,6 @@
 
 
   
-    <article id="post-走进dpdk" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/02/05/%E8%B5%B0%E8%BF%9Bdpdk/" target="_blank">走进dpdk</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/02/05/%E8%B5%B0%E8%BF%9Bdpdk/" class="archive-article-date">
-        <time datetime="2024-02-05T10:11:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <p>记录dpdk学习笔记</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/dpdk//" class="article-tag-list-link color5">dpdk</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/02/05/%E8%B5%B0%E8%BF%9Bdpdk/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -2017,6 +2067,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">linux应用切换</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">SDK交叉编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
               </li>
             
             <div class="clearfix"></div>
