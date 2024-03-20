@@ -265,6 +265,366 @@
             
 
   
+    <article id="post-Marvell-SDK编译" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/" target="_blank">Marvell_SDK编译</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/" class="archive-article-date">
+        <time datetime="2024-03-20T06:17:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-20</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>本篇文章记录了Marvell Octeon10系列的SDK基本编译方法</p>
+<h1 id="Octeon-SDK编译"><a href="#Octeon-SDK编译" class="headerlink" title="Octeon SDK编译"></a>Octeon SDK编译</h1><h2 id="1-服务器前置配置："><a href="#1-服务器前置配置：" class="headerlink" title="1.服务器前置配置："></a>1.服务器前置配置：</h2><p>安装各种依赖，工具包：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apt install sed build-essential git cpio python3 unzip rsync bc wget texinfo \</span><br><span class="line">automake libtool pkg-config flex bison uuid-dev lib32stdc++6 lib32z1 \</span><br><span class="line">acpica-tools dosfstools libconfig-dev libmbedtls-dev libnuma-dev \</span><br><span class="line">liblzma-dev libarchive-zip-perl python3-pycryptodome python3-pyelftools \</span><br><span class="line">libfdt-dev libncurses-dev libpci-dev libyaml-dev pkg-config-aarch64-linux-gnu \</span><br><span class="line">python3-sphinx python3-sphinx-rtd-theme libssl-dev libnl-genl-3-dev libnl-3-dev</span><br></pre></td></tr></table></figure>
+
+<p>服务器版本：</p>
+<p>Linux OcteonSDK 6.2.0-26-generic #26~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Jul 13 16:27:29 UTC 2 x86_64 x86_64 x86_64 GNU&#x2F;Linux</p>
+<h2 id="2-快速编译SDK"><a href="#2-快速编译SDK" class="headerlink" title="2.快速编译SDK"></a>2.快速编译SDK</h2><h3 id="2-1-安装SDK包"><a href="#2-1-安装SDK包" class="headerlink" title="2.1 安装SDK包"></a>2.1 安装SDK包</h3><p>将SDK和roolchain下载到临时的Downloads目录下</p>
+<p>然后解压到我们自己的工作目录下。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/work</span><br><span class="line">cd ~/work</span><br><span class="line">tar xf ~/Downloads/base-&lt;release-id&gt;.tar.bz2</span><br><span class="line">tar xf ~/Downloads/toolchain.tar.bz2</span><br><span class="line">ls</span><br><span class="line">base-patches-&lt;release-id&gt;  base-sources-&lt;release-id&gt;  buildroot  sdk-base  toolchain</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image0.png" alt="loading-ag-11816"></p>
+<p>解压后目录如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span></span></span><br><span class="line">base-patches-SDK12.23.10  base-sources-SDK12.23.10  buildroot  sdk-base  toolchain</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip ../doc-&lt;release-id&gt;.zip</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-使用compile-sh文件编译示范"><a href="#2-2-使用compile-sh文件编译示范" class="headerlink" title="2.2 使用compile.sh文件编译示范"></a>2.2 使用compile.sh文件编译示范</h3><p>需要指定芯片型号平台进行编译，这里是指定cn10kb的dpu芯片。</p>
+<p>【可以这么理解指定特定芯片型号编译出的程序，只能跑在对应的芯片平台上】</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd sdk-base</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"> ./scripts/ci/compile.sh cn10kb -r &lt;release-id&gt;</span></span><br><span class="line">./scripts/ci/compile.sh cn10kb -r SDK12.23.10</span><br></pre></td></tr></table></figure>
+
+<p>这个构建是根据<code>../base-sources-&lt;release-id&gt;</code>中的源文件进行的。最终编译得到的镜像存放在<code>../&lt;platform&gt;-release-output/images</code>目录下。</p>
+<p>在本次示例中，它是根据..&#x2F;base-sources-SDK12.23.10目录的源文件进行构建的，编译构建生成的镜像，保存在..&#x2F;cn10kb-release-output&#x2F;目录下。</p>
+<p><img src="/assets/2024-03-20-14-25-17-image.png"></p>
+<p>其他支持编译的芯片型号，可以用<code>./scripts/ci/compile.sh -l</code>查看</p>
+<p>Other supported platforms are shown with <code>./scripts/ci/compile.sh -l</code>:</p>
+<p>cn10ka版本</p>
+<img title="" src="image1.png" alt="loading-ag-16128" data-align="center">
+
+<h3 id="2-3-构建单个软件包-【Building-a-Single-Package】"><a href="#2-3-构建单个软件包-【Building-a-Single-Package】" class="headerlink" title="2.3 构建单个软件包 【Building a Single Package】"></a>2.3 构建单个软件包 【Building a Single Package】</h3><p>略</p>
+<h3 id="2-4-！构建通用扩展【Building-a-Generic-Extension】"><a href="#2-4-！构建通用扩展【Building-a-Generic-Extension】" class="headerlink" title="2.4 ！构建通用扩展【Building a Generic Extension】"></a>2.4 ！构建通用扩展【Building a Generic Extension】</h3><p>如果发行版包括扩展，那么这些扩展也需要与基础SDK一起解压到工作目录中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/work</span><br><span class="line">tar xf ~/Downloads/base-&lt;release-id&gt;.tar.bz2</span><br><span class="line">tar xf ~/Downloads/generic_extension-&lt;ext-name&gt;-&lt;release-id&gt;.tar.bz2</span><br><span class="line">tar xf ~/Downloads/toolchain.tar.bz2</span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line">base-patches-&lt;release-id&gt;             base-sources-&lt;release-id&gt;             buildroot                     sdk-base                 toolchain</span><br><span class="line">base-patches-&lt;ext-name&gt;-&lt;release-id&gt;  base-sources-&lt;ext-name&gt;-&lt;release-id&gt;  documentation-&lt;ext-name&gt;.zip  sdk-ext-&lt;ext-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>编译带有switches扩展的sdk:</p>
+<p>ext-name表示扩展名,例如：</p>
+<p>switches扩展：sdk-ext-switches</p>
+<p>vpp扩展：sdk-ext-vpp</p>
+<p>pcie扩展：sdk-ext-pcie</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cd sdk-ext-&lt;ext-name&gt;</span></span><br><span class="line"><span class="comment"># ./scripts/ci/compile.sh &lt;platform&gt;-&lt;solution&gt; -r &lt;release-id&gt;</span></span><br><span class="line"><span class="built_in">cd</span> sdk-ext-switches</span><br><span class="line">./scripts/ci/compile.sh cn10kb-switches -r SDK12.23.10</span><br></pre></td></tr></table></figure>
+
+<p>查看支持的platform和扩展：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./scripts/ci/compile.sh  -l</span></span><br><span class="line">Supported build names:</span><br><span class="line">custom_cnf10k</span><br><span class="line">custom_cn10k</span><br><span class="line">.....</span><br><span class="line">cnf10kb</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Extension &lt;switches&gt;</span><br><span class="line"> Valid for all SoC boards (listed by -l option).</span><br><span class="line"> Builds &lt;cpss&gt; and &lt;umsd&gt; packages on top of Base packages.</span><br><span class="line"> Build-Examples (given for &lt;cn98xx&gt; and &lt;cn10ka&gt;)</span><br><span class="line">              &lt;&lt;should be first&gt;&gt;            &lt;&lt;should be last&gt;&gt;</span><br><span class="line">   compile.sh cn98xx-switches              [ options, see --help ]</span><br><span class="line">   compile.sh cn98xx-switches-nwa          [ options, see --help ]</span><br><span class="line">   compile.sh [-h | --help] [-l | --list]</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-5-构建多个通用扩展-Building-Multiple-Generic-Extensions"><a href="#2-5-构建多个通用扩展-Building-Multiple-Generic-Extensions" class="headerlink" title="2.5 构建多个通用扩展[Building Multiple Generic Extensions]"></a>2.5 构建多个通用扩展[Building Multiple Generic Extensions]</h3><p>构建多个扩展的安装过程与构建单个扩展相同，除了多个扩展被解压到工作目录中：</p>
+<p>注：<code>只有通用扩展可以组合在一起编译</code>。带有generic的就是通用扩展。</p>
+<p>1.要构建1个附加扩展，请进入其中一个扩展的未打包目录并运行compile.sh，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> sdk-ext-&lt;ext-name-1&gt;</span><br><span class="line">$ ./scripts/ci/compile.sh &lt;platform&gt;-&lt;solution&gt; -r &lt;release-id&gt; -m path/to/sdk-ext-&lt;ext-name-2&gt;</span><br></pre></td></tr></table></figure>
+
+<p>2.对于另外2个扩展，请运行compile.sh，如下所示：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> sdk-ext-&lt;ext-name-1&gt;</span><br><span class="line">./scripts/ci/compile.sh &lt;platform&gt;-&lt;solution&gt; -r &lt;release-id&gt; -m path/to/sdk-ext-&lt;ext-name-2&gt;:path/to/sdk-ext-&lt;ext-name-3&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-6-构建客户扩展"><a href="#2-6-构建客户扩展" class="headerlink" title="2.6 构建客户扩展"></a>2.6 构建客户扩展</h3><p>首先，客户扩展必须与基础SDK一起解压到工作目录中，共三个文件包：基础版本包，工具链包，扩展包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/work</span><br><span class="line">tar xf ~/Downloads/base-&lt;release-id&gt;.tar.bz2</span><br><span class="line">tar xf ~/Downloads/toolchain.tar.bz2</span><br><span class="line">tar xf ~/Downloads/customer_extension-&lt;customer-name&gt;-&lt;release-id&gt;.tar.bz2</span><br><span class="line"><span class="built_in">ls</span></span><br><span class="line">base-patches-&lt;release-id&gt;  buildroot                          sdk-base                 toolchain</span><br><span class="line">base-sources-&lt;release-id&gt;  documentation-&lt;customer-name&gt;.zip  sdk-ext-&lt;customer-name&gt;</span><br></pre></td></tr></table></figure>
+
+<p>接下来，检查此客户支持哪些构建：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> sdk-ext-&lt;customer-name&gt;</span><br><span class="line">./scripts/ci/compile.sh -l</span><br><span class="line">&lt;platform&gt;</span><br><span class="line">...</span><br><span class="line">Solution &lt;solution&gt;</span><br><span class="line"> Valid only <span class="keyword">for</span> boards &lt;platform&gt;</span><br><span class="line"> Build-Examples</span><br><span class="line">              &lt;&lt;<span class="string">should be first&gt;&gt;  &lt;&lt;should</span> be last&gt;&gt;</span><br><span class="line">   compile.sh &lt;platform&gt;-&lt;solution&gt;        [ options, see --<span class="built_in">help</span> ]</span><br><span class="line">   compile.sh [-h | --<span class="built_in">help</span>] [-l | --list]</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-7-检查SDK版本"><a href="#2-7-检查SDK版本" class="headerlink" title="2.7 检查SDK版本"></a>2.7 检查SDK版本</h3><p>cat &#x2F;proc&#x2F;octtx_info </p>
+<h2 id="3-问题："><a href="#3-问题：" class="headerlink" title="3.问题："></a>3.问题：</h2><p>1.构建时报错：<code>.config:5: *** 缺失分隔符</code>。 停止。</p>
+<p>原因：可能是.config文件中转义字符 <code>\</code> 在注释行的开头。在标准的配置文件中，注释行不应该使用 <code>\</code> 开头。</p>
+<p>&#x2F;home&#x2F;byzoro&#x2F;work&#x2F;cn10ka-switches-release-output&#x2F;build&#x2F;cpss-SDK12.23.10&#x2F;.config</p>
+<p>编译语法错误：</p>
+<p>把srcversion文件中的\去掉</p>
+<p>去掉之后，再次构建仍然报错提示游离的,这说明这个文件的内容是make构建的时候写入的，所以要定位在哪里写入的。</p>
+<p>找到模块编译的Makefile文件，找到写入头文件的命令。去掉,问题解决。</p>
+<p><code>/home/byzoro/work/cn10ka-switches-release-output/build/cpss-SDK12.23.10/cpssEnabler/mainExtDrv/src/gtExtDrv/linuxNoKernelModule/drivers/_Makefile</code></p>
+<h1 id="Buildroot-指南"><a href="#Buildroot-指南" class="headerlink" title="Buildroot 指南"></a>Buildroot 指南</h1><h2 id="开发指南"><a href="#开发指南" class="headerlink" title="开发指南"></a>开发指南</h2><h2 id="配置和defconfig片段"><a href="#配置和defconfig片段" class="headerlink" title="配置和defconfig片段"></a>配置和defconfig片段</h2><h3 id="defconfig配置文件"><a href="#defconfig配置文件" class="headerlink" title="defconfig配置文件"></a>defconfig配置文件</h3><p>Buildroot 配置位于以下目录下的 xxx_defconfig 文件中：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">MV_BLDR/sdk-base/configs/</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">或者，扩展的SDK目录下</span></span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash">MV_BLDR/sdk-ext-abc/configs/</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">~/work/sdk-base/configs$ </span><span class="language-bash"><span class="built_in">ls</span> -a</span></span><br><span class="line">.cn10kb_marvell_cn10k_release_defconfig</span><br><span class="line">override_srcdir.mk</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">~/work/sdk-ext-switches/configs$ </span><span class="language-bash"><span class="built_in">ls</span> -a</span></span><br><span class="line">.cache_cn10kb_switches_marvell_cn10k_release_defconfig</span><br><span class="line">.cn10kb_switches_marvell_cn10k_release_defconfig  </span><br><span class="line">.gitignore</span><br></pre></td></tr></table></figure>
+
+<h3 id="defconfig片段"><a href="#defconfig片段" class="headerlink" title="defconfig片段"></a>defconfig片段</h3><p>默认的defconfig文件被分为fragment的片段，完整的defconfig被分为几个逻辑部分，称为碎片。这些碎片涵盖了最终defconfig组装所需&#x2F;可能的所有变量。</p>
+<p>碎片列表在$MV_BLDR&#x2F;sdk-base&#x2F;configs.mv_frag&#x2F;frag_list中定义</p>
+<h3 id="fragment如何生效的"><a href="#fragment如何生效的" class="headerlink" title="fragment如何生效的"></a>fragment如何生效的</h3><p>碎片没有+x执行权限，但被称为“source f_xx”，因此是可执行脚本，执行脚本功能，包括条件语句。configs.mv_frag&#x2F;f_*碎片由CI脚本.&#x2F;scripts&#x2F;ci&#x2F;compile.sh组装成完整的_defconfig文件。</p>
+<p>在扩展了&lt;configs.mv_frag&gt;路径后，根据PATH变量收集各个碎片，如下所示</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">PATH+=<span class="variable">$MV_BLDR</span>/sdk-ext-abc/configs.mv_frag:<span class="variable">$PATH</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">PATH+=<span class="variable">$MV_BLDR</span>/sdk-base/configs.mv_frag:<span class="variable">$PATH</span></span></span><br></pre></td></tr></table></figure>
+
+<p>因此，在PATH中发现的第一个“f_xx”片段将被处理（例如，用扩展文件替换base_sdk默认文件“f_xx”）。</p>
+<p>根据给定的“目标”名称生成输出配置。生成的完整_defconfig保存在两个地方：</p>
+<ul>
+<li><p><strong>.&#x2F;configs&#x2F;._defconfig</strong> - used internally by Buildroot</p>
+</li>
+<li><p>**..&#x2F;</p>
+<p>&#x2F;images&#x2F;_defconfig</p>
+<p>** - 用于标准的make方法</p>
+</li>
+</ul>
+<p>_defconfig 还可用于创建辅助文件 $MV_BLDR&#x2F;</p>
+<p>&#x2F;.build._defconfig。此文件保留了上次编译的完整构建的开始和结束时间。</p>
+<p>要生成一个配置文件而不启动构建，请使用–config_only或-c选项调用compile.sh：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./scripts/ci/compile.sh &lt;....&gt; --config_only    ;<span class="comment"># or</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./scripts/ci/compile.sh -c</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：</p>
+<blockquote>
+<p>为了生成完整的defconfig文件，compile.sh会调用内部脚本.&#x2F;cfg_frag&#x2F;generate_defconfig。</p>
+</blockquote>
+<h3 id="生成-解析完整defconfig配置名称（和文件）"><a href="#生成-解析完整defconfig配置名称（和文件）" class="headerlink" title="生成&#x2F;解析完整defconfig配置名称（和文件）"></a>生成&#x2F;解析完整defconfig配置名称（和文件）</h3><p>完整的defconfig名称是从传递给compile.sh的命令行参数生成的。它由以下部分组成:</p>
+<ul>
+<li><p>build-name</p>
+</li>
+<li><p>extension-name (可选)</p>
+</li>
+<li><p>SoC-family (marvell_octeontx, marvell_octeontx2, marvell_armada, marvell_armada3k)</p>
+</li>
+<li><p>release&#x2F;devel mode</p>
+</li>
+</ul>
+<p>对于已知的Marvell主板和平台（来自compile.sh –list），SoC系列是已知的并会自动添加。例如，在主板cn10kb上使用扩展switches的发布版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> <span class="variable">$MV_BLDR</span>/sdk-ext-switches</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> ~/work/sdk-ext-switches</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./scripts/ci/compile.sh cn10kb-switches -c -r <span class="string">&quot;SDK12.23.10&quot;</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> -l ./configs/.cn10kb_switches_marvell_cn10k_release_defconfig</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> -l ../cn10kb-switches-release-output/images/cn10kb_switches_marvell_cn10k_release_defconfig</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image3.png" alt="loading-ag-19401"> </p>
+<h3 id="主线社区包"><a href="#主线社区包" class="headerlink" title="主线社区包"></a>主线社区包</h3><p>根据f_pkg_mainline_x碎片，主线社区包被包含在构建中。可以使用-n选项从提供的碎片列表中选择这些包的一个子集来编译。sh。默认设置是1到4，但可以很容易地更改为较小的集合。例如，要选择集合1、2和3：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./scripts/ci/compile.sh cn10kb-switches -n3 -r <span class="string">&quot;SDK12.23.10&quot;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>此外，客户可能需要添加（或删除）主线社区公认的BR2_PACKAGE_。这可以通过修改以下碎片之一来完成：</p>
+<ul>
+<li><p>over base_sdk&#x2F;configs.mv_frag&#x2F;f_pkg_mainline_custom file modification</p>
+</li>
+<li><p>over extension&#x2F;…&#x2F;f_pkg_mainline_custom</p>
+</li>
+<li><p>over extension&#x2F;…&#x2F;f_pkg_mainline_plat - if this is SoC-family specific</p>
+</li>
+</ul>
+<p>base_sdk&#x2F;configs.mv_frag&#x2F;f_pkg_mainline 是影响所有构建的通用修改，因此应与 base_sdk 集成商达成一致。否则，首选方法是修改 f_pkg_mainline_custom 或 f_pkg_mainline_plat。</p>
+<h3 id="Marvell内部持续集成（CI）的技巧"><a href="#Marvell内部持续集成（CI）的技巧" class="headerlink" title="Marvell内部持续集成（CI）的技巧"></a>Marvell内部持续集成（CI）的技巧</h3><p>创建新的扩展    </p>
+<p>略    </p>
+<h2 id="编译时优化"><a href="#编译时优化" class="headerlink" title="编译时优化"></a>编译时优化</h2><h3 id="Marvell-SDK-cache"><a href="#Marvell-SDK-cache" class="headerlink" title="Marvell SDK-cache"></a>Marvell SDK-cache</h3><p>Marvell CI 版本构建中设计了一种名为 SDK-cache 的优化方法。它缓存预先下载和预先编译的包，这些包从一个构建到下一个构建不太可能发生变化。</p>
+<p><strong>由于 SDK-cache 占实际目标构建的 85% 以上，因此实际目标构建的编译时间可以减少 85% 以上。</strong></p>
+<p>SDK缓存方法基于以下内容：</p>
+<ul>
+<li><p>SDK-cache构建输出类似于Marvell-SDK，但没有Marvell特定的包、内核和引导程序。</p>
+</li>
+<li><p>SDK-cache是所有构建目标通用的包的一个子集。</p>
+</li>
+<li><p>SDK缓存是一个“目标构建”，只需单独编译。</p>
+</li>
+<li><p>然后，已构建的SDK缓存（包括配置、对象、输出和中间文件）将被重新用于“真实”的目标构建。</p>
+</li>
+<li><p>SDK-cache环境包含所有下载的包。</p>
+</li>
+</ul>
+<p>一个真正的目标构建会逐步将自己的包添加到预构建的SDK缓存环境中，并在该环境中进行编译。</p>
+<h4 id="SDK-cache-限制"><a href="#SDK-cache-限制" class="headerlink" title="SDK-cache 限制"></a>SDK-cache 限制</h4><p>Buildroot 的配置、对象、输出和中间文件都内置了完整路径和用户信息。输出目录也是内置的，因此所有构建（缓存和其他）都应该构建到名为“output”的同一文件夹中。</p>
+<p>这意味着在此环境中预构建的SDK缓存只能在同一用户和同一路径下用于其他构建。</p>
+<p>Marvell CI 夜间自动化构建在用户“jenkins”下运行，路径为 &lt;&#x2F;home&#x2F;jenkins&#x2F;workspace&#x2F;nightly-devel&gt;。它也在 Docker 容器内运行，因此满足这些要求。</p>
+<p>然而，使用可共享的Build-Server的用户无法以简单的方式使用SDK-cache。</p>
+<h4 id="如何利用SDK的缓存cache"><a href="#如何利用SDK的缓存cache" class="headerlink" title="如何利用SDK的缓存cache"></a>如何利用SDK的缓存cache</h4><p>全局目录变量：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">TOPDIR          : $MV_BLDR/buildroot</span><br><span class="line">BASE_DIR        : $MV_BLDR/***output</span><br><span class="line">BUILD_DIR       := $(BASE_DIR)/build</span><br><span class="line">BINARIES_DIR    := $(BASE_DIR)/images</span><br><span class="line">HOST_DIR        := $(BASE_DIR)/host</span><br><span class="line">BASE_TARGET_DIR := $(BASE_DIR)/target</span><br></pre></td></tr></table></figure>
+
+<p>Marvell CI Nightly Automation Build 在用户“jenkins”下运行，路径为 <code>/home/jenkins/workspace/nightly-devel</code>。它也在 Docker 容器内运行，因此满足这些要求。</p>
+<p>如何创建和使用缓存?</p>
+<h5 id="1-构建缓存，这里是构建OcteonTX2-芯片类型的缓存"><a href="#1-构建缓存，这里是构建OcteonTX2-芯片类型的缓存" class="headerlink" title="1.构建缓存，这里是构建OcteonTX2 芯片类型的缓存"></a>1.构建缓存，这里是构建OcteonTX2 芯片类型的缓存</h5><p>注：SDK-cache支持三种类型</p>
+<ul>
+<li><p>otx2 (octeontx&#x2F;otx uses the same otx2 cache)</p>
+</li>
+<li><p>armada</p>
+</li>
+<li><p>armada3</p>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">export</span> MV_BLDR=/home/jenkins/workspace/nightly-devel</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> sdk-base</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./scripts/ci/compile.sh custom_otx2 -s</span></span><br></pre></td></tr></table></figure>
+
+<p>替换成我们的目录就是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">export</span> MV_BLDR=/home/bozoro/work/nightly-devel</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> sdk-ext-switches</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./scripts/ci/compile.sh custom_otx2  -s</span></span><br></pre></td></tr></table></figure>
+
+<p>注意：<strong>如果是发行版本，或者SDK扩展版，注意输出目录</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scripts/ci/compile.sh cn10kb-switches -d -r SDK12.23.10-PR6 -s</span><br></pre></td></tr></table></figure>
+
+<p>原来工作目录下是：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">byzoro@OcteonSDK:~/work$ ls</span><br><span class="line">base-patches-SDK12.23.10  buildroot                       extensions-patches-umsd-SDK12.23.10  override_srcdir.mk  toolchain</span><br><span class="line">base-sources-SDK12.23.10  cn10kb-release-output           extensions-sources-cpss-SDK12.23.10  sdk-base</span><br><span class="line">br2_out_dir               cn10kb-switches-release-output  extensions-sources-umsd-SDK12.23.10  sdk-ext-switches</span><br><span class="line">byzoro@OcteonSDK:~/work$ pwd</span><br><span class="line">/home/byzoro/work</span><br></pre></td></tr></table></figure>
+
+<p>执行完毕之后：</p>
+<p>现在构建缓存成功之后,多了三个文件：</p>
+<ul>
+<li><p>sdk_cache-cn10k-11685eb4.dl.tar</p>
+</li>
+<li><p>sdk_cache-cn10k-11685eb4.out.tar</p>
+</li>
+<li><p>output</p>
+</li>
+</ul>
+<p><img src="/assets/2024-03-20-14-35-32-image.png"></p>
+<p>现在需要新建一个nightly-devel作为缓存目录,path为&#x2F;home&#x2F;bozoro&#x2F;work&#x2F;nightly-devel</p>
+<h5 id="2-将“sdk-cache-otx2-7ba40650-tar”复制到一个文件夹中，以便其他版本进一步重复使用"><a href="#2-将“sdk-cache-otx2-7ba40650-tar”复制到一个文件夹中，以便其他版本进一步重复使用" class="headerlink" title="2.将“sdk_cache-otx2-7ba40650.tar”复制到一个文件夹中，以便其他版本进一步重复使用"></a>2.将“sdk_cache-otx2-7ba40650.tar”复制到一个文件夹中，以便其他版本进一步重复使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cp</span> ../sdk_cache-otx2-7ba40650.tar /path/to/my-saved-caches</span></span><br></pre></td></tr></table></figure>
+
+<p>即：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">~/work/sdk-ext-switches$ </span><span class="language-bash"><span class="built_in">cp</span> ../sdk_cache-cn10k-11685eb4.dl.tar  /home/byzoro/work/nightly-devel/to/my-saved-caches/</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="3-新的构建，使用别的构建生成的缓存"><a href="#3-新的构建，使用别的构建生成的缓存" class="headerlink" title="3.新的构建，使用别的构建生成的缓存"></a>3.新的构建，使用别的构建生成的缓存</h5><p>对于新构建，可以将缓存复制到新的安装目录（MV_BLDR）中，以加快构建时间。按照building_development_images中的步骤进行操作，直到准备好编译为止。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$</span><span class="language-bash">MV_BLDR/output and <span class="variable">$MV_BLDR</span>/buildroot/dl 然后目录就会被还原，就可以继续下面的构建</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="重新使用以前版本的SDK缓存"><a href="#重新使用以前版本的SDK缓存" class="headerlink" title="重新使用以前版本的SDK缓存"></a>重新使用以前版本的SDK缓存</h4><p>再次构建缓存：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scripts/ci/compile.sh cn10kb-switches -d -r SDK12.23.10-PR6 -s</span><br></pre></td></tr></table></figure>
+
+<p>当新版本缓存的defconfig与具有相同sdk-cache-ID的上一版本相同时，构建将绕过并显示以下消息：</p>
+<p><img src="/assets/2024-03-20-14-36-54-image.png"></p>
+<h3 id="CCACHE【禁用】"><a href="#CCACHE【禁用】" class="headerlink" title="CCACHE【禁用】"></a>CCACHE【禁用】</h3><p>Buildroot 提供了对“编译器缓存”的内置优化功能。编译器缓存是一种技术，用于存储编译过的程序或库的中间结果，以便在后续编译时重用这些结果，从而加快编译速度。</p>
+<p>此方法有一个限制 - 它依赖于编译工具链，但在工具链更改时，它不会检查也不会更新缓存。</p>
+<p>一些用户&#x2F;开发人员可以从使用这种优化方法中受益。然而，用户构建中主要的耗时任务（高达整个构建时间的50%）是从外部存储库下载软件包源代码。</p>
+<p>这种方法不适用于在Docker容器内运行并始终从头开始的Marvel CI-Automation。</p>
+<blockquote>
+<p><strong>官方版本中已禁用CCACHE Buildroot功能。开发人员可以使用Buildroot手册中的概念自行启用并尝试</strong></p>
+</blockquote>
+<h3 id="【注意事项】："><a href="#【注意事项】：" class="headerlink" title="【注意事项】："></a>【注意事项】：</h3><p>Buildroot Work-directory ($MV_BLDR)</p>
+<p>$MV_BLDR&#x3D;&#x2F;home&#x2F;byzoro&#x2F;work</p>
+<p>1.构建根目录：work目录下的文件名字不能随意更改，且所有操作必须是在同一个user下操作的。</p>
+<p>2.在 MV_BLDR 迁移后始终清理环境。</p>
+<p>要清理MV_BLDR，就要清除cn10kb-switches-release-output目录</p>
+<p>3.使用-d选项使用默认的输出目录。</p>
+<p>“-d”参数强制构建使用MVB​LDR&#x2F;output目录，而不是−−output。使用“−d”时，所有变体的构建都在相同的MV_BLDR&#x2F;output下完成。因此：</p>
+<p>一旦将包 ABC 下载到 $MV_BLDR&#x2F;buildroot&#x2F;dl&#x2F;ABC 中，它就不会更新，当源 GIT 上下文更改时，应手动删除以进行更新。</p>
+<p>Buildroot 检查每个包的依赖关系，而不是每个文件，一旦在 $MV_BLDR&#x2F;output&#x2F;build&#x2F;ABC 中编译了包 ABC，它就不会在代码更改时自动重新编译，应该手动删除以进行重新构建。</p>
+<p>可能需要清理TARGET和STAGING文件夹，但此类清理的程序不在本文档范围内。</p>
+<h3 id="Buildroot-output-folder-content"><a href="#Buildroot-output-folder-content" class="headerlink" title="Buildroot output folder content"></a>Buildroot output folder content</h3><p>Buildroot构建过程中产生的所有输出文件和目录</p>
+<img title="" src="image6.png" alt="loading-ag-22667" data-align="center">
+
+<h1 id="Firemare-and-Boot"><a href="#Firemare-and-Boot" class="headerlink" title="Firemare and Boot"></a>Firemare and Boot</h1><h2 id="Early-Boot-Firmware-EBF-User-Guide"><a href="#Early-Boot-Firmware-EBF-User-Guide" class="headerlink" title="Early Boot Firmware (EBF) User Guide"></a>Early Boot Firmware (EBF) User Guide</h2><p>早期固件启动指导手册</p>
+<ul>
+<li><p>Program Board Manufacturing Data</p>
+</li>
+<li><p>Set tracing level for EBF and ATF</p>
+</li>
+<li><p>Set mode of Ethernet ports</p>
+</li>
+<li><p>Set mode of PCIe SERDES</p>
+</li>
+</ul>
+<p>按B进入启动菜单</p>
+<h3 id="Setup-Menu"><a href="#Setup-Menu" class="headerlink" title="Setup Menu"></a>Setup Menu</h3><p>要进入设置菜单，请按 B 键中断 EBF 的正常启动流程。这将显示启动菜单。从启动菜单中，选择 S 进入主设置菜单，显示以下内容之一（基于平台）</p>
+<p>CN10xxx:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Setup</span><br><span class="line">=================================</span><br><span class="line">B) Board Manufacturing Data</span><br><span class="line">C) Chip Features</span><br><span class="line">D) DRAM Options</span><br><span class="line">P) PCIe Configuration</span><br><span class="line">W) Power Options</span><br><span class="line">E) Ethernet ... configuration</span><br><span class="line">F) Restore factory defaults</span><br><span class="line">S) Save Settings and Exit</span><br><span class="line">X) Exit Setup, discarding changes</span><br><span class="line"></span><br><span class="line">Choice:</span><br></pre></td></tr></table></figure>
+
+<h4 id="PCIE-EP-Security-Settings"><a href="#PCIE-EP-Security-Settings" class="headerlink" title="PCIE EP Security Settings"></a>PCIE EP Security Settings</h4><p>Marvell主机实用程序可能需要更改以下PCIE EP安全设置</p>
+<ul>
+<li><p>主机内存访问启用</p>
+</li>
+<li><p>主机流 ID 设置</p>
+</li>
+</ul>
+<p>要访问PCIE EP Security设置菜单，首先进入Setup菜单。然后根据平台选择以下选项，浏览菜单并进入PCIE EP Security设置菜单</p>
+<p>CN10xxx:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;P) PCIe Configuration&quot;</span><br><span class="line">&quot;C) PCIe Security&quot;</span><br></pre></td></tr></table></figure>
+
+<p>在这里，安全菜单应该显示:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">=================================</span><br><span class="line">PCIe EP Security</span><br><span class="line">=================================</span><br><span class="line">A) Allow PCIe Host to Access Octeon Memory (0)</span><br><span class="line">0) Host Stream IDs for PEM0 ( ...)</span><br><span class="line">1) Host Stream IDs for PEMx ( ...)</span><br><span class="line">Q) Return to main menu</span><br></pre></td></tr></table></figure>
+
+<p>首先，选择 <em>‘Allow PCIe Host to Access Octeon Memory’</em> and 输入1:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Choice: A</span><br><span class="line"></span><br><span class="line">Allow PCIe host to access Octeon memory.</span><br><span class="line">Default value is 0, which means do not allow.</span><br><span class="line">1 means allow.</span><br><span class="line">(INS)Allow PCIe Host to Access Octeon Memory [0]: 1</span><br></pre></td></tr></table></figure>
+
+<p>然后选择 <em>‘Host Stream IDs for PEM0’</em> entry 并 输入之前确定的 Host Stream ID ：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Choice: 0</span><br><span class="line"></span><br><span class="line">SMMU Stream IDs for PEM0.  This is a list of strings.  Each string is a</span><br><span class="line">C-style hexadecimal number.  For information about the fields of a Stream</span><br><span class="line">ID, see the &quot;SMMU Stream IDs&quot; section of the HRM.</span><br><span class="line">Default value is 0x30000 (just one item on the list).</span><br><span class="line">Current value:</span><br><span class="line">0x00030000</span><br><span class="line"></span><br><span class="line">Enter multiple lines for new value.</span><br><span class="line">Input ends with a blank line, Ctrl-C exits with no changes.</span><br><span class="line">(INS)Host Stream IDs for PEM0(line 1):</span><br></pre></td></tr></table></figure>
+
+<p>分别输入每个流ID；无需输入之前显示的当前值</p>
+<p>在输入所有流ID后，选择“返回主菜单”选项返回设置菜单。可能需要重复选择，直到显示设置菜单。</p>
+<p>最后，从“设置”菜单中选择“保存设置并退出”，这将保存设置并重新启动EBF</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">S) Save Settings and Exit</span><br><span class="line">Choice: S</span><br><span class="line"></span><br><span class="line">Saving settings</span><br><span class="line">Rebooting</span><br></pre></td></tr></table></figure>
+
+<p>之后，应正确配置Marvell Host Utilities，使其能够访问执行Linux的适配器。</p>
+<h3 id="Config-options"><a href="#Config-options" class="headerlink" title="Config options"></a>Config options</h3><p>所有的配置选项都会成为设备树（device tree）下“cavium,bdk”节点的属性。这些可以在板子的DTS（Device Tree Source，设备树源文件）文件中设置；一些配置也可以从设置菜单中设置。如果一个配置在两个地方都被设置了，那么设置菜单中设置并保存的值优先级更高。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">marvell</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">sdk交叉编译</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/marvell//" class="article-tag-list-link color3">marvell</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-编译可以直接在RAM下运行的镜像Image" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1749,126 +2109,6 @@
 
 
   
-    <article id="post-lua快速入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/02/05/lua%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" target="_blank">lua快速入门</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/02/05/lua%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/" class="archive-article-date">
-        <time datetime="2024-02-05T10:44:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-05</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h2 id="一-lua诞生背景和应用领域"><a href="#一-lua诞生背景和应用领域" class="headerlink" title="一.lua诞生背景和应用领域"></a>一.lua诞生背景和应用领域</h2><p>Lua是一种轻量级、可嵌入的脚本语言，由巴西的里约热内卢天主教大学的Roberto Ierusalimschy、Waldemar Celes和Luiz Henrique de Figueiredo于1993年开发。<code>Lua的设计目的是为了提供一种灵活的扩展和定制功能，使得应用程序可以通过嵌入Lua代码来增加灵活性和可定制性。</code></p>
-<p>Lua的诞生背景是在巴西石油公司和一些合作项目需要一个领域特定语言（DSL）来处理数据输入和数据配置，而当时已有的编程语言要么不容易嵌入，要么语法过于复杂。于是，Lua的开发者们决定开发一门新的编程语言，以满足这些需求。</p>
-<p>Lua的主要应用场景包括：游戏开发、移动应用开发、嵌入式系统开发、网络服务开发以及脚本扩展等。在游戏开发中，Lua常用于定义游戏逻辑、控制游戏流程、处理游戏事件等。在移动应用开发中，Lua可以用于跨平台开发，例如使用Lua进行Android和iOS的应用开发。<code>在嵌入式系统开发中，Lua的轻量级和易扩展性使其成为嵌入式系统开发的理想选择，可以用于嵌入式设备的控制和配置</code>。在网络服务开发中，Lua可以用于开发高性能的网络服务，例如Web应用程序、服务器端应用、代理服务器等。此外，许多软件和应用程序也支持使用Lua进行扩展和定制。</p>
-<h2 id="二-如何学习【How-to-learn-lua】"><a href="#二-如何学习【How-to-learn-lua】" class="headerlink" title="二.如何学习【How to learn lua】"></a>二.如何学习【How to learn lua】</h2><p>以下是几个Lua的学习网站和资料：</p>
-<ol>
-<li>Lua官网：<a href="">http://www.lua.org/</a>，这是Lua的官方网站，提供了Lua的详细文档、教程和示例代码。</li>
-<li>Lua官方文档：<a href="">http://www.lua.org/manual/</a>，这是Lua的官方文档，包含了Lua的语法、标准库、扩展方式等方面的详细说明。</li>
-<li>菜鸟教程：<a href="">http://www.runoob.com/lua/lua-basic-syntax.html</a>，这是一个在线教程，提供了Lua的基础语法和示例代码。</li>
-<li>CPPLua：<a href="">http://sourceforge.net/projects/cpplua/</a>，这是一个将Lua与C++结合使用的项目，提供了详细的文档和示例代码。]</li>
-<li>Lua交流论坛：<a href="">http://lua.10000fruits.com/</a>，这是一个Lua的中文交流论坛，可以找到许多Lua的使用经验和问题解答。</li>
-<li>GitHub上的Lua项目：在GitHub上可以找到许多Lua的项目和代码库，可以通过阅读这些项目来学习Lua的编程技巧和最佳实践。</li>
-</ol>
-<p>这些网站和资料提供了丰富的Lua学习资源，可以帮助你深入了解Lua的语法、标准库、扩展方式等方面的知识，以及掌握Lua在各种领域中的应用技巧。</p>
-<h2 id="三-lua快速入门【Qick-Start】"><a href="#三-lua快速入门【Qick-Start】" class="headerlink" title="三.lua快速入门【Qick Start】"></a>三.lua快速入门【Qick Start】</h2><h2 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1.环境搭建"></a>1.环境搭建</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install lua5.4</span><br><span class="line">lua -v </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">lua -v</span></span><br><span class="line">Lua 5.1.5  Copyright (C) 1994-2012 Lua.org, PUC-Ri</span><br><span class="line"></span><br><span class="line">sudo apt install luarockso  #安装lua库管理工具</span><br><span class="line"></span><br><span class="line">sudo luarocks install lua-readline</span><br></pre></td></tr></table></figure>
-
-<h3 id="两种执行方式："><a href="#两种执行方式：" class="headerlink" title="两种执行方式："></a>两种执行方式：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lua hello.lua</span><br><span class="line">./hello.lua  #加上了解释器</span><br></pre></td></tr></table></figure>
-
-<p>hello.lua</p>
-<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env lua</span><br><span class="line"></span><br><span class="line"><span class="comment">-- 打印 Hello, World!</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello, World!&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>lua工具库的管理工具</p>
-<h2 id="2-命令行demo"><a href="#2-命令行demo" class="headerlink" title="2.命令行demo"></a>2.命令行demo</h2><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">#!/usr/bin/env lua</span><br><span class="line"></span><br><span class="line"><span class="comment">-- Simple CLI program without lua-term</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- Command execution function</span></span><br><span class="line"><span class="keyword">local</span> <span class="function"><span class="keyword">function</span> <span class="title">executeCommand</span><span class="params">(command)</span></span></span><br><span class="line">    <span class="keyword">if</span> command == <span class="string">&quot;show&quot;</span> <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Executing &#x27;show&#x27; command&quot;</span>)</span><br><span class="line">    <span class="keyword">elseif</span> command == <span class="string">&quot;exit&quot;</span> <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Exiting CLI&quot;</span>)</span><br><span class="line">        <span class="built_in">os</span>.<span class="built_in">exit</span>(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">elseif</span> command == <span class="string">&quot;help&quot;</span> <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Available commands:&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;  1. show&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;  2. exit&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;  3. help&quot;</span>)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;  4. run&quot;</span>)</span><br><span class="line">        <span class="comment">-- Add other commands...</span></span><br><span class="line">    <span class="keyword">elseif</span> command == <span class="string">&quot;run&quot;</span> <span class="keyword">then</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Executing &#x27;run&#x27; command&quot;</span>)</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Unknown command. Type &#x27;help&#x27; for available commands.&quot;</span>)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="comment">-- CLI main loop</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">true</span> <span class="keyword">do</span></span><br><span class="line">    <span class="built_in">io</span>.<span class="built_in">write</span>(<span class="string">&quot;&gt; &quot;</span>)  <span class="comment">-- Display prompt</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">local</span> command = <span class="built_in">io</span>.<span class="built_in">read</span>()  <span class="comment">-- Read user input</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> command <span class="keyword">then</span></span><br><span class="line">        <span class="keyword">break</span>  <span class="comment">-- Exit loop if user presses Ctrl-D (EOF)</span></span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">    executeCommand(command)  <span class="comment">-- Parse and execute command</span></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;CLI terminated.&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h2 id="3-执行程序"><a href="#3-执行程序" class="headerlink" title="3.执行程序:"></a>3.执行程序:</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">./appDemo.lua</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="built_in">help</span></span></span><br><span class="line">Available commands:</span><br><span class="line">  1. show</span><br><span class="line">  2. exit</span><br><span class="line">  3. help</span><br><span class="line">  4. run</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="built_in">exit</span></span></span><br></pre></td></tr></table></figure>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">lua</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Program-Language//" class="article-tag-list-link color2">Program_Language</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/02/05/lua%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -2075,6 +2315,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">sdk交叉编译</a>
               </li>
             
             <div class="clearfix"></div>
