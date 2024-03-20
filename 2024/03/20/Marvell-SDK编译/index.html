@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://jack-song-gif.github.io/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image4.png">
 <meta property="og:image" content="https://jack-song-gif.github.io/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image5.png">
 <meta property="article:published_time" content="2024-03-20T06:17:29.000Z">
-<meta property="article:modified_time" content="2024-03-20T06:55:04.483Z">
+<meta property="article:modified_time" content="2024-03-20T07:39:24.055Z">
 <meta property="article:author" content="CoderSong">
 <meta property="article:tag" content="sdk交叉编译">
 <meta property="article:tag" content="marvell">
@@ -332,7 +332,7 @@
 <p>然后解压到我们自己的工作目录下。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/work</span><br><span class="line">cd ~/work</span><br><span class="line">tar xf ~/Downloads/base-&lt;release-id&gt;.tar.bz2</span><br><span class="line">tar xf ~/Downloads/toolchain.tar.bz2</span><br><span class="line">ls</span><br><span class="line">base-patches-&lt;release-id&gt;  base-sources-&lt;release-id&gt;  buildroot  sdk-base  toolchain</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image0.png" alt="loading-ag-23758"></p>
+<p><img src="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image0.png" alt="loading-ag-23770"></p>
 <p>解压后目录如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span></span></span><br><span class="line">base-patches-SDK12.23.10  base-sources-SDK12.23.10  buildroot  sdk-base  toolchain</span><br></pre></td></tr></table></figure>
 
@@ -348,7 +348,7 @@
 <p>其他支持编译的芯片型号，可以用<code>./scripts/ci/compile.sh -l</code>查看</p>
 <p>Other supported platforms are shown with <code>./scripts/ci/compile.sh -l</code>:</p>
 <p>cn10ka版本</p>
-<img title="" src="image1.png" alt="loading-ag-23759" data-align="center">
+<img title="" src="image1.png" alt="loading-ag-23771" data-align="center">
 
 <h3 id="2-3-构建单个软件包-【Building-a-Single-Package】"><a href="#2-3-构建单个软件包-【Building-a-Single-Package】" class="headerlink" title="2.3 构建单个软件包 【Building a Single Package】"></a>2.3 构建单个软件包 【Building a Single Package】</h3><p>略</p>
 <h3 id="2-4-！构建通用扩展【Building-a-Generic-Extension】"><a href="#2-4-！构建通用扩展【Building-a-Generic-Extension】" class="headerlink" title="2.4 ！构建通用扩展【Building a Generic Extension】"></a>2.4 ！构建通用扩展【Building a Generic Extension】</h3><p>如果发行版包括扩展，那么这些扩展也需要与基础SDK一起解压到工作目录中。</p>
@@ -433,7 +433,7 @@
 <p>对于已知的Marvell主板和平台（来自compile.sh –list），SoC系列是已知的并会自动添加。例如，在主板cn10kb上使用扩展switches的发布版本</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> <span class="variable">$MV_BLDR</span>/sdk-ext-switches</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> ~/work/sdk-ext-switches</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./scripts/ci/compile.sh cn10kb-switches -c -r <span class="string">&quot;SDK12.23.10&quot;</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> -l ./configs/.cn10kb_switches_marvell_cn10k_release_defconfig</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> -l ../cn10kb-switches-release-output/images/cn10kb_switches_marvell_cn10k_release_defconfig</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image2.png" alt="loading-ag-23765"> </p>
+<p><img src="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image2.png" alt="loading-ag-23772"> </p>
 <h3 id="主线社区包"><a href="#主线社区包" class="headerlink" title="主线社区包"></a>主线社区包</h3><p>根据f_pkg_mainline_x碎片，主线社区包被包含在构建中。可以使用-n选项从提供的碎片列表中选择这些包的一个子集来编译。sh。默认设置是1到4，但可以很容易地更改为较小的集合。例如，要选择集合1、2和3：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./scripts/ci/compile.sh cn10kb-switches -n3 -r <span class="string">&quot;SDK12.23.10&quot;</span></span></span><br></pre></td></tr></table></figure>
 
@@ -504,7 +504,7 @@
 <li><p>output</p>
 </li>
 </ul>
-<p><img src="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image3.png" alt="loading-ag-23767"></p>
+<p><img src="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image3.png" alt="loading-ag-23773"></p>
 <p>现在需要新建一个nightly-devel作为缓存目录,path为&#x2F;home&#x2F;bozoro&#x2F;work&#x2F;nightly-devel</p>
 <h5 id="2-将“sdk-cache-otx2-7ba40650-tar”复制到一个文件夹中，以便其他版本进一步重复使用"><a href="#2-将“sdk-cache-otx2-7ba40650-tar”复制到一个文件夹中，以便其他版本进一步重复使用" class="headerlink" title="2.将“sdk_cache-otx2-7ba40650.tar”复制到一个文件夹中，以便其他版本进一步重复使用"></a>2.将“sdk_cache-otx2-7ba40650.tar”复制到一个文件夹中，以便其他版本进一步重复使用</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cp</span> ../sdk_cache-otx2-7ba40650.tar /path/to/my-saved-caches</span></span><br></pre></td></tr></table></figure>
 
@@ -518,7 +518,7 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./scripts/ci/compile.sh cn10kb-switches -d -r SDK12.23.10-PR6 -s</span><br></pre></td></tr></table></figure>
 
 <p>当新版本缓存的defconfig与具有相同sdk-cache-ID的上一版本相同时，构建将绕过并显示以下消息：</p>
-<p><img src="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image4.png" alt="loading-ag-23768"></p>
+<p><img src="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image4.png" alt="loading-ag-23774"></p>
 <h3 id="CCACHE【禁用】"><a href="#CCACHE【禁用】" class="headerlink" title="CCACHE【禁用】"></a>CCACHE【禁用】</h3><p>Buildroot 提供了对“编译器缓存”的内置优化功能。编译器缓存是一种技术，用于存储编译过的程序或库的中间结果，以便在后续编译时重用这些结果，从而加快编译速度。</p>
 <p>此方法有一个限制 - 它依赖于编译工具链，但在工具链更改时，它不会检查也不会更新缓存。</p>
 <p>一些用户&#x2F;开发人员可以从使用这种优化方法中受益。然而，用户构建中主要的耗时任务（高达整个构建时间的50%）是从外部存储库下载软件包源代码。</p>
@@ -537,7 +537,7 @@
 <p>Buildroot 检查每个包的依赖关系，而不是每个文件，一旦在 $MV_BLDR&#x2F;output&#x2F;build&#x2F;ABC 中编译了包 ABC，它就不会在代码更改时自动重新编译，应该手动删除以进行重新构建。</p>
 <p>可能需要清理TARGET和STAGING文件夹，但此类清理的程序不在本文档范围内。</p>
 <h3 id="Buildroot-output-folder-content"><a href="#Buildroot-output-folder-content" class="headerlink" title="Buildroot output folder content"></a>Buildroot output folder content</h3><p>Buildroot构建过程中产生的所有输出文件和目录</p>
-<img title="" src="image5.png" alt="loading-ag-23769" data-align="center">
+<img title="" src="image5.png" alt="loading-ag-23775" data-align="center">
 
 <h1 id="Firemare-and-Boot"><a href="#Firemare-and-Boot" class="headerlink" title="Firemare and Boot"></a>Firemare and Boot</h1><h2 id="Early-Boot-Firmware-EBF-User-Guide"><a href="#Early-Boot-Firmware-EBF-User-Guide" class="headerlink" title="Early Boot Firmware (EBF) User Guide"></a>Early Boot Firmware (EBF) User Guide</h2><p>早期固件启动指导手册</p>
 <ul>
