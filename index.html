@@ -231,548 +231,6 @@
             
 
   
-    <article id="post-学会Makefile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/04/11/%E5%AD%A6%E4%BC%9AMakefile/" target="_blank">学会Makefile</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/04/11/%E5%AD%A6%E4%BC%9AMakefile/" class="archive-article-date">
-        <time datetime="2024-04-11T06:45:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-11</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="学会使用Makefile"><a href="#学会使用Makefile" class="headerlink" title="学会使用Makefile"></a>学会使用Makefile</h1><blockquote>
-<p>本教程乃是makefiletutorial中文版</p>
-</blockquote>
-<p>我建立了这个指南，因为我一直无法完全理解Makefile。它们似乎充斥着隐藏的规则和神秘的符号，问简单的问题也得不到简单的答案。为了解决这个问题，我坐下来花了几个周末的时间，尽可能阅读了关于Makefile的所有资料。我将最关键的知识内容总结到了这个指南中。每个主题都有简要的描述和可供你自行运行的独立示例。</p>
-<p>如果你对Make有了较好的理解，可以考虑查看《Makefile Cookbook》，其中提供了一个中等规模项目的模板，以及关于Makefile各部分功能的充分注释。</p>
-<p>祝你好运，希望你能够征服令人困惑的Makefile世界！</p>
-<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="为什么会存在Makefiles呢？"><a href="#为什么会存在Makefiles呢？" class="headerlink" title="为什么会存在Makefiles呢？"></a>为什么会存在Makefiles呢？</h3><p>Makefile用于帮助确定哪些大型程序的部分需要重新编译。在绝大多数情况下，会编译C或C++文件。其他编程语言通常也有自己的工具，用于类似于Make的功能。Make还可以用于除了编译之外的其他用途，比如当需要一系列指令根据文件的变化情况而运行时。本教程将集中讨论C&#x2F;C++编译的使用情况。</p>
-<p>这里有一个可能使用Make构建的示例依赖图。如果任何文件的依赖关系发生变化，那么该文件将被重新编译。</p>
-<img title="" src="2024-04-11-14-53-05-image.png" alt="loading-ag-12408" data-align="center" width="504">
-
-
-
-<h3 id="Make有哪些替代方案？"><a href="#Make有哪些替代方案？" class="headerlink" title="Make有哪些替代方案？"></a>Make有哪些替代方案？</h3><p>流行的C&#x2F;C++替代构建系统包括SCons、CMake、Bazel和Ninja。一些代码编辑器如Microsoft Visual Studio内建了其自己的构建工具。对于Java，有Ant、Maven和Gradle。其他语言如Go、Rust和TypeScript也有它们自己的构建工具。</p>
-<p>像Python、Ruby以及原始JavaScript这样的解释型语言不需要类似于Makefile的东西。Makefile的目标是根据文件的更改情况编译需要编译的文件。但是对于解释型语言的文件，一旦发生更改，就无需重新编译。程序运行时会使用文件的最新版本。</p>
-<h3 id="Make的版本和类型"><a href="#Make的版本和类型" class="headerlink" title="Make的版本和类型"></a>Make的版本和类型</h3><p>Make有各种实现版本，但本指南中的大部分内容适用于任何你使用的版本。但是，它是专门针对GNU Make编写的，这是Linux和MacOS上的标准实现。所有的示例都适用于Make的3和4版本，它们几乎是等效的，只是一些难以理解的细微差别。</p>
-<h3 id="运行示例"><a href="#运行示例" class="headerlink" title="运行示例"></a>运行示例</h3><p>要运行这些示例，你需要一个终端和已安装的”make”。对于每个示例，将内容放入一个名为Makefile的文件中，在该目录下运行命令make。让我们从最简单的Makefile开始：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">hello:</span></span><br><span class="line">    echo <span class="string">&quot;Hello, World&quot;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：Makefile 中的缩进必须使用制表符而不是空格，否则 make 命令会失败。</p>
-</blockquote>
-<p>这是运行上述例子的结果</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ make</span><br><span class="line">echo <span class="string">&quot;Hello, World&quot;</span></span><br><span class="line">Hello, World</span><br></pre></td></tr></table></figure>
-
-<h3 id="Makefile-语法"><a href="#Makefile-语法" class="headerlink" title="Makefile 语法"></a>Makefile 语法</h3><p>一个Makefile包含一组规则。一般规则看起来像这样：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">targets【目标】: prerequisites【先决条件】</span></span><br><span class="line">    command【命令】</span><br><span class="line">    command</span><br><span class="line">    command</span><br></pre></td></tr></table></figure>
-
-<p>targets目标是文件名，用空格分隔。通常，每条规则只有一个目标。</p>
-<p>command命令是一系列步骤，通常用于生成目标文件。这些步骤需要以制表符开头，而不是空格。</p>
-<p>prerequisites先决条件也是文件名，用空格分隔。这些文件需要在运行目标的命令之前存在。这些也被称为依赖项。</p>
-<h3 id="Make的实质"><a href="#Make的实质" class="headerlink" title="Make的实质"></a>Make的实质</h3><p>我们来分析一下Helloworld的例子</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">hello:</span></span><br><span class="line">    echo <span class="string">&quot;Hello, World&quot;</span></span><br><span class="line">    echo <span class="string">&quot;This line will print if the file hello does not exist.&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>这里已经有很多内容需要理解。让我们逐步分解：</p>
-<p>我们有一个名为hello的目标<br>这个目标有两个命令<br>这个目标没有先决条件<br>然后我们会运行make hello。只要hello文件不存在，命令就会运行。如果hello存在，就不会运行任何命令。</p>
-<p>重要的是要意识到，我说的hello既是一个目标又是一个文件。这是因为这两者直接相关。通常情况下，当运行一个目标（也就是运行目标的命令）时，命令会创建一个与目标名称相同的文件。在这种情况下，hello目标不会创建hello文件。</p>
-<p>在我们创建一个更典型的Makefile之前，让我们创建一个名为blah.c的文件，内容如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// blah.c</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123; <span class="keyword">return</span> <span class="number">0</span>; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后我们创建Makefile(文件名通常都为Makefile)</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">blah:</span></span><br><span class="line">    cc blah.c -o blah</span><br></pre></td></tr></table></figure>
-
-<p>这次，尝试简单地运行 make 命令。由于没有向 make 命令提供目标作为参数，因此会运行第一个目标。在这种情况下，只有一个目标（blah）。第一次运行时，会创建 blah。第二次运行时，你会看到输出 make: ‘blah’ is up to date。这是因为 blah 文件已经存在。但是存在一个问题：如果我们修改 blah.c 然后运行 make，就不会重新编译任何东西。</p>
-<p>我们通过添加一个先决条件来解决这个问题：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">blah: blah.c</span></span><br><span class="line">    cc blah.c -o blah</span><br></pre></td></tr></table></figure>
-
-<p>当我们再次运行 make 时，会发生以下一系列步骤：</p>
-<p>选择第一个目标，因为第一个目标是默认目标<br>这个目标有一个先决条件，即 blah.c<br>Make 决定是否应该运行 blah 目标。只有在 blah 不存在，或者 blah.c 的修改时间比 blah 的新时才会运行<br>最后这一步至关重要，也是 make 的实质。其目的是判断自上次编译 blah 以来，blah 的先决条件是否发生了变化。也就是说，如果修改了 blah.c，运行 make 应该重新编译文件。反之，如果 blah.c 没有变化，就不应该重新编译。</p>
-<p>为了实现这一点，它使用文件系统时间戳作为代理来确定是否发生了变化。这是一个合理的启发式方法，因为文件时间戳通常只会在文件被修改时改变。但重要的是要意识到，情况并非总是如此。例如，你可能修改了一个文件，然后将该文件的修改时间戳更改为旧的时间。如果这样做，Make 将错误地猜测文件没有发生变化，因此可以忽略。</p>
-<p>哎呀，这真是一大段话。确保你理解了这一点。这是 Makefile 的关键，可能需要你花几分钟来正确理解。通过上面的例子进行实验，如果仍然感到困惑，可以观看上面的视频。</p>
-<h3 id="更多快速示例"><a href="#更多快速示例" class="headerlink" title="更多快速示例"></a>更多快速示例</h3><p>以下的 Makefile 最终运行了所有三个目标。当你在终端中运行 make 时，它将按一系列步骤构建一个名为 blah 的程序：</p>
-<p>Make 选择了目标 blah，因为第一个目标是默认目标<br>blah 需要 blah.o，make 于是寻找 blah.o 目标<br>blah.o 需要 blah.c，因此 make 寻找 blah.c 目标<br>blah.c 没有依赖，因此运行 echo 命令<br>然后运行 cc -c 命令，因为所有的 blah.o 依赖已经完成<br>接着运行顶层的 cc 命令，因为所有的 blah 依赖已经完成<br>至此，blah 是一个编译好的 C 程序</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">blah: blah.o</span></span><br><span class="line">    cc blah.o -o blah <span class="comment"># Runs third</span></span><br><span class="line"></span><br><span class="line"><span class="section">blah.o: blah.c</span></span><br><span class="line">    cc -c blah.c -o blah.o <span class="comment"># Runs second</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Typically blah.c would already exist, but I want to limit any additional required files</span></span><br><span class="line"><span class="section">blah.c:</span></span><br><span class="line">    echo <span class="string">&quot;int main() &#123; return 0; &#125;&quot;</span> &gt; blah.c <span class="comment"># Runs first</span></span><br></pre></td></tr></table></figure>
-
-<p>如果你删除 blah.c，所有三个目标都将重新运行。如果你编辑 blah.c（因此修改时间戳比 blah.o 要新），那么前两个目标将会运行。如果你运行 touch blah.o（从而修改时间戳比 blah 还要新），那么只有第一个目标会运行。如果啥也不改，那么这些目标都不会运行。试一下吧！</p>
-<p>下一个示例并没有做什么新的，但它仍然是一个很好的附加例子。它始终会运行两个目标，因为 some_file 依赖于 other_file，而 other_file 从未被创建。【因为创建some_file目标的前提条件是other_file存在】</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">some_file: other_file</span></span><br><span class="line">    echo <span class="string">&quot;This will always run, and runs second&quot;</span></span><br><span class="line">    touch some_file</span><br><span class="line"></span><br><span class="line"><span class="section">other_file:</span></span><br><span class="line">    echo <span class="string">&quot;This will always run, and runs first&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Make-clean"><a href="#Make-clean" class="headerlink" title="Make clean"></a>Make clean</h3><p>clean通常被用作一个目标，用于删除其他目标的输出，但它并不是Make中的一个特殊单词。你可以在这个示例上运行 make 和 make clean 来创建和删除 some_file。</p>
-<p>需要注意的是，clean 在这里有两个新的特点：</p>
-<p>它是一个非首要（默认）的目标，也不是一个先决条件。这意味着它永远不会运行，除非你明确调用 make clean<br>它不是一个意图作为文件名的目标。如果你碰巧有一个名为 clean 的文件，这个目标就不会运行，这不是我们想要的。在本教程的后面部分中会介绍如何通过 .PHONY 来解决这个问题</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">some_file: </span></span><br><span class="line">    touch some_file</span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -f some_file</span><br></pre></td></tr></table></figure>
-
-<h3 id="变量【Variables】"><a href="#变量【Variables】" class="headerlink" title="变量【Variables】"></a>变量【Variables】</h3><p>变量只能是字符串。通常你会想使用 :&#x3D;，但&#x3D;也可以。请参阅变量第二部分。</p>
-<p>下面是一个使用变量的示例：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">files := file1 file2</span><br><span class="line"><span class="section">some_file: <span class="variable">$(files)</span></span></span><br><span class="line">    echo <span class="string">&quot;Look at this variable: &quot;</span> <span class="variable">$(files)</span></span><br><span class="line">    touch some_file</span><br><span class="line"></span><br><span class="line"><span class="section">file1:</span></span><br><span class="line">    touch file1</span><br><span class="line"><span class="section">file2:</span></span><br><span class="line">    touch file2</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -f file1 file2 some_file</span><br></pre></td></tr></table></figure>
-
-<p>单引号或双引号在Make中没有意义。它们只是赋给变量的字符。然而，在shell&#x2F;bash中，引号是有用的，在诸如printf之类的命令中需要它们。在这个例子中，这两个命令的行为是相同的：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">a := one two <span class="comment"># a is set to the string &quot;one two&quot;</span></span><br><span class="line">b := &#x27;one two&#x27; <span class="comment"># Not recommended. b is set to the string &quot;&#x27;one two&#x27;&quot;</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    printf &#x27;$a&#x27;</span><br><span class="line">    printf $b</span><br></pre></td></tr></table></figure>
-
-<p>引用变量使用 <code>$&#123;&#125;</code> or <code>$()</code></p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x := dude <span class="comment"># :=表示变量立即赋值，即刻生效，相当于字符串常量，=是在使用变量的时候再赋值，变量值会改变。</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    echo <span class="variable">$(x)</span></span><br><span class="line">    echo $&#123;x&#125;</span><br><span class="line">    <span class="comment"># Bad practice, but works【错误做法】</span></span><br><span class="line">    echo $x  </span><br></pre></td></tr></table></figure>
-
-<h2 id="Targets【目标】"><a href="#Targets【目标】" class="headerlink" title="Targets【目标】"></a>Targets【目标】</h2><h3 id="The-all-target"><a href="#The-all-target" class="headerlink" title="The all target"></a>The all target</h3><p>要创建多个目标并且想让它们都运行吗？那就创建一个名为 all 的目标。因为这是列出的第一个规则，所以如果在没有指定目标的情况下调用 make，它将默认运行。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: one two three</span></span><br><span class="line"><span class="section">one:</span></span><br><span class="line">    touch one</span><br><span class="line"><span class="section">two:</span></span><br><span class="line">    touch two</span><br><span class="line"><span class="section">three:</span></span><br><span class="line">    touch three</span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -f one two three</span><br></pre></td></tr></table></figure>
-
-<h3 id="Multiple-targets"><a href="#Multiple-targets" class="headerlink" title="Multiple targets"></a>Multiple targets</h3><p>当一个规则有多个目标时，命令将会对每个目标运行。$@ 是一个自动变量，包含了目标的名称。</p>
-<blockquote>
-<p>$@就是一个迭代器，可以遍历目标数组中的每个目标</p>
-</blockquote>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: f1.o f2.o</span></span><br><span class="line"></span><br><span class="line">f1.o f2.o:</span><br><span class="line">    echo <span class="variable">$@</span></span><br><span class="line"><span class="comment"># Equivalent to:</span></span><br><span class="line"><span class="comment"># f1.o:</span></span><br><span class="line"><span class="comment">#     echo f1.o</span></span><br><span class="line"><span class="comment"># f2.o:</span></span><br><span class="line"><span class="comment">#     echo f2.o</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="自动变量和通配符【Automatic-Variables-and-Wildcards】"><a href="#自动变量和通配符【Automatic-Variables-and-Wildcards】" class="headerlink" title="自动变量和通配符【Automatic Variables and Wildcards】"></a>自动变量和通配符【Automatic Variables and Wildcards】</h2><h3 id="Wildcard通配符"><a href="#Wildcard通配符" class="headerlink" title="* Wildcard通配符"></a>* Wildcard通配符</h3><p>在Make中，<em>和%都被称为通配符，但它们表示完全不同的东西。</em>在文件系统中搜索匹配的文件名。我建议您始终将其包装在通配符函数中，否则您可能会陷入下面描述的常见陷阱。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Print out file information about every .c file</span></span><br><span class="line"><span class="section">print: $(wildcard *.c)</span></span><br><span class="line">    ls -la  <span class="variable">$^</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#在这里，$^ 代表所有的依赖文件列表。这将执行ls -la命令来打印出所有 .c 文件的详细信息。</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> make</span><br><span class="line">ls -la  blah.c</span><br><span class="line">-rw-rw-r-- 1 root root 25  3月 29 14:27 blah.c</span><br><span class="line"><span class="meta prompt_">learing$ </span><span class="language-bash"><span class="built_in">touch</span> main.c</span></span><br><span class="line"><span class="meta prompt_">learing$ </span><span class="language-bash"><span class="built_in">touch</span> test.c</span></span><br><span class="line"><span class="meta prompt_">learing$ </span><span class="language-bash">make</span></span><br><span class="line">ls -la  blah.c main.c test.c</span><br><span class="line">-rw-rw-r-- 1 root root 25  3月 29 14:27 blah.c</span><br><span class="line">-rw-rw-r-- 1 root root  0  3月 29 16:34 main.c</span><br><span class="line">-rw-rw-r-- 1 root root  0  3月 29 16:34 test.c</span><br></pre></td></tr></table></figure>
-
-<p><code>*</code>可以用在目标、先决条件中，或者用在通配符函数中。</p>
-<p>注意：* 不能直接用在变量定义中</p>
-<p>注意：当 * 没有匹配到任何文件时，它将保持原样（除非在通配符函数中运行）。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">thing_wrong := *.o # Don&#x27;t do this! &#x27;*&#x27; will not get expanded</span><br><span class="line">thing_right := $(wildcard *.o)</span><br><span class="line"></span><br><span class="line">all: one two three four</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Fails, because $(thing_wrong) is the string <span class="string">&quot;*.o&quot;</span></span></span><br><span class="line">one: $(thing_wrong)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Stays as *.o <span class="keyword">if</span> there are no files that match this pattern :(</span></span><br><span class="line">two: *.o </span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Works as you would expect! In this <span class="keyword">case</span>, it does nothing.</span></span><br><span class="line">three: $(thing_right)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Same as rule three</span></span><br><span class="line">four: $(wildcard *.o)</span><br></pre></td></tr></table></figure>
-
-<p>执行结果</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line">make: *** 没有规则可制作目标“*.o”，由“one” 需求。 停止。</span><br></pre></td></tr></table></figure>
-
-<h3 id="通配符"><a href="#通配符" class="headerlink" title="%通配符"></a>%通配符</h3><p>百分号（%）非常有用，但由于它可用于多种情况，有时会显得有些令人困惑。</p>
-<p>当在“匹配”模式中使用时，它会匹配字符串中的一个或多个字符。这种匹配被称为 stem。</p>
-<p>当在“替换”模式中使用时，它会取代之前匹配的 stem，并替换字符串中相应的部分。</p>
-<p>% 最常用于规则定义和一些特定函数中。</p>
-<p>请查看以下章节，了解其用法示例：</p>
-<ul>
-<li>静态模式规则</li>
-<li>模式规则</li>
-<li>字符串替换</li>
-<li>vpath 指令</li>
-</ul>
-<h3 id="自动变量"><a href="#自动变量" class="headerlink" title="自动变量"></a>自动变量</h3><p>有许多自动变量，但通常只有少数几个会出现：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">hey: one two</span></span><br><span class="line">    <span class="comment"># Outputs &quot;hey&quot;, since this is the target name</span></span><br><span class="line">    echo <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Outputs all prerequisites newer than the target</span></span><br><span class="line">    echo <span class="variable">$?</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Outputs all prerequisites</span></span><br><span class="line">    echo <span class="variable">$^</span></span><br><span class="line"></span><br><span class="line">    touch hey</span><br><span class="line"><span class="section">one:</span></span><br><span class="line">    touch one</span><br><span class="line"><span class="section">two:</span></span><br><span class="line">    touch two</span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -f hey one two</span><br></pre></td></tr></table></figure>
-
-<p>执行结果</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">touch</span> one</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span> -ll</span></span><br><span class="line">总计 4</span><br><span class="line">-rw-rw-r-- 1 root root   0  3月 29 16:50 hey</span><br><span class="line">-rw-rw-r-- 1 root root 243  3月 29 16:50 Makefile</span><br><span class="line">-rw-rw-r-- 1 root root   0  3月 29 16:53 one</span><br><span class="line">-rw-rw-r-- 1 root root   0  3月 29 16:50 two</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Outputs <span class="string">&quot;hey&quot;</span>, since this is the target name</span></span><br><span class="line">echo hey</span><br><span class="line">hey</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Outputs all prerequisites newer than the target</span></span><br><span class="line">echo one</span><br><span class="line">one</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Outputs all prerequisites</span></span><br><span class="line">echo one two</span><br><span class="line">one two</span><br><span class="line">touch hey</span><br></pre></td></tr></table></figure>
-
-<h2 id="高级规则【Fancy-Rules】"><a href="#高级规则【Fancy-Rules】" class="headerlink" title="高级规则【Fancy Rules】"></a>高级规则【Fancy Rules】</h2><h3 id="隐式规则【Implicit-Rules】"><a href="#隐式规则【Implicit-Rules】" class="headerlink" title="隐式规则【Implicit Rules】"></a>隐式规则【Implicit Rules】</h3><p>Make很喜欢用隐式的规则来编译C程序【称之为Make对C&#x2F;C++独特的爱】。我个人不同意这个设计决定，我不建议使用它们，但它们经常被使用，因此了解它们很有用。下面是隐式规则的列表：</p>
-<ul>
-<li><p>Compiling a C program: <code>n.o</code> is made automatically from <code>n.c</code> with a command of the form <code>$(CC) -c $(CPPFLAGS) $(CFLAGS) $^ -o $@</code></p>
-</li>
-<li><p>Compiling a C++ program: <code>n.o</code> is made automatically from <code>n.cc</code> or <code>n.cpp</code> with a command of the form <code>$(CXX) -c $(CPPFLAGS) $(CXXFLAGS) $^ -o $@</code></p>
-</li>
-<li><p>Linking a single object file: <code>n</code> is made automatically from <code>n.o</code> by running the command <code>$(CC) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) -o $@</code></p>
-</li>
-<li><p>编译一个程序：<code>n.o</code>文件会由<code>n.c</code>文件自动生成，通过命令：<code>$(CC) -c $(CPPFLAGS) $(CFLAGS) $^ -o $@</code></p>
-</li>
-<li><p>C++程序编译: <code>n.o</code>文件会由<code>n.cc</code>或<code>n.cpp</code>文件自动生成，通过命令：<code>$(CXX) -c $(CPPFLAGS) $(CXXFLAGS) $^ -o $@</code></p>
-</li>
-<li><p>链接单个目标文件: <code>n</code>文件会由<code>n.o</code>或<code>n.cpp</code>文件自动生成，通过命令: <code>$(CC) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) -o $@</code></p>
-</li>
-</ul>
-<p>隐式规则所使用的重要变量包括：</p>
-<ul>
-<li><p>CC: 用于编译C程序的程序；默认为cc</p>
-</li>
-<li><p>CXX: 用于编译C++程序的程序；默认为g++</p>
-</li>
-<li><p>CFLAGS: 提供给C编译器的额外标志</p>
-</li>
-<li><p>CXXFLAGS: 提供给C++编译器的额外标志</p>
-</li>
-<li><p>CPPFLAGS: 提供给C预处理器的额外标志</p>
-</li>
-<li><p>LDFLAGS: 当编译器需要调用链接器时提供的额外标志</p>
-</li>
-</ul>
-<p>现在，让我们看看如何在不明确告诉Make如何进行编译的情况下构建一个C程序：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CC = gcc <span class="comment"># Flag for implicit rules</span></span><br><span class="line">CFLAGS = -g <span class="comment"># Flag for implicit rules. Turn on debug info</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Implicit rule #1: blah is built via the C linker implicit rule</span></span><br><span class="line"><span class="comment"># Implicit rule #2: blah.o is built via the C compilation implicit rule, because blah.c exists</span></span><br><span class="line"><span class="section">blah: blah.o  #按照C链接器默认的隐式规则进行链接</span></span><br><span class="line"></span><br><span class="line"><span class="section">blah.c: #按照C编译器默认的隐式规则进行编译</span></span><br><span class="line">    echo <span class="string">&quot;int main() &#123; return 0; &#125;&quot;</span> &gt; blah.c</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -f blah*</span><br></pre></td></tr></table></figure>
-
-<h3 id="静态模式规则【Static-Pattern-Rules】"><a href="#静态模式规则【Static-Pattern-Rules】" class="headerlink" title="静态模式规则【Static Pattern Rules】"></a>静态模式规则【Static Pattern Rules】</h3><p>静态模式规则是在Makefile中编写更少内容的另一种方式，我认为它们更实用，而且稍微不那么”神奇”。以下是它们的语法：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">targets...: target-pattern: prereq-patterns ...</span></span><br><span class="line">   commands</span><br></pre></td></tr></table></figure>
-
-<p>其本质是给定的目标通过目标模式（使用 % 通配符）进行匹配。匹配到的任何内容称为 stem。然后将此 stem 替换到前置模式中，以生成目标的先决条件。</p>
-<p>一个典型的用例是将 .c 文件编译成 .o 文件。以下是手动方式：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">objects = foo.o bar.o all.o</span><br><span class="line"><span class="section">all: <span class="variable">$(objects)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># These files compile via implicit rules</span></span><br><span class="line"><span class="section">foo.o: foo.c</span></span><br><span class="line"><span class="section">bar.o: bar.c</span></span><br><span class="line"><span class="section">all.o: all.c</span></span><br><span class="line"></span><br><span class="line"><span class="section">all.c:</span></span><br><span class="line">    echo <span class="string">&quot;int main() &#123; return 0; &#125;&quot;</span> &gt; all.c</span><br><span class="line"><span class="comment"># 下面这条规则表示当Makefile需要一个.c文件而该文件不存在时，</span></span><br><span class="line"><span class="comment"># 通过touch命令创建一个空的.c文件，比如需要foo.c文件，没有，就创建一个空的foo.c文件</span></span><br><span class="line"><span class="section">%.c:   </span></span><br><span class="line">    touch <span class="variable">$@</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -f *.c *.o all</span><br></pre></td></tr></table></figure>
-
-<p>解析：</p>
-<p>这个Makefile定义了一个变量objects，用于存储目标文件的列表。然后定义了一个名为all的目标，其依赖于objects中列出的所有目标文件。接下来，针对每个源文件（foo.c，bar.c，all.c），Makefile设置了编译每个文件的规则，即将每个.c文件编译为对应的.o文件。all.c文件使用了一个特殊的规则，用于生成一个简单的main函数。此外，还定义了一个通用的规则，指示当Makefile需要一个.c文件而该文件不存在时，通过touch命令创建一个空的.c文件。最后，定义了一个名为clean的目标，用于删除所有生成的.c文件和.o文件，以及生成的可执行文件all。</p>
-<p>以下是更高效的方法，使用静态模式规则：<code>根据静态模式生成目标文件</code></p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">objects = foo.o bar.o all.o</span><br><span class="line"><span class="section">all: <span class="variable">$(objects)</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># These files compile via implicit rules</span></span><br><span class="line"><span class="comment"># Syntax - targets ...: target-pattern: prereq-patterns ...</span></span><br><span class="line"><span class="comment"># In the case of the first target, foo.o, the target-pattern matches foo.o and sets the &quot;stem&quot; to be &quot;foo&quot;.</span></span><br><span class="line"><span class="comment"># It then replaces the &#x27;%&#x27; in prereq-patterns with that stem</span></span><br><span class="line"><span class="variable">$(objects)</span>: %.o: %.c</span><br><span class="line"></span><br><span class="line"><span class="section">all.c:</span></span><br><span class="line">    echo <span class="string">&quot;int main() &#123; return 0; &#125;&quot;</span> &gt; all.c</span><br><span class="line"></span><br><span class="line"><span class="section">%.c:</span></span><br><span class="line">    touch <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -f *.c *.o all</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>$(objects): %.o: %.c这一行代码说明了如何将.c文件编译为.o文件。当定义了这样的规则后，对应的目标文件会根据文件名自动匹配并编译，无需显式地指定规则。</p>
-</blockquote>
-<h3 id="静态模式规则和过滤器【Static-Pattern-Rules-and-Filter】"><a href="#静态模式规则和过滤器【Static-Pattern-Rules-and-Filter】" class="headerlink" title="静态模式规则和过滤器【Static Pattern Rules and Filter】"></a>静态模式规则和过滤器【Static Pattern Rules and Filter】</h3><p>虽然我稍后会介绍函数，但我会提前展示它们的用法。filter函数可用于静态模式规则，以匹配正确的文件。在本例中，我使用了.raw和.result这两个后缀。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">obj_files = foo.result bar.o lose.o</span><br><span class="line">src_files = foo.raw bar.c lose.c</span><br><span class="line"></span><br><span class="line"><span class="section">all: <span class="variable">$(obj_files)</span></span></span><br><span class="line"><span class="comment"># Note: PHONY is important here. Without it, implicit rules will try to build the executable &quot;all&quot;, since the prereqs are &quot;.o&quot; files.</span></span><br><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: all </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Ex 1: .o files depend on .c files. Though we don&#x27;t actually make the .o file.</span></span><br><span class="line"><span class="variable">$(<span class="built_in">filter</span> %.o,<span class="variable">$(obj_files)</span>)</span>: %.o: %.c</span><br><span class="line">    echo <span class="string">&quot;target: <span class="variable">$@</span> prereq: <span class="variable">$&lt;</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Ex 2: .result files depend on .raw files. Though we don&#x27;t actually make the .result file.</span></span><br><span class="line"><span class="variable">$(<span class="built_in">filter</span> %.result,<span class="variable">$(obj_files)</span>)</span>: %.result: %.raw</span><br><span class="line">    echo <span class="string">&quot;target: <span class="variable">$@</span> prereq: <span class="variable">$&lt;</span>&quot;</span> </span><br><span class="line"></span><br><span class="line">%.c %.raw:</span><br><span class="line">    touch <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -f <span class="variable">$(src_files)</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="模式规则"><a href="#模式规则" class="headerlink" title="模式规则"></a>模式规则</h3><p>模式规则经常被使用，但也常常让人感到困惑。你可以将它们看作两种方式：</p>
-<p>定义自己的隐含规则的一种方法<br>静态模式规则的一种更简单的形式<br>让我们先从一个示例开始：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define a pattern rule that compiles every .c file into a .o file</span></span><br><span class="line">%.o : %.c</span><br><span class="line">        <span class="variable">$(CC)</span> -c <span class="variable">$(CFLAGS)</span> <span class="variable">$(CPPFLAGS)</span> <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br></pre></td></tr></table></figure>
-
-<p>模式规则中的目标包含 ‘%’。这个 ‘%’ 匹配任何非空字符串，而其他字符则与它们自身匹配。在模式规则的先决条件中，“%”代表与目标中的“%”相匹配的相同 stem。</p>
-<p>以下是另一个例子：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Define a pattern rule that has no pattern in the prerequisites.</span></span><br><span class="line"><span class="comment"># This just creates empty .c files when needed.</span></span><br><span class="line"><span class="section">%.c:</span></span><br><span class="line">   touch <span class="variable">$@</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Double-Colon-Rules-“双冒号规则”"><a href="#Double-Colon-Rules-“双冒号规则”" class="headerlink" title="Double-Colon Rules “双冒号规则”"></a>Double-Colon Rules “双冒号规则”</h3><p>双冒号规则很少被使用，但允许为同一目标定义多个规则。如果使用单冒号，会打印警告，并且只有第二组命令会被执行。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: blah</span></span><br><span class="line"></span><br><span class="line"><span class="section">blah::</span></span><br><span class="line">    echo <span class="string">&quot;hello&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="section">blah::</span></span><br><span class="line">    echo <span class="string">&quot;hello again&quot;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="命令和执行-【Commands-and-execution】"><a href="#命令和执行-【Commands-and-execution】" class="headerlink" title="命令和执行 【Commands and execution】"></a>命令和执行 【Commands and execution】</h2><h4 id="命令回显-静音-【Command-Echoing-Silencing-】"><a href="#命令回显-静音-【Command-Echoing-Silencing-】" class="headerlink" title="命令回显&#x2F;静音 【Command Echoing&#x2F;Silencing 】"></a>命令回显&#x2F;静音 【Command Echoing&#x2F;Silencing 】</h4><p>在命令前面加上@可以阻止其被打印出来<br>您也可以使用-s选项来运行make，在每行命令前面加上@</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: </span></span><br><span class="line">    @echo <span class="string">&quot;This make line will not be printed&quot;</span></span><br><span class="line">    echo <span class="string">&quot;But this will&quot;</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>Makefile中，使用@符号可以阻止该条命令本身被打印到屏幕上，但是命令的执行结果仍然会打印到屏幕上。</p>
-</blockquote>
-<p>执行make:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line">This make line will not be printed</span><br><span class="line">echo &quot;But this will&quot;</span><br><span class="line">But this will</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">加了-s ,使用静默模式所有的命令本身都不打印到终端上。</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make -s</span></span><br><span class="line">This make line will not be printed</span><br><span class="line">But this will</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>执行<code>make</code>时使用了<code>-s</code>选项，即<code>make -s</code>，那么Makefile中的命令不会被打印到屏幕上，只会输出命令的执行结果。这个选项通常用于让输出更加清晰，只显示实际的构建信息，而不包括每个具体的命令。</p>
-</blockquote>
-<h3 id="命令执行【Command-Execution】"><a href="#命令执行【Command-Execution】" class="headerlink" title="命令执行【Command Execution】"></a>命令执行【Command Execution】</h3><blockquote>
-<p>每个命令在一个新的 shell 中运行（或至少产生了这样的效果）</p>
-</blockquote>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: </span></span><br><span class="line">    cd ..</span><br><span class="line">    <span class="comment"># The cd above does not affect this line, because each command is effectively run in a new shell</span></span><br><span class="line">    echo `pwd`</span><br><span class="line"></span><br><span class="line">    <span class="comment"># This cd command affects the next because they are on the same line</span></span><br><span class="line">    cd ..;echo `pwd`</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Same as above</span></span><br><span class="line">    cd ..; \</span><br><span class="line">    echo `pwd`</span><br></pre></td></tr></table></figure>
-
-<h3 id="默认的Shell【Default-Shell】"><a href="#默认的Shell【Default-Shell】" class="headerlink" title="默认的Shell【Default Shell】"></a>默认的Shell【Default Shell】</h3><p>The default shell is <code>/bin/sh</code>. You can change this by changing the variable SHELL:</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SHELL=/bin/bash</span><br><span class="line"></span><br><span class="line"><span class="section">cool:</span></span><br><span class="line">    echo <span class="string">&quot;Hello from bash&quot;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo $BASH</span><br><span class="line">/bin/bash</span><br></pre></td></tr></table></figure>
-
-<p>双美元符号<br>如果你想要字符串包含一个美元符号，你可以使用<code>$$</code>. 这是在<code>bash</code>或<code>sh</code>中使用shell变量的方法。</p>
-<p>请注意在接下来的例子中Makefile变量与Shell变量之间的差异。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">make_var = I am a make variable</span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    <span class="comment"># Same as running &quot;sh_var=&#x27;I am a shell variable&#x27;; echo $sh_var&quot; in the shell</span></span><br><span class="line">    sh_var=&#x27;I am a shell variable&#x27;; echo $$sh_var</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Same as running &quot;echo I am a make variable&quot; in the shell</span></span><br><span class="line">    echo <span class="variable">$(make_var)</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Error-handling-with-k-i-and-【错误处理】"><a href="#Error-handling-with-k-i-and-【错误处理】" class="headerlink" title="Error handling with -k, -i, and - 【错误处理】"></a>Error handling with <code>-k</code>, <code>-i</code>, and <code>-</code> 【错误处理】</h3><p>在运行 make 时，使用 -k 选项可以在面对错误时继续执行。这对于希望一次看到 make 的所有错误非常有帮助。在命令之前添加 - 可以抑制该命令的错误。使用 -i 选项可以使这种特性对每个命令都生效。</p>
-<p>Add -k when running make to continue running even in the face of errors. Helpful if you want to see all the errors of Make at once.<br>Add a - before a command to suppress the error<br>Add -i to make to have this happen for every command.</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">one:</span></span><br><span class="line">    <span class="comment"># This error will be printed but ignored, and make will continue to run</span></span><br><span class="line">    -false</span><br><span class="line">    touch one</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>注意：如果你使用 ctrl+c 终止 make，它会删除它刚创建的较新的目标。</p>
-</blockquote>
-<h2 id="Recursive-use-of-make-【递归使用-make】"><a href="#Recursive-use-of-make-【递归使用-make】" class="headerlink" title="Recursive use of make 【递归使用 make】"></a>Recursive use of make 【递归使用 make】</h2><p>要递归调用一个 makefile，请使用特殊的 $(MAKE) 而不是 make，因为它将为你传递 make 标志，并且不会受到它们的影响。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">new_contents = <span class="string">&quot;hello:\n\ttouch inside_file&quot;</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    mkdir -p subdir</span><br><span class="line">    printf <span class="variable">$(new_contents)</span> | sed -e &#x27;s/^ //&#x27; &gt; subdir/makefile</span><br><span class="line">    cd subdir &amp;&amp; <span class="variable">$(MAKE)</span></span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -rf subdir</span><br></pre></td></tr></table></figure>
-
-<h3 id="Export-environments-and-recursive-make【导出、环境和递归-make】"><a href="#Export-environments-and-recursive-make【导出、环境和递归-make】" class="headerlink" title="Export, environments, and recursive make【导出、环境和递归 make】"></a>Export, environments, and recursive make【导出、环境和递归 make】</h3><p>当 Make 启动时，它会自动将所有在执行时设置的环境变量转换为 Make 变量。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Run this with &quot;export shell_env_var=&#x27;I am an environment variable&#x27;; make&quot;</span></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    <span class="comment"># Print out the Shell variable</span></span><br><span class="line">    echo $$shell_env_var</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Print out the Make variable</span></span><br><span class="line">    echo <span class="variable">$(shell_env_var)</span></span><br></pre></td></tr></table></figure>
-
-<p>export指令接受一个变量，并将其设置为所有配方中所有shell命令的环境变量：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">shell_env_var=Shell env var, created inside of Make</span><br><span class="line"><span class="keyword">export</span> shell_env_var</span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    echo <span class="variable">$(shell_env_var)</span></span><br><span class="line">    echo $$shell_env_var</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>export 导出的变量在子进程中是可见的，而在当前 shell 环境中是不可见的。</p>
-</blockquote>
-<p>执行结果：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line">echo Shell env var, created inside of Make</span><br><span class="line">Shell env var, created inside of Make</span><br><span class="line">echo $shell_env_var</span><br><span class="line">Shell env var, created inside of Make</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">echo</span> <span class="variable">$shell_env_var</span></span></span><br><span class="line">I am an environment variable</span><br></pre></td></tr></table></figure>
-
-<p>因此，当您在make命令内部运行make时，您可以使用export指令使其对子make命令可用。在这个例子中，cooly被导出，以便subdir中的makefile可以使用它。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">new_contents = <span class="string">&quot;hello:\n\techo \$<span class="variable">$(cooly)</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    mkdir -p subdir</span><br><span class="line">    printf <span class="variable">$(new_contents)</span> | sed -e &#x27;s/^ //&#x27; &gt; subdir/makefile</span><br><span class="line">    @echo <span class="string">&quot;---MAKEFILE CONTENTS---&quot;</span></span><br><span class="line">    @cd subdir &amp;&amp; cat makefile</span><br><span class="line">    @echo <span class="string">&quot;---END MAKEFILE CONTENTS---&quot;</span></span><br><span class="line">    cd subdir &amp;&amp; <span class="variable">$(MAKE)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Note that variables and exports. They are set/affected globally.</span></span><br><span class="line">cooly = <span class="string">&quot;The subdirectory can see me!&quot;</span></span><br><span class="line"><span class="keyword">export</span> cooly</span><br><span class="line"><span class="comment"># This would nullify the line above: unexport cooly</span></span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -rf subdir</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><code>$(MAKE)</code>就代表着执行make命令。在Makefile中，<code>$(MAKE)</code> 是一个特殊变量，用于在执行递归调用时引用 make 命令本身。使用 <code>$(MAKE)</code> 而不是直接使用 make 的好处在于它可以传递 make 命令的参数和标志，使得递归调用的 make 命令能够继承当前 make 命令的设置，从而更加灵活和方便。</p>
-</blockquote>
-<blockquote>
-<p>以下是一些常见的 Makefile 特殊变量：</p>
-<ol>
-<li>**$@**：表示规则中的目标文件名。</li>
-<li><strong>$^</strong>：表示规则中所有的依赖文件列表，用空格分隔。</li>
-<li>**$&lt;**：表示规则中的第一个依赖文件。</li>
-<li>**$?**：表示规则中所有比目标新的依赖文件列表。</li>
-<li>**$*、%**：表示通配符，匹配规则中 % 所代表的部分。</li>
-<li>**$(MAKE)**：表示 make 命令。</li>
-<li>**$(CURDIR)**：表示当前目录的路径。</li>
-<li>**$(wildcard pattern)**：展开匹配 pattern 的文件名。</li>
-<li>**$(subst from,to,text)**：将 text 中的 from 替换为 to。</li>
-<li>**$(patsubst pattern,replacement,text)**：根据 pattern 匹配 text 中的单词，将其替换为 replacement。</li>
-<li>**$(shell command)**：执行 shell 命令并返回结果。</li>
-<li>**$(foreach var,list,text)**：遍历 list 中的每个单词，并将其赋值给变量 var，然后展开 text。</li>
-<li>**$(if condition,then-part,else-part)**：如果 condition 成立，则展开 then-part；否则展开 else-part。</li>
-<li>**$(call variable,param,…)**：定义和调用一个函数。</li>
-<li>**$(addprefix prefix,names…)**：给 names 中的每个单词都加上前缀 prefix。</li>
-</ol>
-<p>这些变量和函数在 Makefile 中经常被用来进行文件管理、条件判断、循环操作等。</p>
-</blockquote>
-<p>执行结果：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line">mkdir -p subdir</span><br><span class="line">printf &quot;hello:\n\techo \$(cooly)&quot; | sed -e &#x27;s/^ //&#x27; &gt; subdir/makefile</span><br><span class="line">---MAKEFILE CONTENTS---</span><br><span class="line">hello:</span><br><span class="line">        echo $(cooly)---END MAKEFILE CONTENTS---</span><br><span class="line">cd subdir &amp;&amp; make</span><br><span class="line">make[1]: 进入目录“/home/byzoro/zhengshihong/learing/subdir”</span><br><span class="line">echo &quot;The subdirectory can see me!&quot;</span><br><span class="line">The subdirectory can see me!</span><br><span class="line">make[1]: 离开目录“/home/byzoro/zhengshihong/learing/subdir”</span><br><span class="line">byzoro@OcteonSDK:~/zhengshihong/learing$ ls</span><br><span class="line">Makefile  subdir</span><br></pre></td></tr></table></figure>
-
-<p>你需要导出变量才能在shell中运行。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">one=this will only work locally</span><br><span class="line"><span class="keyword">export</span> two=we can run subcommands with this</span><br><span class="line"></span><br><span class="line"><span class="section">all: </span></span><br><span class="line">    @echo <span class="variable">$(one)</span></span><br><span class="line">    @echo $$one</span><br><span class="line">    @echo <span class="variable">$(two)</span></span><br><span class="line">    @echo $$two</span><br></pre></td></tr></table></figure>
-
-<p>输出结果：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line">this will only work locally</span><br><span class="line"></span><br><span class="line">we can run subcommands with this</span><br><span class="line">we can run subcommands with this</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">因为one没有<span class="built_in">export</span>，所以<span class="built_in">echo</span> <span class="variable">$one</span>就没有值，而two导出变量了，所以<span class="built_in">echo</span> <span class="variable">$two</span>是有值的。</span></span><br></pre></td></tr></table></figure>
-
-<p>    <code>.EXPORT_ALL_VARIABLES</code>会为你导出所有的变量。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">.EXPORT_ALL_VARIABLES:</span></span><br><span class="line">new_contents = <span class="string">&quot;hello:\n\techo \$<span class="variable">$(cooly)</span>&quot;</span></span><br><span class="line"></span><br><span class="line">cooly = <span class="string">&quot;The subdirectory can see me!&quot;</span></span><br><span class="line"><span class="comment"># This would nullify the line above: unexport cooly</span></span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    mkdir -p subdir</span><br><span class="line">    printf <span class="variable">$(new_contents)</span> | sed -e &#x27;s/^ //&#x27; &gt; subdir/makefile</span><br><span class="line">    @echo <span class="string">&quot;---MAKEFILE CONTENTS---&quot;</span></span><br><span class="line">    @cd subdir &amp;&amp; cat makefile</span><br><span class="line">    @echo <span class="string">&quot;---END MAKEFILE CONTENTS---&quot;</span></span><br><span class="line">    cd subdir &amp;&amp; <span class="variable">$(MAKE)</span></span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -rf subdir</span><br></pre></td></tr></table></figure>
-
-<h3 id="make的参数-【Arguments-to-make】"><a href="#make的参数-【Arguments-to-make】" class="headerlink" title="make的参数 【Arguments to make】"></a>make的参数 【Arguments to make】</h3><p>make有一系列很好用的选项。看一下–dry-run，–touch，–old-file。</p>
-<p>你可以指定多个目标来运行make，比如 make clean run test 会依次运行clean目标，然后是run，最后是test。</p>
-<h2 id="Variables-Pt-2【变量】"><a href="#Variables-Pt-2【变量】" class="headerlink" title="Variables Pt. 2【变量】"></a>Variables Pt. 2【变量】</h2><h3 id="Flavors-and-modification【变量的种类和修改】"><a href="#Flavors-and-modification【变量的种类和修改】" class="headerlink" title="Flavors and modification【变量的种类和修改】"></a>Flavors and modification【变量的种类和修改】</h3><p>变量有两种不同的类型：</p>
-<p>递归（使用&#x3D;）- 仅在命令被使用时查找变量，而不是在其定义时。【使用时赋值】<br>简单展开（使用:&#x3D;）- 像普通的命令式编程一样，只有到目前为止定义的才会被展开。【直接赋值！！！】</p>
-<p>There are two flavors of variables:</p>
-<ul>
-<li>recursive (use <code>=</code>) - only looks for the variables when the command is <em>used</em>, not when it’s <em>defined</em>.</li>
-<li>simply expanded (use <code>:=</code>) - like normal imperative programming – only those defined so far get expanded</li>
-</ul>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Recursive variable. This will print &quot;later&quot; below</span></span><br><span class="line">one = one $&#123;later_variable&#125;</span><br><span class="line"><span class="comment"># Simply expanded variable. This will not print &quot;later&quot; below</span></span><br><span class="line">two := two $&#123;later_variable&#125;  <span class="comment">#即刻赋值，替换成文本</span></span><br><span class="line"></span><br><span class="line">later_variable = later</span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">        echo <span class="variable">$(one)</span></span><br><span class="line">        echo <span class="variable">$(two)</span></span><br></pre></td></tr></table></figure>
-
-<p>执行结果:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line">echo one later</span><br><span class="line">one later</span><br><span class="line">echo two</span><br><span class="line">two</span><br></pre></td></tr></table></figure>
-
-<p>简单扩展（使用 :&#x3D;）允许你向变量追加内容。递归定义会导致无限循环错误。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">one = hello</span><br><span class="line"><span class="comment"># one gets defined as a simply expanded variable (:=) and thus can handle appending</span></span><br><span class="line">one := $&#123;one&#125; there</span><br><span class="line"></span><br><span class="line"><span class="section">all: </span></span><br><span class="line">    echo <span class="variable">$(one)</span></span><br></pre></td></tr></table></figure>
-
-<p><code>?=</code> only sets variables if they have not yet been set</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">one = hello</span><br><span class="line">one ?= will not be set</span><br><span class="line">two ?= will be set</span><br><span class="line"></span><br><span class="line"><span class="section">all: </span></span><br><span class="line">    echo <span class="variable">$(one)</span></span><br><span class="line">    echo <span class="variable">$(two)</span></span><br></pre></td></tr></table></figure>
-
-<p>输出结果：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make</span></span><br><span class="line">echo hello</span><br><span class="line">hello</span><br><span class="line">echo will be set</span><br><span class="line">will be set</span><br></pre></td></tr></table></figure>
-
-<p>行末的空格不会被去除，但行首的空格会被去除。要创建只含有一个空格的变量，使用 $(nullstring)。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">with_spaces = hello   <span class="comment"># with_spaces has many spaces after &quot;hello&quot;</span></span><br><span class="line">after = <span class="variable">$(with_spaces)</span>there</span><br><span class="line"></span><br><span class="line">nullstring =</span><br><span class="line">space = <span class="variable">$(nullstring)</span> <span class="comment"># Make a variable with a single space.</span></span><br><span class="line"></span><br><span class="line"><span class="section">all: </span></span><br><span class="line">    echo <span class="string">&quot;<span class="variable">$(after)</span>&quot;</span></span><br><span class="line">    echo start<span class="string">&quot;<span class="variable">$(space)</span>&quot;</span>end</span><br></pre></td></tr></table></figure>
-
-<p>一个未定义的变量实际上是一个空字符串！</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: </span></span><br><span class="line">    <span class="comment"># Undefined variables are just empty strings!</span></span><br><span class="line">    echo <span class="variable">$(nowhere)</span></span><br></pre></td></tr></table></figure>
-
-<p>Use <code>+=</code> to append</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">foo := start</span><br><span class="line">foo += more</span><br><span class="line"></span><br><span class="line"><span class="section">all: </span></span><br><span class="line">    echo <span class="variable">$(foo)</span></span><br></pre></td></tr></table></figure>
-
-<p>字符串替换是修改变量的一种常见而实用的方式。另外也可以查看文本函数和文件名函数。</p>
-<h3 id="命令行参数和覆盖-【Command-line-arguments-and-override】"><a href="#命令行参数和覆盖-【Command-line-arguments-and-override】" class="headerlink" title="命令行参数和覆盖 【Command line arguments and override】"></a>命令行参数和覆盖 【Command line arguments and override】</h3><p>你可以使用 “override” 来重写来自命令行的变量。在这里，我们使用 “make option_one&#x3D;hi” 来运行 make</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Overrides command line arguments</span></span><br><span class="line"><span class="keyword">override</span> option_one = did_override</span><br><span class="line"><span class="comment"># Does not override command line arguments</span></span><br><span class="line">option_two = not_override</span><br><span class="line"><span class="section">all: </span></span><br><span class="line">    echo <span class="variable">$(option_one)</span></span><br><span class="line">    echo <span class="variable">$(option_two)</span></span><br></pre></td></tr></table></figure>
-
-<p>输出结果：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">加了override</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make option_one=hi</span></span><br><span class="line">echo did_override</span><br><span class="line">did_override</span><br><span class="line">echo not_override</span><br><span class="line">not_override</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">去掉override</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">make option_one=hi</span></span><br><span class="line">echo hi</span><br><span class="line">hi</span><br><span class="line">echo not_override</span><br><span class="line">not_override</span><br></pre></td></tr></table></figure>
-
-<h3 id="命令列表和定义-【List-of-commands-and-define】"><a href="#命令列表和定义-【List-of-commands-and-define】" class="headerlink" title="命令列表和定义 【List of commands and define】"></a>命令列表和定义 【List of commands and define】</h3><p>define指令不是一个函数，尽管看起来可能像。我见过它的使用频率如此之低，所以我不会详细介绍，但它主要用于定义常规的操作步骤，而且与eval函数搭配使用效果良好。</p>
-<p>define&#x2F;endef 简单地创建一个变量，该变量被设置为一系列命令。需要注意的是，这与在命令之间使用分号有些不同，因为每个命令都会在单独的shell中执行，正如我们预期的那样。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">one = <span class="keyword">export</span> blah=<span class="string">&quot;I was set!&quot;</span>; echo $$blah</span><br><span class="line"></span><br><span class="line"><span class="keyword">define</span> two</span><br><span class="line"><span class="keyword">export</span> blah=<span class="string">&quot;I was set!&quot;</span></span><br><span class="line">echo $$blah</span><br><span class="line"><span class="keyword">endef</span></span><br><span class="line"></span><br><span class="line"><span class="section">all: </span></span><br><span class="line">    @echo <span class="string">&quot;This prints &#x27;I was set&#x27;&quot;</span></span><br><span class="line">    @<span class="variable">$(one)</span></span><br><span class="line">    @echo <span class="string">&quot;This does not print &#x27;I was set&#x27; because each command runs in a separate shell&quot;</span></span><br><span class="line">    @<span class="variable">$(two)</span></span><br></pre></td></tr></table></figure>
-
-<p>运行结果：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"> make</span><br><span class="line">This prints &#x27;I was set&#x27;</span><br><span class="line">I was set!</span><br><span class="line">This does not print &#x27;I was set&#x27; because each command runs in a separate shell</span><br></pre></td></tr></table></figure>
-
-<h3 id="特定目标变量【Target-specific-variables】"><a href="#特定目标变量【Target-specific-variables】" class="headerlink" title="特定目标变量【Target-specific variables】"></a>特定目标变量【Target-specific variables】</h3><p>可以为特定的目标设置变量</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: one = cool</span></span><br><span class="line"></span><br><span class="line"><span class="section">all: </span></span><br><span class="line">    echo one is defined: <span class="variable">$(one)</span></span><br><span class="line"></span><br><span class="line"><span class="section">other:</span></span><br><span class="line">    echo one is nothing: <span class="variable">$(one)</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="特定模式变量【Pattern-specific-variables】"><a href="#特定模式变量【Pattern-specific-variables】" class="headerlink" title="特定模式变量【Pattern-specific variables】"></a>特定模式变量【Pattern-specific variables】</h3><p>你可以为特定的目标模式设置变量</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">%.c: one = cool</span></span><br><span class="line"></span><br><span class="line"><span class="section">blah.c: </span></span><br><span class="line">    echo one is defined: <span class="variable">$(one)</span></span><br><span class="line"></span><br><span class="line"><span class="section">other:</span></span><br><span class="line">    echo one is nothing: <span class="variable">$(one)</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Makefile的条件部分【-Conditional-part-of-Makefiles】"><a href="#Makefile的条件部分【-Conditional-part-of-Makefiles】" class="headerlink" title="Makefile的条件部分【# Conditional part of Makefiles】"></a>Makefile的条件部分【# Conditional part of Makefiles】</h2><h3 id="Conditional-if-else"><a href="#Conditional-if-else" class="headerlink" title="Conditional if&#x2F;else"></a>Conditional if&#x2F;else</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">foo = ok</span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line"><span class="keyword">ifeq</span> (<span class="variable">$(foo)</span>, ok)</span><br><span class="line">    echo <span class="string">&quot;foo equals ok&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    echo <span class="string">&quot;nope&quot;</span></span><br><span class="line"><span class="keyword">endif</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="检查变量是否为空【Check-if-a-variable-is-empty】"><a href="#检查变量是否为空【Check-if-a-variable-is-empty】" class="headerlink" title="检查变量是否为空【Check if a variable is empty】"></a>检查变量是否为空【Check if a variable is empty】</h3><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">nullstring =</span><br><span class="line">foo = <span class="variable">$(nullstring)</span> <span class="comment"># end of line; there is a space here</span></span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line"><span class="keyword">ifeq</span> (<span class="variable">$(<span class="built_in">strip</span> <span class="variable">$(foo)</span>)</span>,)</span><br><span class="line">    echo <span class="string">&quot;foo is empty after being stripped&quot;</span></span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"><span class="keyword">ifeq</span> (<span class="variable">$(nullstring)</span>,)</span><br><span class="line">    echo <span class="string">&quot;nullstring doesn&#x27;t even have spaces&quot;</span></span><br><span class="line"><span class="keyword">endif</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="检查变量是否已经定义【Check-if-a-variable-is-defined】"><a href="#检查变量是否已经定义【Check-if-a-variable-is-defined】" class="headerlink" title="检查变量是否已经定义【Check if a variable is defined】"></a>检查变量是否已经定义【Check if a variable is defined】</h3><p>ifdef不会展开变量引用；它只是检查某些东西是否被定义。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">bar =</span><br><span class="line">foo = <span class="variable">$(bar)</span></span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line"><span class="keyword">ifdef</span> foo</span><br><span class="line">    echo <span class="string">&quot;foo is defined&quot;</span></span><br><span class="line"><span class="keyword">endif</span></span><br><span class="line"><span class="keyword">ifndef</span> bar</span><br><span class="line">    echo <span class="string">&quot;but bar is not&quot;</span></span><br><span class="line"><span class="keyword">endif</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="MAKEFLAGS"><a href="#MAKEFLAGS" class="headerlink" title="$(MAKEFLAGS)"></a>$(MAKEFLAGS)</h3><p>$(MAKEFLAGS)<br>这个例子向你展示了如何使用<code>findstring</code>和<code>MAKEFLAGS</code>来测试make标志。使用make -i命令来运行这个例子，你将看到它打印出echo语句。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all:</span></span><br><span class="line"><span class="comment"># Search for the &quot;-i&quot; flag. MAKEFLAGS is just a list of single characters, one per flag. So look for &quot;i&quot; in this case.</span></span><br><span class="line"><span class="keyword">ifneq</span> (,<span class="variable">$(<span class="built_in">findstring</span> i, <span class="variable">$(MAKEFLAGS)</span>)</span>)</span><br><span class="line">    echo <span class="string">&quot;i was passed to MAKEFLAGS&quot;</span></span><br><span class="line"><span class="keyword">endif</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Functions【函数】"><a href="#Functions【函数】" class="headerlink" title="Functions【函数】"></a>Functions【函数】</h2><p>首要的函数<br>函数主要用于文本处理。使用<code>$(fn,arguments)</code>或<code>$&#123;fn, arguments&#125;</code>来调用函数。Make具有相当数量的内置函数。</p>
-<p><em>Functions</em> are mainly just for text processing. Call functions with <code>$(fn, arguments)</code> or <code>$&#123;fn, arguments&#125;</code>. Make has a decent amount of <a target="_blank" rel="noopener" href="https://www.gnu.org/software/make/manual/html_node/Functions.html">builtin functions</a>.</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bar := $&#123;subst not,totally, <span class="string">&quot;I am not superman&quot;</span>&#125;</span><br><span class="line"><span class="section">all: </span></span><br><span class="line">    @echo <span class="variable">$(bar)</span></span><br></pre></td></tr></table></figure>
-
-<p>如果你想要替换空格或逗号，请使用变量。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">comma := ,</span><br><span class="line">empty:=</span><br><span class="line">space := <span class="variable">$(empty)</span> <span class="variable">$(empty)</span></span><br><span class="line">foo := a b c</span><br><span class="line">bar := <span class="variable">$(<span class="built_in">subst</span> <span class="variable">$(space)</span>,<span class="variable">$(comma)</span>,<span class="variable">$(foo)</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="section">all: </span></span><br><span class="line">    @echo <span class="variable">$(bar)</span></span><br></pre></td></tr></table></figure>
-
-<p>不要在第一个参数之后的参数中包含空格。那会被视为字符串的一部分。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">comma := ,</span><br><span class="line">empty:=</span><br><span class="line">space := <span class="variable">$(empty)</span> <span class="variable">$(empty)</span></span><br><span class="line">foo := a b c</span><br><span class="line">bar := <span class="variable">$(<span class="built_in">subst</span> <span class="variable">$(space)</span>, <span class="variable">$(comma)</span> , <span class="variable">$(foo)</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="section">all: </span></span><br><span class="line">    <span class="comment"># Output is &quot;, a , b , c&quot;. Notice the spaces introduced</span></span><br><span class="line">    @echo <span class="variable">$(bar)</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="String-Substitution【字符串替换】"><a href="#String-Substitution【字符串替换】" class="headerlink" title="String Substitution【字符串替换】"></a>String Substitution【字符串替换】</h3><p><code>$(patsubst pattern,replacement,text)</code> 执行以下操作：</p>
-<p>“在文本中查找与模式匹配的以空格分隔的单词，并用替换项替换它们。在这里，模式可能包含一个‘%’，它充当通配符，匹配单词内的任意数量的任何字符。如果替换项也包含‘%’，那么‘%’将被模式中匹配‘%’的文本所取代。只有模式和替换项中的第一个‘%’会被这样处理；任何后续的‘%’都不会改变。”(GNU 文档)</p>
-<p>替换引用<code>$(text:pattern=replacement)</code> 是这个的简写。</p>
-<p>还有另一个只替换后缀的简写：<code>$(text:suffix=replacement)</code>。这里不使用%通配符。</p>
-<p>注意：对于这个简写，不要添加额外的空格。它会被视为搜索或替换项。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">foo := a.o b.o l.a c.o</span><br><span class="line">one := <span class="variable">$(<span class="built_in">patsubst</span> %.o,%.c,<span class="variable">$(foo)</span>)</span></span><br><span class="line"><span class="comment"># This is a shorthand for the above</span></span><br><span class="line">two := $(foo:%.o=%.c)</span><br><span class="line"><span class="comment"># This is the suffix-only shorthand, and is also equivalent to the above.</span></span><br><span class="line">three := $(foo:.o=.c)</span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    echo <span class="variable">$(one)</span></span><br><span class="line">    echo <span class="variable">$(two)</span></span><br><span class="line">    echo <span class="variable">$(three)</span></span><br></pre></td></tr></table></figure>
-
-<p>在 Makefile 语法中，<code>OBJECTS := $(SOURCES:.c=.o)</code> 是一行用于变量赋值的语句，它使用了模式替换功能来从源文件列表（通常是 <code>.c</code> 后缀的 C 语言源文件）生成对应的目标文件列表（通常是 <code>.o</code> 后缀的对象文件）。</p>
-<p>具体解释如下：</p>
-<ul>
-<li><code>OBJECTS</code> 是一个变量名，用于存储生成的对象文件列表。</li>
-<li><code>:=</code> 是立即赋值操作符，它会在解析 Makefile 时立即计算并赋值给变量，而不是在每次引用该变量时都重新计算。</li>
-<li><code>$(SOURCES:.c=.o)</code> 是模式替换表达式的应用，其中：<ul>
-<li><code>$(SOURCES)</code> 是一个已经定义的变量，通常包含一组 <code>.c</code> 后缀的源文件。</li>
-<li><code>:.c=.o</code> 是模式替换规则，指定将 <code>.c</code> 后缀替换为 <code>.o</code> 后缀。</li>
-</ul>
-</li>
-</ul>
-<p>因此，如果 <code>SOURCES</code> 包含了 <code>file1.c file2.c</code>，那么 <code>OBJECTS</code> 将会被赋值为 <code>file1.o file2.o</code>。这样，你就可以用 <code>$(OBJECTS)</code> 来引用这个新生成的对象文件列表，以便在后续的 Makefile 规则中使用它们。</p>
-<p>例如，在编译 C 语言项目时，你可能会看到如下的规则：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SOURCES := file1.c file2.c</span><br><span class="line">OBJECTS := $(SOURCES:.c=.o)</span><br><span class="line"></span><br><span class="line"><span class="section">all: program</span></span><br><span class="line"></span><br><span class="line"><span class="section">program: <span class="variable">$(OBJECTS)</span></span></span><br><span class="line"> <span class="variable">$(CC)</span> <span class="variable">$(LDFLAGS)</span> <span class="variable">$^</span> <span class="variable">$(LDLIBS)</span> -o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="section">%.o: %.c</span></span><br><span class="line"> <span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br></pre></td></tr></table></figure>
-
-<p>在这个例子中，<code>%.o: %.c</code> 是一个模式规则，用于指定如何从 <code>.c</code> 文件编译生成 <code>.o</code> 文件。<code>all</code> 和 <code>program</code> 是目标，<code>program</code> 依赖于 <code>$(OBJECTS)</code>，即 <code>file1.o</code> 和 <code>file2.o</code>。当执行 <code>make</code> 命令时，Make 会根据这些规则和依赖关系自动编译必要的文件来构建最终的程序。</p>
-<h3 id="The-foreach-function"><a href="#The-foreach-function" class="headerlink" title="The foreach function"></a>The foreach function</h3><p>foreach 函数的形式为：<code>$(foreach var,list,text)</code>。它将一个由空格分隔的单词列表转换为另一个列表。var 被设定为列表中的每个单词，text 被依次扩展为每个单词。<br>以下是在每个单词后附加感叹号的示例：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">foo := who are you</span><br><span class="line"><span class="comment"># For each &quot;word&quot; in foo, output that same word with an exclamation after</span></span><br><span class="line">bar := <span class="variable">$(<span class="built_in">foreach</span> wrd,<span class="variable">$(foo)</span>,<span class="variable">$(wrd)</span>!)</span></span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    <span class="comment"># Output is &quot;who! are! you!&quot;</span></span><br><span class="line">    @echo <span class="variable">$(bar)</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="The-if-function【if-函数】"><a href="#The-if-function【if-函数】" class="headerlink" title="The if function【if 函数】"></a>The if function【if 函数】</h3><p>if 函数检查第一个参数是否非空。如果是，执行第二个参数；否则执行第三个参数。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">foo := <span class="variable">$(<span class="built_in">if</span> this-is-not-empty,then!,else!)</span></span><br><span class="line">empty :=</span><br><span class="line">bar := <span class="variable">$(<span class="built_in">if</span> <span class="variable">$(empty)</span>,then!,else!)</span></span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    @echo <span class="variable">$(foo)</span></span><br><span class="line">    @echo <span class="variable">$(bar)</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="The-call-function【回调函数】"><a href="#The-call-function【回调函数】" class="headerlink" title="The call function【回调函数】"></a>The call function【回调函数】</h3><p>Make supports creating basic functions. You “define” the function just by creating a variable, but use the parameters <code>$(0)</code>, <code>$(1)</code>, etc. You then call the function with the special <a target="_blank" rel="noopener" href="https://www.gnu.org/software/make/manual/html_node/Call-Function.html#Call-Function"><code>call</code></a> builtin function. The syntax is <code>$(call variable,param,param)</code>. <code>$(0)</code> is the variable, while <code>$(1)</code>, <code>$(2)</code>, etc. are the params.</p>
-<p>Make 支持创建基本函数。你只需通过创建一个变量来“定义”函数，但使用参数 <code>$(0)</code>、<code>$(1)</code> 等。然后，通过特殊的 call 内置函数来调用这个函数。其语法为 <code>$(callvariable,param,param)</code>。<code>$(0)</code> 是变量，而 <code>$(1)</code>、<code>$(2)</code> 等是参数。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sweet_new_fn = Variable Name: $(0) First: $(1) Second: $(2) Empty Variable: $(3)</span><br><span class="line"></span><br><span class="line"><span class="section">all:</span></span><br><span class="line">    <span class="comment"># Outputs &quot;Variable Name: sweet_new_fn First: go Second: tigers Empty Variable:&quot;</span></span><br><span class="line">    @echo <span class="variable">$(<span class="built_in">call</span> sweet_new_fn, go, tigers)</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="The-shell-function"><a href="#The-shell-function" class="headerlink" title="The shell function"></a>The shell function</h3><p>shell - 这将调用shell，但它会用空格替换换行符！</p>
-<p>shell - This calls the shell, but it replaces newlines with spaces!</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">all: </span></span><br><span class="line">    @echo <span class="variable">$(<span class="built_in">shell</span> ls -la)</span> <span class="comment"># Very ugly because the newlines are gone!</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="origin函数"><a href="#origin函数" class="headerlink" title="origin函数"></a>origin函数</h3><p>在Makefile中，origin函数用于检查一个变量是如何定义的。它的语法是$(origin variable)，它返回变量的引用方式。</p>
-<p>它返回的结果有以下可能：</p>
-<ul>
-<li>如果变量是通过赋值语句定义的（比如<code>VARIABLE = value</code>），那么origin函数返回”file”。</li>
-<li>如果变量是在命令行中设置的，比如<code>make VARIABLE=value</code>，那么origin函数返回”command line”。</li>
-<li>如果变量是通过环境变量定义的，那么origin函数返回”environment”。</li>
-<li>如果变量没有被定义，origin函数返回”undefined”。</li>
-</ul>
-<p>这个函数在Makefile中通常用于检查变量的来源，以便根据不同情况采取相应的行动。</p>
-<h2 id="Other-Features"><a href="#Other-Features" class="headerlink" title="Other Features"></a>Other Features</h2><h3 id="Include-Makefiles-【包含Makefiles】"><a href="#Include-Makefiles-【包含Makefiles】" class="headerlink" title="Include Makefiles 【包含Makefiles】"></a>Include Makefiles 【包含Makefiles】</h3><p>The include directive tells make to read one or more other makefiles. It’s a line in the makefile that looks like this:</p>
-<p>include 指令告诉 make 去读取一个或多个其他的 Makefile。在 Makefile 中，它是这样一行：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span> filenames...</span><br></pre></td></tr></table></figure>
-
-<p>这在你使用类似 -M 的编译器标志时特别有用，该标志会基于源代码创建 Makefile。举个例子，如果一些 C 文件包含一个头文件，这个头文件将被添加到由 gcc 写入的 Makefile 中。我在《Makefile Cookbook》中有更多相关内容。</p>
-<h3 id="The-vpath-Directive【vpath指令】"><a href="#The-vpath-Directive【vpath指令】" class="headerlink" title="The vpath Directive【vpath指令】"></a>The vpath Directive【vpath指令】</h3><p>使用vpath来指定某些先决条件存在的位置。格式为vpath &lt;模式&gt; &lt;目录，以空格&#x2F;冒号分隔&gt; &lt;模式&gt; 可以包含%字符，用于匹配任意零个或多个字符。你也可以使用变量VPATH在全局范围内进行类似的操作。</p>
-<p>Use vpath to specify where some set of prerequisites exist. The format is <code>vpath &lt;pattern&gt; &lt;directories, space/colon separated&gt;</code> <code>&lt;pattern&gt;</code> can have a <code>%</code>, which matches any zero or more characters. You can also do this globallyish with the variable VPATH</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">vpath</span> %.h ../headers ../other-directory</span><br><span class="line"></span><br><span class="line"><span class="comment"># Note: vpath allows blah.h to be found even though blah.h is never in the current directory</span></span><br><span class="line"><span class="section">some_binary: ../headers blah.h</span></span><br><span class="line">    touch some_binary</span><br><span class="line"></span><br><span class="line"><span class="section">../headers:</span></span><br><span class="line">    mkdir ../headers</span><br><span class="line"></span><br><span class="line"><span class="comment"># We call the target blah.h instead of ../headers/blah.h, because that&#x27;s the prereq that some_binary is looking for</span></span><br><span class="line"><span class="comment"># Typically, blah.h would already exist and you wouldn&#x27;t need this.</span></span><br><span class="line"><span class="section">blah.h:</span></span><br><span class="line">    touch ../headers/blah.h</span><br><span class="line"></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -rf ../headers</span><br><span class="line">    rm -f some_binary</span><br></pre></td></tr></table></figure>
-
-<h3 id="Multiline"><a href="#Multiline" class="headerlink" title="Multiline"></a>Multiline</h3><p>The backslash (“”) character gives us the ability to use multiple lines when the commands are too long</p>
-<p>反斜杠（“\”）字符使我们能够在命令过长时使用多行</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">some_file: </span></span><br><span class="line">    echo This line is too long, so \</span><br><span class="line">        it is broken up into multiple lines</span><br></pre></td></tr></table></figure>
-
-<h3 id="phony【伪目标】"><a href="#phony【伪目标】" class="headerlink" title=".phony【伪目标】"></a>.phony【伪目标】</h3><p>Adding <code>.PHONY</code> to a target will prevent Make from confusing the phony target with a file name. In this example, if the file <code>clean</code> is created, make clean will still be run. Technically, I should have used it in every example with <code>all</code> or <code>clean</code>, but I didn’t to keep the examples clean. Additionally, “phony” targets typically have names that are rarely file names, and in practice many people skip this.</p>
-<p>在目标中添加 .PHONY 可以防止 Make 将虚拟目标与文件名混淆。在这个例子中，如果创建了文件 clean，运行 make clean 时仍然会执行对应的操作。严格来讲，在每个包含 all 或 clean 的示例中，我都应该使用它，但为了保持示例的简洁性，我没有这样做。此外，“虚拟”目标通常具有很少作为文件名的名称，在实践中，许多人会忽略这一点。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">some_file:</span></span><br><span class="line">    touch some_file</span><br><span class="line">    touch clean</span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: clean</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -f some_file</span><br><span class="line">    rm -f clean</span><br></pre></td></tr></table></figure>
-
-<h3 id="delete-on-error"><a href="#delete-on-error" class="headerlink" title=".delete_on_error"></a>.delete_on_error</h3><p>The make tool will stop running a rule (and will propogate back to prerequisites) if a command returns a nonzero exit status.<br><code>DELETE_ON_ERROR</code> will delete the target of a rule if the rule fails in this manner. This will happen for all targets, not just the one it is before like PHONY. It’s a good idea to always use this, even though make does not for historical reasons.</p>
-<p>如果命令返回非零退出状态，make 工具将停止运行规则（并将向前传递至先决条件）。DELETE_ON_ERROR 将在规则以这种方式失败时删除目标。这将适用于所有目标，而不仅仅是像 PHONY 那样的单个目标。尽管由于历史原因 make 没有这样做，但始终使用这一功能是个好主意。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">.DELETE_ON_ERROR:</span></span><br><span class="line"><span class="section">all: one two</span></span><br><span class="line"></span><br><span class="line"><span class="section">one:</span></span><br><span class="line">    touch one</span><br><span class="line">    false</span><br><span class="line"></span><br><span class="line"><span class="section">two:</span></span><br><span class="line">    touch two</span><br><span class="line">    false</span><br></pre></td></tr></table></figure>
-
-<h2 id="Makefile-使用示例"><a href="#Makefile-使用示例" class="headerlink" title="Makefile 使用示例"></a>Makefile 使用示例</h2><h3 id="通用模板"><a href="#通用模板" class="headerlink" title="通用模板"></a>通用模板</h3><p>让我们来看一个非常实用的Make示例，非常适合中等规模的项目。</p>
-<p>这个Makefile的精妙之处在于它会自动为你确定依赖关系。你所需做的就是把你的C&#x2F;C++文件放在src&#x2F;文件夹中。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Thanks to Job Vranish (https://spin.atomicobject.com/2016/08/26/makefile-c-projects/)</span></span><br><span class="line">TARGET_EXEC := final_program</span><br><span class="line"></span><br><span class="line">BUILD_DIR := ./build</span><br><span class="line">SRC_DIRS := ./src</span><br><span class="line"></span><br><span class="line"><span class="comment"># Find all the C and C++ files we want to compile</span></span><br><span class="line"><span class="comment"># Note the single quotes around the * expressions. The shell will incorrectly expand these otherwise, but we want to send the * directly to the find command.</span></span><br><span class="line">SRCS := <span class="variable">$(<span class="built_in">shell</span> find <span class="variable">$(SRC_DIRS)</span> -name &#x27;*.cpp&#x27; -<span class="built_in">or</span> -name &#x27;*.c&#x27; -<span class="built_in">or</span> -name &#x27;*.s&#x27;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Prepends BUILD_DIR and appends .o to every src file</span></span><br><span class="line"><span class="comment"># As an example, ./your_dir/hello.cpp turns into ./build/./your_dir/hello.cpp.o</span></span><br><span class="line">OBJS := $(SRCS:%=<span class="variable">$(BUILD_DIR)</span>/%.o)</span><br><span class="line"></span><br><span class="line"><span class="comment"># String substitution (suffix version without %).</span></span><br><span class="line"><span class="comment"># As an example, ./build/hello.cpp.o turns into ./build/hello.cpp.d</span></span><br><span class="line">DEPS := $(OBJS:.o=.d)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Every folder in ./src will need to be passed to GCC so that it can find header files</span></span><br><span class="line">INC_DIRS := <span class="variable">$(<span class="built_in">shell</span> find <span class="variable">$(SRC_DIRS)</span> -type d)</span></span><br><span class="line"><span class="comment"># Add a prefix to INC_DIRS. So moduleA would become -ImoduleA. GCC understands this -I flag</span></span><br><span class="line">INC_FLAGS := <span class="variable">$(<span class="built_in">addprefix</span> -I,<span class="variable">$(INC_DIRS)</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># The -MMD and -MP flags together generate Makefiles for us!</span></span><br><span class="line"><span class="comment"># These files will have .d instead of .o as the output.</span></span><br><span class="line">CPPFLAGS := <span class="variable">$(INC_FLAGS)</span> -MMD -MP</span><br><span class="line"></span><br><span class="line"><span class="comment"># The final build step.</span></span><br><span class="line"><span class="variable">$(BUILD_DIR)</span>/<span class="variable">$(TARGET_EXEC)</span>: <span class="variable">$(OBJS)</span></span><br><span class="line">    <span class="variable">$(CXX)</span> <span class="variable">$(OBJS)</span> -o <span class="variable">$@</span> <span class="variable">$(LDFLAGS)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Build step for C source</span></span><br><span class="line"><span class="variable">$(BUILD_DIR)</span>/%.c.o: %.c</span><br><span class="line">    mkdir -p <span class="variable">$(<span class="built_in">dir</span> <span class="variable">$@</span>)</span></span><br><span class="line">    <span class="variable">$(CC)</span> <span class="variable">$(CPPFLAGS)</span> <span class="variable">$(CFLAGS)</span> -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Build step for C++ source</span></span><br><span class="line"><span class="variable">$(BUILD_DIR)</span>/%.cpp.o: %.cpp</span><br><span class="line">    mkdir -p <span class="variable">$(<span class="built_in">dir</span> <span class="variable">$@</span>)</span></span><br><span class="line">    <span class="variable">$(CXX)</span> <span class="variable">$(CPPFLAGS)</span> <span class="variable">$(CXXFLAGS)</span> -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: clean</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    rm -r <span class="variable">$(BUILD_DIR)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Include the .d makefiles. The - at the front suppresses the errors of missing</span></span><br><span class="line"><span class="comment"># Makefiles. Initially, all the .d files will be missing, and we don&#x27;t want those</span></span><br><span class="line"><span class="comment"># errors to show up.</span></span><br><span class="line"><span class="keyword">-include</span> <span class="variable">$(DEPS)</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="include指令的使用方法"><a href="#include指令的使用方法" class="headerlink" title="include指令的使用方法"></a>include指令的使用方法</h3><p>当使用 <code>include</code> 指令时，您可以将其他 Makefile 文件的内容包含到当前的 Makefile 中。这种方法非常有用，特别是当您希望将一个大型项目的构建过程分解为多个 Makefile 时。</p>
-<p>假设您有以下项目结构：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">project/</span><br><span class="line">├── Makefile</span><br><span class="line">├── sub_system1/</span><br><span class="line">│   └── Makefile</span><br><span class="line">├── sub_system2/</span><br><span class="line">│   └── Makefile</span><br><span class="line">└── common/</span><br><span class="line">    └── common_defs.mk</span><br></pre></td></tr></table></figure>
-
-<p>现在让我们看看如何使用 <code>include</code> 指令，将这些文件包含到主 <code>Makefile</code> 中，以及它们各自的内容：</p>
-<h4 id="1-主-Makefile（project-Makefile）"><a href="#1-主-Makefile（project-Makefile）" class="headerlink" title="1. 主 Makefile（project&#x2F;Makefile）"></a>1. 主 Makefile（project&#x2F;Makefile）</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 包含常用变量和规则</span></span><br><span class="line"><span class="keyword">include</span> common/common_defs.mk</span><br><span class="line"></span><br><span class="line"><span class="comment"># 包含子系统1的Makefile</span></span><br><span class="line"><span class="keyword">include</span> sub_system1/Makefile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 包含子系统2的Makefile</span></span><br><span class="line"><span class="keyword">include</span> sub_system2/Makefile</span><br><span class="line"></span><br><span class="line"><span class="comment"># 主目标</span></span><br><span class="line"><span class="section">all: sub_system1 sub_system2</span></span><br><span class="line">    <span class="comment"># 主要的构建规则</span></span><br><span class="line">    <span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -o output_file main.c</span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: clean</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    <span class="comment"># 清理所有子系统</span></span><br><span class="line">    <span class="variable">$(MAKE)</span> -C sub_system1 clean</span><br><span class="line">    <span class="variable">$(MAKE)</span> -C sub_system2 clean</span><br><span class="line">    <span class="comment"># 清理主目标</span></span><br><span class="line">    rm -f output_file</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-子系统1的-Makefile（project-sub-system1-Makefile）"><a href="#2-子系统1的-Makefile（project-sub-system1-Makefile）" class="headerlink" title="2. 子系统1的 Makefile（project&#x2F;sub_system1&#x2F;Makefile）"></a>2. 子系统1的 Makefile（project&#x2F;sub_system1&#x2F;Makefile）</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义子系统1相关的变量</span></span><br><span class="line">SOURCES := file1.c file2.c</span><br><span class="line">OBJECTS := $(SOURCES:.c=.o)</span><br><span class="line"></span><br><span class="line"><span class="section">sub_system1: <span class="variable">$(OBJECTS)</span></span></span><br><span class="line">    <span class="comment"># 构建子系统1</span></span><br><span class="line"></span><br><span class="line"><span class="section">%.o: %.c</span></span><br><span class="line">    <span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: clean</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    <span class="comment"># 清理子系统1生成的文件</span></span><br><span class="line">    rm -f <span class="variable">$(OBJECTS)</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="3-子系统2的-Makefile（project-sub-system2-Makefile）"><a href="#3-子系统2的-Makefile（project-sub-system2-Makefile）" class="headerlink" title="3. 子系统2的 Makefile（project&#x2F;sub_system2&#x2F;Makefile）"></a>3. 子系统2的 Makefile（project&#x2F;sub_system2&#x2F;Makefile）</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义子系统2相关的变量</span></span><br><span class="line">SOURCES := file3.c file4.c</span><br><span class="line">OBJECTS := $(SOURCES:.c=.o)</span><br><span class="line"></span><br><span class="line"><span class="section">sub_system2: <span class="variable">$(OBJECTS)</span></span></span><br><span class="line">    <span class="comment"># 构建子系统2</span></span><br><span class="line"></span><br><span class="line"><span class="section">%.o: %.c</span></span><br><span class="line">    <span class="variable">$(CC)</span> <span class="variable">$(CFLAGS)</span> -c <span class="variable">$&lt;</span> -o <span class="variable">$@</span></span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: clean</span></span><br><span class="line"><span class="section">clean:</span></span><br><span class="line">    <span class="comment"># 清理子系统2生成的文件</span></span><br><span class="line">    rm -f <span class="variable">$(OBJECTS)</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="4-公共定义文件（project-common-common-defs-mk）"><a href="#4-公共定义文件（project-common-common-defs-mk）" class="headerlink" title="4. 公共定义文件（project&#x2F;common&#x2F;common_defs.mk）"></a>4. 公共定义文件（project&#x2F;common&#x2F;common_defs.mk）</h4><figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义常用变量和规则</span></span><br><span class="line">CC = gcc</span><br><span class="line">CFLAGS = -Wall -O2</span><br></pre></td></tr></table></figure>
-
-<p>在这个例子中，顶级的 <code>Makefile</code> 使用 <code>include</code> 指令引用了子系统1和子系统2目录下的各自的 <code>Makefile</code>，同时也引用了公共的定义文件 <code>common_defs.mk</code>。这样可以使得整个项目的构建过程更加清晰和模块化，并且允许在主 <code>Makefile</code> 中使用子系统和公共定义文件中定义的变量和规则。</p>
-<p>补充芝士</p>
-<blockquote>
-<p>在 Makefile 中，使用 <code>-include</code>（或者等效的 <code>.include</code>）命令来引入文件的话，如果被包含的文件不存在，Make 不会报错，而是会继续执行后续的命令。</p>
-<p>这种行为与普通的 <code>include</code> 命令有所不同。普通的 <code>include</code> 命令会在被包含的文件不存在时报错并停止 Make 的执行，而 <code>-include</code> 命令会忽略文件不存在的情况，继续执行后续步骤。</p>
-<p>这种处理方式通常用于让 Makefile 在包含可选配置文件或模块时更加灵活，因为有时某些配置文件可能存在但并非必需，或者存在于特定情况下的文件。</p>
-</blockquote>
-<h3 id="日志打印调试"><a href="#日志打印调试" class="headerlink" title="日志打印调试"></a>日志打印调试</h3><p>在Makefile中，<code>info</code>函数通常用于打印消息或变量的值到标准输出。以下是一些常见的<code>info</code>函数的用法示例：</p>
-<ol>
-<li><p>输出固定消息：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(info This is a message.)</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>输出变量的值：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">MY_VARIABLE := hello</span><br><span class="line"><span class="variable">$(info MY_VARIABLE is <span class="variable">$(MY_VARIABLE)</span>)</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>输出多个变量的值及消息：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">VARIABLE_1 := value1</span><br><span class="line">VARIABLE_2 := value2</span><br><span class="line"><span class="variable">$(info Values: <span class="variable">$(VARIABLE_1)</span> <span class="built_in">and</span> <span class="variable">$(VARIABLE_2)</span>)</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>输出带有换行符的消息：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(info Line 1\nLine 2)</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>检测Makefile中某段代码是否执行：</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$(info This line is running)</span><span class="variable">$(<span class="built_in">eval</span> DUMMY := $(<span class="built_in">shell</span> echo Executing this line)</span>)</span><br></pre></td></tr></table></figure></li>
-</ol>
-<p>这些示例展示了如何使用<code>info</code>函数在Makefile中输出消息、变量的值以及执行信息。这对于调试Makefile中的逻辑、变量传递等情况非常有用。</p>
-
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">compile</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">build</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Build//" class="article-tag-list-link color1">Build</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/04/11/%E5%AD%A6%E4%BC%9AMakefile/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-Marvell-SDK编译" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2477,6 +1935,146 @@
 
 
   
+    <article id="post-一分钟学会meson构建项目" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2024/02/28/%E4%B8%80%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9Ameson%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE/" target="_blank">一分钟学会meson构建项目</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2024/02/28/%E4%B8%80%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9Ameson%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE/" class="archive-article-date">
+        <time datetime="2024-02-28T06:21:30.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-28</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="一分钟快速学会使用meson构建C语言项目"><a href="#一分钟快速学会使用meson构建C语言项目" class="headerlink" title="一分钟快速学会使用meson构建C语言项目"></a>一分钟快速学会使用meson构建C语言项目</h1><p>meson是用python写的一个程序构建工具，</p>
+<p>meson的官网在<code>https://mesonbuild.com/index.html</code>，这里有meson的使用手册，<br>这个手册很好用。meson和make一样，需要写描述文件告诉meson要构建什么，这个描述文件 就是<code>meson.build</code>，<code>meson</code>根据<code>meson.build</code>中的定义生成具体的构建定义文件<code>build.ninja</code>， <code>ninja</code>根据<code>build.ninja</code>完成具体构建。所以，不像make直接根据Makefile文件完成构建，<strong>meson 需要和ninja配合一起完成构建。</strong></p>
+<h2 id="一-不同系统安装Meson和Ninja工具包"><a href="#一-不同系统安装Meson和Ninja工具包" class="headerlink" title="一.不同系统安装Meson和Ninja工具包"></a>一.不同系统安装Meson和Ninja工具包</h2><h3 id="在-Ubuntu-上安装-Meson-和-Ninja："><a href="#在-Ubuntu-上安装-Meson-和-Ninja：" class="headerlink" title="在 Ubuntu 上安装 Meson 和 Ninja："></a>在 Ubuntu 上安装 Meson 和 Ninja：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新软件包列表</span></span><br><span class="line">sudo apt-get update</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 Meson 和 Ninja</span></span><br><span class="line">sudo apt-get install meson ninja-build</span><br></pre></td></tr></table></figure>
+
+<h3 id="在-CentOS-上安装-Meson-和-Ninja："><a href="#在-CentOS-上安装-Meson-和-Ninja：" class="headerlink" title="在 CentOS 上安装 Meson 和 Ninja："></a>在 CentOS 上安装 Meson 和 Ninja：</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新软件包列表</span></span><br><span class="line">sudo yum update</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 Meson 和 Ninja</span></span><br><span class="line">sudo yum install meson ninja-build</span><br></pre></td></tr></table></figure>
+
+<h2 id="二-构建简单的C语言项目"><a href="#二-构建简单的C语言项目" class="headerlink" title="二.构建简单的C语言项目"></a>二.构建简单的C语言项目</h2><p>建立一个项目目录meson_project，包括多个源文件和头文件,在这个示例中，我将展示如何组织一个稍微复杂的项目。</p>
+<h3 id="2-1-项目结构"><a href="#2-1-项目结构" class="headerlink" title="2.1 项目结构"></a>2.1 项目结构</h3><p>假设你的项目有以下结构：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">project_root/ #项目源码目录</span><br><span class="line">|-- src/</span><br><span class="line">|   |-- main.c</span><br><span class="line">|   |-- util/</span><br><span class="line">|       |-- helper.c</span><br><span class="line">|       |-- helper.h</span><br><span class="line">|-- include/</span><br><span class="line">|   |-- project.h</span><br><span class="line">|-- meson.build # 描述meson如何组织文件进行构建</span><br><span class="line">|-- native-file.txt  #指定gcc，g++,cpu架构版本信息</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">构建的时候，新建一个Build目录放构建的产出，可以根据不同的编译配置创建不同的build目录</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">示范如下</span> </span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">meson arm-build --cross-file config_file.txt  <span class="comment">#指定arm架构的编译器构建</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">ninja -C build_dir <span class="comment">#输出到build_dir目录下</span></span></span><br><span class="line">project_root/ </span><br><span class="line">|-- x86_build/</span><br><span class="line">|-- arm_build/</span><br></pre></td></tr></table></figure>
+
+<h4 id="main-c"><a href="#main-c" class="headerlink" title="main.c"></a>main.c</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;project.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;util/helper.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello, Meson!\n&quot;</span>);</span><br><span class="line">    print_hello_from_helper();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="util-helper-c"><a href="#util-helper-c" class="headerlink" title="util&#x2F;helper.c"></a>util&#x2F;helper.c</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">include <span class="string">&quot;helper.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">void print_hello_from_helper() &#123;</span><br><span class="line">    printf(&quot;Hello from helper!\n&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="util-helper-h"><a href="#util-helper-h" class="headerlink" title="util&#x2F;helper.h"></a>util&#x2F;helper.h</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">ifndef HELPER_H</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">define HELPER_H</span></span><br><span class="line"></span><br><span class="line">void print_hello_from_helper();</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">endif</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="include-project-h"><a href="#include-project-h" class="headerlink" title="include&#x2F;project.h"></a>include&#x2F;project.h</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">ifndef PROJECT_H</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">define PROJECT_H</span></span><br><span class="line"></span><br><span class="line">// Your project-specific declarations go here</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">endif</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="meson-build"><a href="#meson-build" class="headerlink" title="meson.build"></a>meson.build</h4><p>这个文件定义了一个my_project的工程，并且定义了my_hello这个构建目标，以及使用的源文件，头文件等等。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">project(&#x27;my_project&#x27;, &#x27;c&#x27;)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Define sources</span></span><br><span class="line">src_files = files([&#x27;src/main.c&#x27;, &#x27;src/util/helper.c&#x27;])</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Define include directories</span></span><br><span class="line">inc_path = include_directories(&#x27;include&#x27;)</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Set CC environment variable to specify the compiler</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Add an executable</span></span><br><span class="line">executable(&#x27;my_hello&#x27;, src_files, include_directories: inc_path)</span><br></pre></td></tr></table></figure>
+
+<h4 id="native-file-txt"><a href="#native-file-txt" class="headerlink" title="native-file.txt"></a>native-file.txt</h4><p><strong>该文件指定一些构建要用的参数</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[binaries]</span><br><span class="line">c = [&#x27;ccache&#x27;, &#x27;x86_64-linux-gnu-gcc&#x27;]</span><br><span class="line">cpp = [&#x27;ccache&#x27;, &#x27;x86_64-linux-gnu-g++&#x27;]</span><br><span class="line">ar = &#x27;x86_64-linux-gnu-gcc-ar&#x27;</span><br><span class="line">strip = &#x27;x86_64-linux-gnu-strip&#x27;</span><br><span class="line">pkgconfig = &#x27;x86_64-linux-gnu-pkg-config&#x27;</span><br><span class="line">pcap-config = &#x27;&#x27;</span><br><span class="line">cmake = &#x27;cmake&#x27;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-完整构建meson-project项目"><a href="#2-2-完整构建meson-project项目" class="headerlink" title="2.2 完整构建meson_project项目"></a>2.2 完整构建meson_project项目</h3><h4 id="1-meson-setup-build-创建构建目录"><a href="#1-meson-setup-build-创建构建目录" class="headerlink" title="1. meson setup build 创建构建目录"></a>1. meson setup build 创建构建目录</h4><p>这个是告诉meson在哪个目录下构建(这里是源码根目录下的build目录)，<strong>meson一定要在一个和源码独立的目录里做构建</strong>，这样多次构建可以指定不同的构建目录和构建配置，相互之间不受影响，比如对于同样的程序，构建一个riscv版本可以这样指定构建目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">meson setup --cross-file ./rv_cross_file rv_builddir</span><br></pre></td></tr></table></figure>
+
+<p>开始创建build目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">meson setup build  <span class="comment"># 创建build目录</span></span></span><br><span class="line">The Meson build system</span><br><span class="line">Version: 0.61.2</span><br><span class="line">Source dir: /home/meson_project</span><br><span class="line">Build dir: /home/meson_project/build</span><br><span class="line">Build type: native build</span><br><span class="line">Project name: my_project</span><br><span class="line">Project version: undefined</span><br><span class="line">C compiler for the host machine: cc (gcc 11.4.0 &quot;cc (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0&quot;)</span><br><span class="line">C linker for the host machine: cc ld.bfd 2.38</span><br><span class="line">Host machine cpu family: x86_64</span><br><span class="line">Host machine cpu: x86_64</span><br><span class="line">Build targets in project: 1</span><br><span class="line"></span><br><span class="line">Found ninja-1.10.1 at /usr/bin/ninja</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-根据native-file-txt配置文件，指定构建目录"><a href="#2-根据native-file-txt配置文件，指定构建目录" class="headerlink" title="2.根据native_file.txt配置文件，指定构建目录"></a>2.根据native_file.txt配置文件，指定构建目录</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">meson_project$ </span><span class="language-bash"><span class="built_in">ls</span></span></span><br><span class="line">build  include  meson.build  native-file.txt  src</span><br><span class="line"><span class="meta prompt_">meson_project$ </span><span class="language-bash">meson build --cross-file native-file.txt</span></span><br><span class="line">Directory already configured.</span><br><span class="line"></span><br><span class="line">Just run your build command (e.g. ninja) and Meson will regenerate as necessary.</span><br><span class="line">If ninja fails, run &quot;ninja reconfigure&quot; or &quot;meson --reconfigure&quot;</span><br><span class="line">to force Meson to regenerate.</span><br><span class="line"></span><br><span class="line">If build failures persist, run &quot;meson setup --wipe&quot; to rebuild from scratch</span><br><span class="line">using the same options as passed when configuring the build.</span><br><span class="line">To change option values, run &quot;meson configure&quot; instead.</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-使用ninja将源码编译并输出到build目录下"><a href="#3-使用ninja将源码编译并输出到build目录下" class="headerlink" title="3.使用ninja将源码编译并输出到build目录下"></a>3.使用ninja将源码编译并输出到build目录下</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">meson_project$ </span><span class="language-bash">ninja -C build -v</span></span><br><span class="line">ninja: Entering directory `build&#x27;</span><br><span class="line">[1/3] cc -Imy_hello.p -I. -I.. -I../include -fdiagnostics-color=always -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -g -MD -MQ my_hello.p/src_util_helper.c.o -MF my_hello.p/src_util_helper.c.o.d -o my_hello.p/src_util_helper.c.o -c ../src/util/helper.c</span><br><span class="line">[2/3] cc -Imy_hello.p -I. -I.. -I../include -fdiagnostics-color=always -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -g -MD -MQ my_hello.p/src_main.c.o -MF my_hello.p/src_main.c.o.d -o my_hello.p/src_main.c.o -c ../src/main.c</span><br><span class="line">[3/3] cc  -o my_hello my_hello.p/src_main.c.o my_hello.p/src_util_helper.c.o -Wl,--as-needed -Wl,--no-undefined</span><br><span class="line"><span class="meta prompt_">meson_project$</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash">meson_project$</span></span><br><span class="line"><span class="meta prompt_">meson_project$ </span><span class="language-bash"><span class="built_in">ls</span></span></span><br><span class="line">build  include  meson.build  native-file.txt  src</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-进入build目录查看构建结果"><a href="#4-进入build目录查看构建结果" class="headerlink" title="4.进入build目录查看构建结果"></a>4.进入build目录查看构建结果</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入build目录查看构建结果</span></span><br><span class="line"><span class="meta prompt_">meson_project$ </span><span class="language-bash"><span class="built_in">cd</span> build/</span></span><br><span class="line"><span class="meta prompt_">meson_project/build$ </span><span class="language-bash"><span class="built_in">ls</span></span></span><br><span class="line">build.ninja  compile_commands.json  meson-info  meson-logs  meson-private  my_hello  my_hello.p</span><br><span class="line"><span class="meta prompt_">meson_project/build$ </span><span class="language-bash">./my_hello</span></span><br><span class="line">Hello, Meson!</span><br><span class="line">Hello from helper!</span><br><span class="line"><span class="meta prompt_">meson_project/build$</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="5-修改main-c文件-重新构建项目"><a href="#5-修改main-c文件-重新构建项目" class="headerlink" title="5.修改main.c文件,重新构建项目"></a>5.修改main.c文件,重新构建项目</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">vim main.c</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">include <span class="string">&quot;project.h&quot;</span></span></span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">include <span class="string">&quot;util/helper.h&quot;</span></span></span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    printf(&quot;Hello, Meson!\n&quot;);</span><br><span class="line">    printf(&quot;Hello, now you can you use it to build project!\n&quot;);</span><br><span class="line">    print_hello_from_helper();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>回到根目录meson_project重新构建.</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">meson_project $ meson build --cross-file native-file.txt</span><br><span class="line">Directory already configured.</span><br><span class="line"></span><br><span class="line">Just run your build command (e.g. ninja) and Meson will regenerate as necessary.</span><br><span class="line">If ninja fails, run &quot;ninja reconfigure&quot; or &quot;meson --reconfigure&quot;</span><br><span class="line">to force Meson to regenerate.</span><br><span class="line"></span><br><span class="line">If build failures persist, run &quot;meson setup --wipe&quot; to rebuild from scratch</span><br><span class="line">using the same options as passed when configuring the build.</span><br><span class="line">To change option values, run &quot;meson configure&quot; instead.</span><br><span class="line"><span class="meta prompt_">meson_project$ </span><span class="language-bash">ninja -C build</span></span><br><span class="line">ninja: Entering directory `build&#x27;</span><br><span class="line">[2/2] Linking target my_hello</span><br><span class="line"><span class="meta prompt_">meson_project$ </span><span class="language-bash"><span class="built_in">cd</span> build/</span></span><br><span class="line"><span class="meta prompt_">meson_project/build$ </span><span class="language-bash">./my_hello</span></span><br><span class="line">Hello, Meson!</span><br><span class="line">Hello, now you can you use it to build project!</span><br><span class="line">Hello from helper!</span><br><span class="line"><span class="meta prompt_">meson_project/build$</span></span><br></pre></td></tr></table></figure>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">meson项目构建</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">C语言工程</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Program-Language//" class="article-tag-list-link color2">Program_Language</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2024/02/28/%E4%B8%80%E5%88%86%E9%92%9F%E5%AD%A6%E4%BC%9Ameson%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -2626,14 +2224,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">sdk交叉编译</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">marvell</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">c_basic</a>
               </li>
              
@@ -2647,6 +2237,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">C语言工程</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">sdk交叉编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">marvell</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -2671,14 +2269,6 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">dpdk交叉编译</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">compile</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">build</a>
               </li>
              
               <li class="article-tag-list-item">
