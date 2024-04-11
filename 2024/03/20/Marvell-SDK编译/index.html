@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://jack-song-gif.github.io/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image4.png">
 <meta property="og:image" content="https://jack-song-gif.github.io/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image5.png">
 <meta property="article:published_time" content="2024-03-20T06:17:29.000Z">
-<meta property="article:modified_time" content="2024-03-20T09:34:26.792Z">
+<meta property="article:modified_time" content="2024-03-21T03:18:48.562Z">
 <meta property="article:author" content="CoderSong">
 <meta property="article:tag" content="sdk交叉编译">
 <meta property="article:tag" content="marvell">
@@ -96,6 +96,8 @@
 				<li><a href="/categories/dpdk" target="_blank">走进dpdk</a></li>
 			
 				<li><a href="/categories/Embedded-Develop" target="_blank">嵌入式开发</a></li>
+			
+				<li><a href="/categories/Build" target="_blank">工程编译构建</a></li>
 			
 				<li><a href="/categories/Algorithm" target="_blank">算法系列</a></li>
 			
@@ -179,6 +181,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -191,29 +195,31 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 8.333333333333334%"><a href="/">主页</a></li>
+					<li style="width: 7.6923076923076925%"><a href="/">主页</a></li>
 		        
-					<li style="width: 8.333333333333334%"><a href="/categories/Architecture">架构</a></li>
+					<li style="width: 7.6923076923076925%"><a href="/categories/Architecture">架构</a></li>
 		        
-					<li style="width: 8.333333333333334%"><a href="/categories/Program-Language">编程语言</a></li>
+					<li style="width: 7.6923076923076925%"><a href="/categories/Program-Language">编程语言</a></li>
 		        
-					<li style="width: 8.333333333333334%"><a href="/categories/data-store">数据存储</a></li>
+					<li style="width: 7.6923076923076925%"><a href="/categories/data-store">数据存储</a></li>
 		        
-					<li style="width: 8.333333333333334%"><a href="/categories/linux">linux系统编程</a></li>
+					<li style="width: 7.6923076923076925%"><a href="/categories/linux">linux系统编程</a></li>
 		        
-					<li style="width: 8.333333333333334%"><a href="/categories/dpdk">走进dpdk</a></li>
+					<li style="width: 7.6923076923076925%"><a href="/categories/dpdk">走进dpdk</a></li>
 		        
-					<li style="width: 8.333333333333334%"><a href="/categories/Embedded-Develop">嵌入式开发</a></li>
+					<li style="width: 7.6923076923076925%"><a href="/categories/Embedded-Develop">嵌入式开发</a></li>
 		        
-					<li style="width: 8.333333333333334%"><a href="/categories/Algorithm">算法系列</a></li>
+					<li style="width: 7.6923076923076925%"><a href="/categories/Build">工程编译构建</a></li>
 		        
-					<li style="width: 8.333333333333334%"><a href="/categories/Net">网络</a></li>
+					<li style="width: 7.6923076923076925%"><a href="/categories/Algorithm">算法系列</a></li>
 		        
-					<li style="width: 8.333333333333334%"><a href="/categories/Design-Pattern">设计模式</a></li>
+					<li style="width: 7.6923076923076925%"><a href="/categories/Net">网络</a></li>
 		        
-					<li style="width: 8.333333333333334%"><a href="/categories/book">读书笔记</a></li>
+					<li style="width: 7.6923076923076925%"><a href="/categories/Design-Pattern">设计模式</a></li>
 		        
-					<li style="width: 8.333333333333334%"><a href="/categories/thoughts">思考</a></li>
+					<li style="width: 7.6923076923076925%"><a href="/categories/book">读书笔记</a></li>
+		        
+					<li style="width: 7.6923076923076925%"><a href="/categories/thoughts">思考</a></li>
 		        
 				</ul>
 			</nav>
@@ -308,7 +314,7 @@
 <p>其他支持编译的芯片型号，可以用<code>./scripts/ci/compile.sh -l</code>查看</p>
 <p>Other supported platforms are shown with <code>./scripts/ci/compile.sh -l</code>:</p>
 <p>cn10ka版本</p>
-<img title="" src="image1.png" alt="loading-ag-23771" data-align="center">
+<img title="" src="image1.png" alt="loading-ag-25358" data-align="center">
 
 <h3 id="2-3-构建单个软件包-【Building-a-Single-Package】"><a href="#2-3-构建单个软件包-【Building-a-Single-Package】" class="headerlink" title="2.3 构建单个软件包 【Building a Single Package】"></a>2.3 构建单个软件包 【Building a Single Package】</h3><p>略</p>
 <h3 id="2-4-！构建通用扩展【Building-a-Generic-Extension】"><a href="#2-4-！构建通用扩展【Building-a-Generic-Extension】" class="headerlink" title="2.4 ！构建通用扩展【Building a Generic Extension】"></a>2.4 ！构建通用扩展【Building a Generic Extension】</h3><p>如果发行版包括扩展，那么这些扩展也需要与基础SDK一起解压到工作目录中。</p>
@@ -696,6 +702,15 @@
 
 <nav id="article-nav">
   
+    <a href="/2024/04/11/%E5%AD%A6%E4%BC%9AMakefile/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          学会Makefile
+        
+      </div>
+    </a>
+  
   
     <a href="/2024/03/19/%E7%BC%96%E8%AF%91%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E5%9C%A8RAM%E4%B8%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E9%95%9C%E5%83%8FImage/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">编译可以直接在RAM下运行的镜像Image</div>
@@ -921,6 +936,14 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">dpdk交叉编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">compile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">build</a>
               </li>
              
               <li class="article-tag-list-item">
