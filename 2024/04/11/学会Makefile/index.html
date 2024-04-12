@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jack-song-gif.github.io/2024/04/11/%E5%AD%A6%E4%BC%9AMakefile/2024-04-11-14-53-05-image.png">
 <meta property="article:published_time" content="2024-04-11T06:45:16.000Z">
-<meta property="article:modified_time" content="2024-04-11T08:19:30.520Z">
+<meta property="article:modified_time" content="2024-04-12T08:23:55.457Z">
 <meta property="article:author" content="CoderSong">
 <meta property="article:tag" content="compile">
 <meta property="article:tag" content="build">
@@ -288,6 +288,8 @@
 <p>我建立了这个指南，因为我一直无法完全理解Makefile。它们似乎充斥着隐藏的规则和神秘的符号，问简单的问题也得不到简单的答案。为了解决这个问题，我坐下来花了几个周末的时间，尽可能阅读了关于Makefile的所有资料。我将最关键的知识内容总结到了这个指南中。每个主题都有简要的描述和可供你自行运行的独立示例。</p>
 <p>如果你对Make有了较好的理解，可以考虑查看《Makefile Cookbook》，其中提供了一个中等规模项目的模板，以及关于Makefile各部分功能的充分注释。</p>
 <p>祝你好运，希望你能够征服令人困惑的Makefile世界！</p>
+<span id="more"></span>
+
 <h2><span id="快速开始">快速开始</span></h2><h3><span id="为什么会存在makefiles呢">为什么会存在Makefiles呢？</span></h3><p>Makefile用于帮助确定哪些大型程序的部分需要重新编译。在绝大多数情况下，会编译C或C++文件。其他编程语言通常也有自己的工具，用于类似于Make的功能。Make还可以用于除了编译之外的其他用途，比如当需要一系列指令根据文件的变化情况而运行时。本教程将集中讨论C&#x2F;C++编译的使用情况。</p>
 <p>这里有一个可能使用Make构建的示例依赖图。如果任何文件的依赖关系发生变化，那么该文件将被重新编译。</p>
 <img title src="2024-04-11-14-53-05-image.png" alt="loading-ag-12408" data-align="center" width="504">

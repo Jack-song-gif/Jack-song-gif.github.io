@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jack-song-gif.github.io/2024/02/28/%E5%9C%A8Ubuntu%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7%E9%93%BE%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91arm%E6%9E%B6%E6%9E%84%E7%9A%84DPDK/dpdk_compile.png">
 <meta property="article:published_time" content="2024-02-28T07:45:19.000Z">
-<meta property="article:modified_time" content="2024-02-28T07:55:29.242Z">
+<meta property="article:modified_time" content="2024-04-12T08:15:47.628Z">
 <meta property="article:author" content="CoderSong">
 <meta property="article:tag" content="marvell">
 <meta property="article:tag" content="dpdk交叉编译">
@@ -285,6 +285,8 @@
     <h1><span id="在ubuntu使用工具链交叉编译arm架构的dpdk">在Ubuntu使用工具链交叉编译arm架构的DPDK</span></h1><p>为了使用 Marvell 提供的 ARM 架构工具链编译 DPDK 的 l3fwd 程序，你需要进行以下配置：</p>
 <p>toolchain工具包解压出来，里面的目录是marvell-tools-12006.0</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">toolchain/marvell-tools-12006.0$ ls</span><br><span class="line">aarch64-marvell-linux-gnu  bin  include  lib  lib64  libexec  share</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
 
 <h2><span id="使用meson和ninja编译dpdk">使用meson和ninja编译dpdk</span></h2><h3><span id="1设置环境变量">1.设置环境变量：</span></h3><p>在编译 DPDK 之前，你需要设置环境变量，告诉 DPDK 使用 Marvell 提供的 ARM 架构工具链。假设 Marvell 工具链安装在 <code>/path/to/marvell-tools-12006.0</code>，你可以执行以下命令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">export PATH=/path/to/marvell-tools-12006.0/bin:$PATH</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">eg 如下</span></span><br><span class="line">export PATH=$PATH:/home/byzoro/work/toolchain/marvell-tools-12006.0/bin</span><br><span class="line"></span><br><span class="line">export PATH=$PATH:/home/zheng/zhengshihong/marvell-tools-12006.0/bin</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo chmod -R 777 /home/byzoro/work/cn10ka-switches-release-output/build/dpdk/arm64-build/</span><br></pre></td></tr></table></figure>

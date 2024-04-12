@@ -18,7 +18,7 @@
 <meta property="og:description" content="一分钟快速学会使用meson构建C语言项目meson是用python写的一个程序构建工具， meson的官网在https:&#x2F;&#x2F;mesonbuild.com&#x2F;index.html，这里有meson的使用手册，这个手册很好用。meson和make一样，需要写描述文件告诉meson要构建什么，这个描述文件 就是meson.build，meson根据meson.build中的定义生成具体的构建定义文件bu">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-02-28T06:21:30.000Z">
-<meta property="article:modified_time" content="2024-02-28T06:24:00.576Z">
+<meta property="article:modified_time" content="2024-04-12T08:23:16.065Z">
 <meta property="article:author" content="CoderSong">
 <meta property="article:tag" content="meson项目构建">
 <meta property="article:tag" content="C语言工程">
@@ -282,6 +282,8 @@
     
     <h1><span id="一分钟快速学会使用meson构建c语言项目">一分钟快速学会使用meson构建C语言项目</span></h1><p>meson是用python写的一个程序构建工具，</p>
 <p>meson的官网在<code>https://mesonbuild.com/index.html</code>，这里有meson的使用手册，<br>这个手册很好用。meson和make一样，需要写描述文件告诉meson要构建什么，这个描述文件 就是<code>meson.build</code>，<code>meson</code>根据<code>meson.build</code>中的定义生成具体的构建定义文件<code>build.ninja</code>， <code>ninja</code>根据<code>build.ninja</code>完成具体构建。所以，不像make直接根据Makefile文件完成构建，<strong>meson 需要和ninja配合一起完成构建。</strong></p>
+<span id="more"></span>
+
 <h2><span id="一不同系统安装meson和ninja工具包">一.不同系统安装Meson和Ninja工具包</span></h2><h3><span id="在-ubuntu-上安装-meson-和-ninja">在 Ubuntu 上安装 Meson 和 Ninja：</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新软件包列表</span></span><br><span class="line">sudo apt-get update</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 Meson 和 Ninja</span></span><br><span class="line">sudo apt-get install meson ninja-build</span><br></pre></td></tr></table></figure>
 
 <h3><span id="在-centos-上安装-meson-和-ninja">在 CentOS 上安装 Meson 和 Ninja：</span></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">更新软件包列表</span></span><br><span class="line">sudo yum update</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">安装 Meson 和 Ninja</span></span><br><span class="line">sudo yum install meson ninja-build</span><br></pre></td></tr></table></figure>

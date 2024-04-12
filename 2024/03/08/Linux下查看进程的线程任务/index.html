@@ -10,17 +10,17 @@
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="查看进程每个线程的执行任务在Linux中，你可以使用多种方法来查看一个进程中的多个线程以及每个线程正在执行的任务。以下是一些常用的方法： 1. 使用ps命令你可以使用ps命令结合-eLf选项来查看每个线程及其状态。 1ps -eLf | grep 进程ID  其中，进程ID是你想要查看的进程的ID。这个命令会列出该进程下的所有线程及其详细信息。 12345678$ ps -eLf | grep 8">
+  <meta name="description" content="查看进程每个线程的执行任务在Linux中，你可以使用多种方法来查看一个进程中的多个线程以及每个线程正在执行的任务。以下是一些常用的方法：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux下查看进程的线程任务">
 <meta property="og:url" content="https://jack-song-gif.github.io/2024/03/08/Linux%E4%B8%8B%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1/index.html">
 <meta property="og:site_name" content="CoderSong&#39;s blog">
-<meta property="og:description" content="查看进程每个线程的执行任务在Linux中，你可以使用多种方法来查看一个进程中的多个线程以及每个线程正在执行的任务。以下是一些常用的方法： 1. 使用ps命令你可以使用ps命令结合-eLf选项来查看每个线程及其状态。 1ps -eLf | grep 进程ID  其中，进程ID是你想要查看的进程的ID。这个命令会列出该进程下的所有线程及其详细信息。 12345678$ ps -eLf | grep 8">
+<meta property="og:description" content="查看进程每个线程的执行任务在Linux中，你可以使用多种方法来查看一个进程中的多个线程以及每个线程正在执行的任务。以下是一些常用的方法：">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jack-song-gif.github.io/2024/03/08/Linux%E4%B8%8B%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1/htop.png">
 <meta property="og:image" content="https://jack-song-gif.github.io/2024/03/08/Linux%E4%B8%8B%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1/perf.png">
 <meta property="article:published_time" content="2024-03-08T08:36:57.000Z">
-<meta property="article:modified_time" content="2024-03-08T08:46:37.227Z">
+<meta property="article:modified_time" content="2024-04-12T08:34:25.924Z">
 <meta property="article:author" content="CoderSong">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="thread">
@@ -284,6 +284,8 @@
   <div class="article-entry" itemprop="articleBody">
     
     <h1><span id="查看进程每个线程的执行任务">查看进程每个线程的执行任务</span></h1><p>在Linux中，你可以使用多种方法来查看一个进程中的多个线程以及每个线程正在执行的任务。以下是一些常用的方法：</p>
+<span id="more"></span>
+
 <h3><span id="1-使用ps命令">1. 使用<code>ps</code>命令</span></h3><p>你可以使用<code>ps</code>命令结合<code>-eLf</code>选项来查看每个线程及其状态。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | grep 进程ID</span><br></pre></td></tr></table></figure>
 

@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://jack-song-gif.github.io/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image4.png">
 <meta property="og:image" content="https://jack-song-gif.github.io/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/image5.png">
 <meta property="article:published_time" content="2024-03-20T06:17:29.000Z">
-<meta property="article:modified_time" content="2024-03-21T03:18:48.562Z">
+<meta property="article:modified_time" content="2024-04-12T08:32:27.252Z">
 <meta property="article:author" content="CoderSong">
 <meta property="article:tag" content="sdk交叉编译">
 <meta property="article:tag" content="marvell">
@@ -293,7 +293,9 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">apt install sed build-essential git cpio python3 unzip rsync bc wget texinfo \</span><br><span class="line">automake libtool pkg-config flex bison uuid-dev lib32stdc++6 lib32z1 \</span><br><span class="line">acpica-tools dosfstools libconfig-dev libmbedtls-dev libnuma-dev \</span><br><span class="line">liblzma-dev libarchive-zip-perl python3-pycryptodome python3-pyelftools \</span><br><span class="line">libfdt-dev libncurses-dev libpci-dev libyaml-dev pkg-config-aarch64-linux-gnu \</span><br><span class="line">python3-sphinx python3-sphinx-rtd-theme libssl-dev libnl-genl-3-dev libnl-3-dev</span><br></pre></td></tr></table></figure>
 
 <p>服务器版本：</p>
-<p>Linux OcteonSDK 6.2.0-26-generic #26~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Thu Jul 13 16:27:29 UTC 2 x86_64 x86_64 x86_64 GNU&#x2F;Linux</p>
+<p>Linux OcteonSDK 6.2.0-26-generic </p>
+<span id="more"></span>
+
 <h2><span id="2快速编译sdk">2.快速编译SDK</span></h2><h3><span id="21-安装sdk包">2.1 安装SDK包</span></h3><p>将SDK和roolchain下载到临时的Downloads目录下</p>
 <p>然后解压到我们自己的工作目录下。</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mkdir ~/work</span><br><span class="line">cd ~/work</span><br><span class="line">tar xf ~/Downloads/base-&lt;release-id&gt;.tar.bz2</span><br><span class="line">tar xf ~/Downloads/toolchain.tar.bz2</span><br><span class="line">ls</span><br><span class="line">base-patches-&lt;release-id&gt;  base-sources-&lt;release-id&gt;  buildroot  sdk-base  toolchain</span><br></pre></td></tr></table></figure>
