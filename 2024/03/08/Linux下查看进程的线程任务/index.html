@@ -283,10 +283,10 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1><span id="查看进程每个线程的执行任务">查看进程每个线程的执行任务</span></h1><p>在Linux中，你可以使用多种方法来查看一个进程中的多个线程以及每个线程正在执行的任务。以下是一些常用的方法：</p>
+    <h1 id="查看进程每个线程的执行任务"><a href="#查看进程每个线程的执行任务" class="headerlink" title="查看进程每个线程的执行任务"></a>查看进程每个线程的执行任务</h1><p>在Linux中，你可以使用多种方法来查看一个进程中的多个线程以及每个线程正在执行的任务。以下是一些常用的方法：</p>
 <span id="more"></span>
 
-<h3><span id="1-使用ps命令">1. 使用<code>ps</code>命令</span></h3><p>你可以使用<code>ps</code>命令结合<code>-eLf</code>选项来查看每个线程及其状态。</p>
+<h3 id="1-使用ps命令"><a href="#1-使用ps命令" class="headerlink" title="1. 使用ps命令"></a>1. 使用<code>ps</code>命令</h3><p>你可以使用<code>ps</code>命令结合<code>-eLf</code>选项来查看每个线程及其状态。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -eLf | grep 进程ID</span><br></pre></td></tr></table></figure>
 
 <p>其中，<code>进程ID</code>是你想要查看的进程的ID。这个命令会列出该进程下的所有线程及其详细信息。</p>
@@ -309,15 +309,15 @@
 <li><strong>CMD</strong> (Command Name&#x2F;Line): 启动进程的命令名称或命令行。</li>
 </ol>
 <p>在这个输出中，你可以看到各种系统进程，如<code>init</code>、<code>kthreadd</code>和<code>rcu_gp</code>。这些都是Linux内核和初始化系统的一部分，它们在系统启动时自动启动，并在系统运行时持续运行。</p>
-<h3><span id="2-使用top命令">2. 使用<code>top</code>命令</span></h3><p><code>top</code>命令是一个实时显示系统中各个进程的资源占用状况的监控工具。你可以通过按<code>H</code>键来显示线程，而不是进程。</p>
+<h3 id="2-使用top命令"><a href="#2-使用top命令" class="headerlink" title="2. 使用top命令"></a>2. 使用<code>top</code>命令</h3><p><code>top</code>命令是一个实时显示系统中各个进程的资源占用状况的监控工具。你可以通过按<code>H</code>键来显示线程，而不是进程。</p>
 <p>在<code>top</code>命令运行时，按<code>H</code>，然后按<code>P</code>（按CPU使用率排序）或<code>M</code>（按内存使用率排序）来查看线程的详细信息。</p>
-<h3><span id="3-使用htop命令">3. 使用<code>htop</code>命令</span></h3><p><code>htop</code>是<code>top</code>的一个增强版，它提供了一个彩色的界面，并支持鼠标操作。在<code>htop</code>中，你可以直接看到每个进程下的线程，并按需要排序和筛选。</p>
+<h3 id="3-使用htop命令"><a href="#3-使用htop命令" class="headerlink" title="3. 使用htop命令"></a>3. 使用<code>htop</code>命令</h3><p><code>htop</code>是<code>top</code>的一个增强版，它提供了一个彩色的界面，并支持鼠标操作。在<code>htop</code>中，你可以直接看到每个进程下的线程，并按需要排序和筛选。</p>
 <p>首先，你需要安装<code>htop</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install htop  <span class="comment"># 对于Debian/Ubuntu系统  sudo yum install htop  # 对于CentOS/RedHat系统</span></span><br></pre></td></tr></table></figure>
 
 <p>然后，运行<code>htop</code>并查看进程和线程信息。</p>
 <p><img src="/2024/03/08/Linux%E4%B8%8B%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1/htop.png" alt="loading-ag-2577"></p>
-<h3><span id="4-使用gdb">4. 使用<code>gdb</code></span></h3><p><code>gdb</code>是一个强大的调试工具，你也可以使用它来查看进程中的线程和它们的堆栈跟踪。</p>
+<h3 id="4-使用gdb"><a href="#4-使用gdb" class="headerlink" title="4. 使用gdb"></a>4. 使用<code>gdb</code></h3><p><code>gdb</code>是一个强大的调试工具，你也可以使用它来查看进程中的线程和它们的堆栈跟踪。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gdb -p 进程ID  (gdb) info threads</span><br></pre></td></tr></table></figure>
 
 <p>这将显示所有线程的列表。你可以使用<code>thread 线程ID</code>来切换到特定的线程，并使用<code>bt</code>命令来查看该线程的堆栈跟踪。</p>
@@ -335,7 +335,7 @@
 <p>示例<code>gdb</code>会话如下：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">(gdb) info threads  </span><br><span class="line">  Id   Target Id         Frame   </span><br><span class="line">* 1    Thread 0x7ffff7fd6700 (LWP 12345) &quot;multithread_exam&quot; 0x00007ffff7a9c94d in __GI___nanosleep () at ../sysdeps/unix/syscall-template.S:81  </span><br><span class="line">  2    Thread 0x7ffff77d5700 (LWP 12346) &quot;multithread_exam&quot; 0x00007ffff7a9c94d in __GI___nanosleep () at ../sysdeps/unix/syscall-template.S:81  </span><br><span class="line"></span><br><span class="line">(gdb) thread 2  </span><br><span class="line">[Switching to thread 2 (Thread 0x7ffff77d5700 (LWP 12346))]  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">0  0x00007ffff7a9c94d <span class="keyword">in</span> __GI___nanosleep () at ../sysdeps/unix/syscall-template.S:81</span>  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">1  0x00007ffff7a9c884 <span class="keyword">in</span> <span class="built_in">sleep</span> () at ../sysdeps/unix/sysv/linux/sleep.c:50</span>  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">2  0x0000555555555114 <span class="keyword">in</span> print_message_function (ptr=0x555555754f8c) at multithread_example.c:9</span>  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">3  0x00007ffff7b936db <span class="keyword">in</span> start_thread (arg=0x7ffff77d5700) at pthread_create.c:463</span>  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">4  0x00007ffff78c988f <span class="keyword">in</span> <span class="built_in">clone</span> () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:95</span>  </span><br><span class="line"></span><br><span class="line">(gdb) bt  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">0  0x00007ffff7a9c94d <span class="keyword">in</span> __GI___nanosleep () at ../sysdeps/unix/syscall-template.S:81</span>  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">1  0x00007ffff7a9c884 <span class="keyword">in</span> <span class="built_in">sleep</span> () at ../sysdeps/unix/sysv/linux/sleep.c:50</span>  </span><br><span class="line"><span class="meta prompt_">#</span><span class="language-bash">2  0x0000555555555114 <span class="keyword">in</span> print_message_function (ptr=0x55</span></span><br></pre></td></tr></table></figure>
 
-<h3><span id="5-查看线程正在执行的任务">5. 查看线程正在执行的任务</span></h3><p>要查看线程正在执行的具体任务（即它们当前的函数调用堆栈），你可以使用<code>gdb</code>的<code>bt</code>命令（如上所述），或者使用<code>perf</code>工具。</p>
+<h3 id="5-查看线程正在执行的任务"><a href="#5-查看线程正在执行的任务" class="headerlink" title="5. 查看线程正在执行的任务"></a>5. 查看线程正在执行的任务</h3><p>要查看线程正在执行的具体任务（即它们当前的函数调用堆栈），你可以使用<code>gdb</code>的<code>bt</code>命令（如上所述），或者使用<code>perf</code>工具。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">perf top -p 进程ID</span><br></pre></td></tr></table></figure>
 
 <p>这将显示按CPU使用率排序的进程和线程列表。你可以看到每个线程当前正在执行的函数。</p>
@@ -533,7 +533,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">查看进程每个线程的执行任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 使用ps命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 使用top命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. 使用htop命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 使用gdb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">1.0.5.</span> <span class="toc-text">5. 查看线程正在执行的任务</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E6%AF%8F%E4%B8%AA%E7%BA%BF%E7%A8%8B%E7%9A%84%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.</span> <span class="toc-text">查看进程每个线程的执行任务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BD%BF%E7%94%A8ps%E5%91%BD%E4%BB%A4"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 使用ps命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BD%BF%E7%94%A8top%E5%91%BD%E4%BB%A4"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 使用top命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BD%BF%E7%94%A8htop%E5%91%BD%E4%BB%A4"><span class="toc-number">1.0.3.</span> <span class="toc-text">3. 使用htop命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8gdb"><span class="toc-number">1.0.4.</span> <span class="toc-text">4. 使用gdb</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%9F%A5%E7%9C%8B%E7%BA%BF%E7%A8%8B%E6%AD%A3%E5%9C%A8%E6%89%A7%E8%A1%8C%E7%9A%84%E4%BB%BB%E5%8A%A1"><span class="toc-number">1.0.5.</span> <span class="toc-text">5. 查看线程正在执行的任务</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -721,15 +721,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">读后感</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">book</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">嵌入式开发板</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -745,10 +745,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Embedded_Develop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">compile</a>
               </li>
              
@@ -757,15 +753,15 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Embedded_Develop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">net</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SDK交叉编译</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">嵌入式</a>
               </li>
             
             <div class="clearfix"></div>
