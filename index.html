@@ -237,6 +237,148 @@
             
 
   
+    <article id="post-虚拟机扩容，解决虚拟机磁盘根目录不足" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2024/04/24/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9%EF%BC%8C%E8%A7%A3%E5%86%B3%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8D%E8%B6%B3/" target="_blank">虚拟机扩容，解决虚拟机磁盘根目录不足</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2024/04/24/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9%EF%BC%8C%E8%A7%A3%E5%86%B3%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8D%E8%B6%B3/" class="archive-article-date">
+        <time datetime="2024-04-24T07:50:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-24</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <p>虚拟机扩容整体思路：</p>
+<p>1.虚拟机关机，使用vmware扩容，然后打开虚拟机设置，扩充磁盘空间容量</p>
+<p>2.重启虚拟机，给磁盘重新分区，如果根文件系统是最后一个分区，可以直接扩容。【否则分区前要先备份】</p>
+<h2 id="一虚拟机扩容"><a href="#一-虚拟机扩容" class="headerlink" title="一.虚拟机扩容"></a>一.虚拟机扩容</h2><p>当你打开虚拟机时会提示：你的磁盘根目录不足，这表明你需要对自己的虚拟机进行扩容，详细步骤如下：</p>
+<p>第一步：你需要将自己的虚拟机关机（即关闭电源）；</p>
+<p>第二步：右键你需要扩容的虚拟机，然后点击设置；</p>
+<p> 第三步：点击硬盘；</p>
+<p>第四步：点击右边进行扩容，将磁盘容量扩展到自己需要的容量；</p>
+<p>（<code>第四步必须在已关闭虚拟机电源和虚拟机快照全部删除的情况下操作，不然无法完成</code>）</p>
+<h2 id="二磁盘重新分区"><a href="#二-磁盘重新分区" class="headerlink" title="二.磁盘重新分区"></a>二.磁盘重新分区</h2><p>现在开始进行分区及磁盘处理步骤</p>
+<p>（<code>虽然扩大了容量，但是没有进行分区和指定文件系统，Linux则会无法识别，扩容将没有完成</code>）</p>
+<p>第五步：打开需要扩容的虚拟机；</p>
+<p>第六步：输入指令查看分区情况；</p>
+<p>指令：df -h</p>
+<p>从上图来看我的系统文件是 &#x2F;dev&#x2F;sda3且当前大小为20G</p>
+<p>第七步：输入指令查看当前磁盘</p>
+<p>指令：<code>sudo fdisk -l</code></p>
+<p>输入指令后可能会出现如下权限不够的情况，不要惊慌，再往下翻会有详解：</p>
+<p>如果出现权限不足则输入如下指令，将执行者从自己改为root</p>
+<p>指令：<code>sudo fdisk -l</code></p>
+<p><strong>sudo后的密码就是开启自己虚拟机的密码</strong></p>
+<p>第八步：然后开始操作磁盘：</p>
+<p>指令：fdisk &#x2F;dev&#x2F;sda</p>
+<p>(注意这里的 &#x2F;dev&#x2F;sda 是自己的磁盘路径。若又出现权限不够的情况请重复上述步骤在指令前加上sudo  示例：sudo fdisk &#x2F;dev&#x2F;sda）</p>
+<p>第九步：输入p,列出分区列表；</p>
+<p>第十步：输入d用来删除分区；</p>
+<p>删除分区时会让你输入数字，因为我的系统文件是sda3，所以当时我输入的是3，这个需要根据自身的虚拟机的系统文件来输入。</p>
+<p>第十一步：输入n用来新建一个分区；</p>
+<p>第十二步：输入p，命名主分区且保存最终结果；</p>
+<p>接下来又会输入数字，这里是将你新建的分区进行命名，你第十步输入的数字几，此时也输入数字几（因为我第十步输入的是3，现在我还是输入3）</p>
+<p>之后一直空格，直到出现Command (m for help):时直接输入w进行保存</p>
+<p>第十三步：输入指令查看sda3的文件格式；</p>
+<p>指令：<code>df -T /dev/sda3</code></p>
+<p> 可以看出它的文件格式是ext4的，所以要在第十五步使用resize2fs进行刷新文件系统容量（如果你的文件格式是xfs，则使用xfs_growfs命令）</p>
+<p>第十四步：重启虚拟机；</p>
+<p>指令：<code>reboot</code></p>
+<p>第十五步：刷新文件系统变量；</p>
+<p>指令：<code>resize2fs  /dev/sda3</code></p>
+<p>如若出现权限不够请重复第七步进行更改执行者来获得权限，示例：<code>sudo resize2fs /dev/sda3</code></p>
+<p>第十六步：查看根目录大小，验证是否扩容完成；</p>
+<p>指令：<code>df -h</code></p>
+<p> 可以清楚的看见 &#x2F;dev&#x2F;sda3 由大小20G变为大小49G，表示扩容完毕。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux-command</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/linux-command//" class="article-tag-list-link color4">linux-command</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2024/04/24/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9%EF%BC%8C%E8%A7%A3%E5%86%B3%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8D%E8%B6%B3/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Linux的三种配置IP方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1302,111 +1444,6 @@
     
     <p class="article-more-link">
       <a class="article-more-a" href="/2024/02/29/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-在Ubuntu使用工具链交叉编译arm架构的DPDK" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/02/28/%E5%9C%A8Ubuntu%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7%E9%93%BE%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91arm%E6%9E%B6%E6%9E%84%E7%9A%84DPDK/" target="_blank">在Ubuntu使用工具链交叉编译arm架构的DPDK</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/02/28/%E5%9C%A8Ubuntu%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7%E9%93%BE%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91arm%E6%9E%B6%E6%9E%84%E7%9A%84DPDK/" class="archive-article-date">
-        <time datetime="2024-02-28T07:45:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-28</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="在Ubuntu使用工具链交叉编译arm架构的DPDK"><a href="#在Ubuntu使用工具链交叉编译arm架构的DPDK" class="headerlink" title="在Ubuntu使用工具链交叉编译arm架构的DPDK"></a>在Ubuntu使用工具链交叉编译arm架构的DPDK</h1><p>为了使用 Marvell 提供的 ARM 架构工具链编译 DPDK 的 l3fwd 程序，你需要进行以下配置：</p>
-<p>toolchain工具包解压出来，里面的目录是marvell-tools-12006.0</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">toolchain/marvell-tools-12006.0$ ls</span><br><span class="line">aarch64-marvell-linux-gnu  bin  include  lib  lib64  libexec  share</span><br></pre></td></tr></table></figure>
-    
-    <a class="article-more-a" href="/2024/02/28/%E5%9C%A8Ubuntu%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7%E9%93%BE%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91arm%E6%9E%B6%E6%9E%84%E7%9A%84DPDK/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">marvell</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dpdk交叉编译</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/dpdk//" class="article-tag-list-link color5">dpdk</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/02/28/%E5%9C%A8Ubuntu%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7%E9%93%BE%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91arm%E6%9E%B6%E6%9E%84%E7%9A%84DPDK/">展开全文 >></a>
     </p>
     
 
