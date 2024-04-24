@@ -6,20 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://jack-song-gif.github.io">
-  <title>Archives | CoderSong&#39;s blog</title>
+  <title>非Root用户编译C程序如何生成Core文件 | CoderSong&#39;s blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="recording study linux c programming and so on">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CoderSong&#39;s blog">
-<meta property="og:url" content="https://jack-song-gif.github.io/archives/index.html">
+  <meta name="description" content="非Root用户编译C程序如何生成Core文件一.生成core文件的步骤1.设置核心转储文件大小为不限制 12345#查询生成core文件限制：$ ulimit -c0 #---&gt;0表示无法生成core文件# 不设置大小限制$ ulimit -c unlimited">
+<meta property="og:type" content="article">
+<meta property="og:title" content="非Root用户编译C程序如何生成Core文件">
+<meta property="og:url" content="https://jack-song-gif.github.io/2024/04/24/%E9%9D%9ERoot%E7%94%A8%E6%88%B7%E7%BC%96%E8%AF%91C%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90Core%E6%96%87%E4%BB%B6/index.html">
 <meta property="og:site_name" content="CoderSong&#39;s blog">
-<meta property="og:description" content="recording study linux c programming and so on">
+<meta property="og:description" content="非Root用户编译C程序如何生成Core文件一.生成core文件的步骤1.设置核心转储文件大小为不限制 12345#查询生成core文件限制：$ ulimit -c0 #---&gt;0表示无法生成core文件# 不设置大小限制$ ulimit -c unlimited">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jack-song-gif.github.io/2024/04/24/%E9%9D%9ERoot%E7%94%A8%E6%88%B7%E7%BC%96%E8%AF%91C%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90Core%E6%96%87%E4%BB%B6/%E9%9D%9ERoot%E7%94%A8%E6%88%B7%E7%BC%96%E8%AF%91C%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90Core%E6%96%87%E4%BB%B6/2024-04-24-17-25-58-image.png">
+<meta property="article:published_time" content="2024-04-24T09:20:49.000Z">
+<meta property="article:modified_time" content="2024-04-24T09:27:08.918Z">
 <meta property="article:author" content="CoderSong">
-<meta property="article:tag" content="linux,">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jack-song-gif.github.io/2024/04/24/%E9%9D%9ERoot%E7%94%A8%E6%88%B7%E7%BC%96%E8%AF%91C%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90Core%E6%96%87%E4%BB%B6/%E9%9D%9ERoot%E7%94%A8%E6%88%B7%E7%BC%96%E8%AF%91C%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90Core%E6%96%87%E4%BB%B6/2024-04-24-17-25-58-image.png">
   
     <link rel="alternative" href="/atom.xml" title="CoderSong&#39;s blog" type="application/atom+xml">
   
@@ -230,41 +234,173 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-非Root用户编译C程序如何生成Core文件" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
   
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
+    <h1 class="article-title" itemprop="name">
+      非Root用户编译C程序如何生成Core文件
+    </h1>
+  
+
+
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
 <a href="/2024/04/24/%E9%9D%9ERoot%E7%94%A8%E6%88%B7%E7%BC%96%E8%AF%91C%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90Core%E6%96%87%E4%BB%B6/" class="archive-article-date">
         <time datetime="2024-04-24T09:20:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-24</time>
 </a>
 
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">879字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">3分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="非root用户编译c程序如何生成core文件"><a href="#非Root用户编译C程序如何生成Core文件" class="headerlink" title="非Root用户编译C程序如何生成Core文件"></a>非Root用户编译C程序如何生成Core文件</h1><h2 id="一生成core文件的步骤"><a href="#一-生成core文件的步骤" class="headerlink" title="一.生成core文件的步骤"></a>一.生成core文件的步骤</h2><p>1.设置核心转储文件大小为不限制</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">#</span><span class="language-bash">查询生成core文件限制：</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ulimit</span> -c</span></span><br><span class="line">0 #---&gt;0表示无法生成core文件</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">不设置大小限制</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ulimit</span> -c unlimited</span> </span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<p>2.<strong>修改核心转储文件生成路径</strong></p>
+<p>编辑文件&#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;core_pattern，，实际上这个文件显示的是当前系统所使用的核心转储文件生成模式。修改这个文件仅在临时情况下起作用。</p>
+<p>3.指定core的生成目录为当前目录下</p>
+<p>修改文件&#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;core_pattern内容为core</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">非root用户情况</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">提前备份一下</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cp</span> /proc/sys/kernel/core_pattern ~/core_pattern_bak</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">sudo bash -c <span class="string">&#x27;echo &quot;core&quot; &gt; /proc/sys/kernel/core_pattern&#x27;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>4.测试程序</p>
+<p>segfault_example.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> *ptr = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Attempting to dereference a null pointer...\n&quot;</span>);</span><br><span class="line">    *ptr = <span class="number">42</span>;  <span class="comment">// 尝试解引用空指针</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc -g segfault_example.c -o segfault_example</span><br><span class="line">ulimit -c unlimited  # 设置生成无限制的核心文件大小</span><br></pre></td></tr></table></figure>
+
+<p>编译程序</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./segfault_example</span></span><br><span class="line">Attempting to dereference a null pointer...</span><br><span class="line">段错误 (核心已转储)</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span></span></span><br><span class="line">core.75784   segfault_example  segfault_example.c</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>gdb</code> 工具可以分析生成的核心转储文件。运行以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">gdb ./segfault_example core</span></span><br></pre></td></tr></table></figure>
+
+<p>这将启动 <code>gdb</code> 并加载程序和生成的核心文件，允许你查看导致段错误的情况。</p>
+<img src="非Root用户编译C程序如何生成Core文件/2024-04-24-17-25-58-image.png" title alt data-align="center">
+
+<h2 id="二核心转储相关设置文件"><a href="#二-核心转储相关设置文件" class="headerlink" title="二.核心转储相关设置文件"></a>二.核心转储相关设置文件</h2><p>在系统的 <code>/proc/sys/kernel/</code> 目录下有三个与核心转储相关的文件：<code>core_pattern</code>、<code>core_pipe_limit</code> 和 <code>core_uses_pid</code>。这里是它们各自的作用和区别：</p>
+<ol>
+<li><strong>core_pattern</strong>：<ul>
+<li><strong>作用</strong>：<code>core_pattern</code> 文件定义了生成核心转储文件的模式或路径。它指定何时以及如何产生核心转储文件，可以包含文件路径、文件名模式以及格式转换说明符。</li>
+<li><strong>设置示例</strong>：例如，<code>|/path/to/some_program %p %u %g</code> 可以用来定义核心文件的路径及其命名方式。</li>
+<li><strong>默认值</strong>：默认情况下，其值通常为 <code>core</code>，表示核心文件将在当前目录下生成一个名为 <code>core</code> 的文件。如果是&#x2F;home&#x2F;core,就是在&#x2F;home下生成core文件。</li>
+</ul>
+</li>
+<li><strong>core_pipe_limit</strong>：<ul>
+<li><strong>作用</strong>：<code>core_pipe_limit</code> 文件定义核心转储的管道限制。这个限制指定了核心转储管道的大小限制，用于确定核心文件传输时的大小限制。</li>
+<li><strong>设置示例</strong>：一般设置为系统内存大小的一部分，以确保适当但受控制的核心转储。</li>
+<li><strong>默认值</strong>：默认情况下，其值取决于系统的内存设置。</li>
+</ul>
+</li>
+<li><strong>core_uses_pid</strong>：<ul>
+<li><strong>作用</strong>：<code>core_uses_pid</code> 文件指示是否在生成核心转储文件时使用进程 ID（PID）作为文件的一部分。这样可以帮助将核心转储文件与其生成的进程相关联。</li>
+<li><strong>设置示例</strong>：值为 <code>1</code> 表示使用进程 ID，值为 <code>0</code> 表示不使用进程 ID。</li>
+<li><strong>默认值</strong>：一般情况下，默认值为 <code>1</code>，表示使用进程 ID。 <strong>区别</strong>：</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><code>core_pattern</code> 确定了核心转储文件的名称和路径。</li>
+<li><code>core_pipe_limit</code> 确定了核心转储管道的大小限制。</li>
+<li><code>core_uses_pid</code> 确定了是否在生成的核心转储文件中包含进程 ID。<br>这三个文件一起提供了对系统核心转储行为的控制，允许管理员根据需求进行配置和调整以满足系统的要求。对这些文件的设置需要谨慎，以确保系统的稳定性和安全性。</li>
+</ul>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/04/24/%E9%9D%9ERoot%E7%94%A8%E6%88%B7%E7%BC%96%E8%AF%91C%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90Core%E6%96%87%E4%BB%B6/" target="_blank">非Root用户编译C程序如何生成Core文件</a>
-  
-    </h1>
-  
+      </a>
+    </div>
+    
 
-
-        <div class="article-info info-on-right">
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          CoderSong
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://jack-song-gif.github.io/2024/04/24/非Root用户编译C程序如何生成Core文件/" title="非Root用户编译C程序如何生成Core文件" target="_blank">https://jack-song-gif.github.io/2024/04/24/非Root用户编译C程序如何生成Core文件/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -276,7 +412,7 @@
 		</ul>
 	</div>
 
-          
+    
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -289,539 +425,118 @@
 	</div>
 
 
+    
+
+    
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://jack-song-gif.github.io/2024/04/24/%E9%9D%9ERoot%E7%94%A8%E6%88%B7%E7%BC%96%E8%AF%91C%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90Core%E6%96%87%E4%BB%B6/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
   </div>
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/04/24/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9%EF%BC%8C%E8%A7%A3%E5%86%B3%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8D%E8%B6%B3/" class="archive-article-date">
-        <time datetime="2024-04-24T07:50:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-24</time>
-</a>
 
+
+<nav id="article-nav">
+  
+  
+    <a href="/2024/04/24/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9%EF%BC%8C%E8%A7%A3%E5%86%B3%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8D%E8%B6%B3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">虚拟机扩容，解决虚拟机磁盘根目录不足</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/04/24/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9%EF%BC%8C%E8%A7%A3%E5%86%B3%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8D%E8%B6%B3/" target="_blank">虚拟机扩容，解决虚拟机磁盘根目录不足</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux-command</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/linux-command//" class="article-tag-list-link color4">linux-command</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%9D%9Eroot%E7%94%A8%E6%88%B7%E7%BC%96%E8%AF%91c%E7%A8%8B%E5%BA%8F%E5%A6%82%E4%BD%95%E7%94%9F%E6%88%90core%E6%96%87%E4%BB%B6"><span class="toc-number">1.</span> <span class="toc-text">非Root用户编译C程序如何生成Core文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E7%94%9F%E6%88%90core%E6%96%87%E4%BB%B6%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.1.</span> <span class="toc-text">一.生成core文件的步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E6%A0%B8%E5%BF%83%E8%BD%AC%E5%82%A8%E7%9B%B8%E5%85%B3%E8%AE%BE%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">二.核心转储相关设置文件</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/04/24/Linux%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AEIP%E6%96%B9%E6%B3%95/" class="archive-article-date">
-        <time datetime="2024-04-24T06:45:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-24</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/04/24/Linux%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AEIP%E6%96%B9%E6%B3%95/" target="_blank">Linux的三种配置IP方法</a>
-  
-    </h1>
-  
+        
+    </div>
+</aside>
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">net</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux-command</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/linux-command//" class="article-tag-list-link color4">linux-command</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/04/24/%E6%B5%81%E7%95%85%E5%88%87%E6%8D%A2Linux%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/" class="archive-article-date">
-        <time datetime="2024-04-24T06:33:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-24</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/04/24/%E6%B5%81%E7%95%85%E5%88%87%E6%8D%A2Linux%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/" target="_blank">流畅切换Linux的应用程序</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux_command</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/linux-command//" class="article-tag-list-link color4">linux-command</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/04/11/%E5%AD%A6%E4%BC%9AMakefile/" class="archive-article-date">
-        <time datetime="2024-04-11T06:45:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-11</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/04/11/%E5%AD%A6%E4%BC%9AMakefile/" target="_blank">学会Makefile</a>
-  
-    </h1>
-  
 
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">compile</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">build</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Build//" class="article-tag-list-link color1">Build</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/" class="archive-article-date">
-        <time datetime="2024-03-20T06:17:29.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-20</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/03/20/Marvell-SDK%E7%BC%96%E8%AF%91/" target="_blank">Marvell_SDK编译</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">sdk交叉编译</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">marvell</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/marvell//" class="article-tag-list-link color3">marvell</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/03/19/%E7%BC%96%E8%AF%91%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E5%9C%A8RAM%E4%B8%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E9%95%9C%E5%83%8FImage/" class="archive-article-date">
-        <time datetime="2024-03-19T07:49:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-19</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/03/19/%E7%BC%96%E8%AF%91%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E5%9C%A8RAM%E4%B8%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E9%95%9C%E5%83%8FImage/" target="_blank">编译可以直接在RAM下运行的镜像Image</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">marvell</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">嵌入式</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">SDK交叉编译</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/linux//" class="article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/03/11/Linux%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%95%85%E5%88%87%E6%8D%A2/" class="archive-article-date">
-        <time datetime="2024-03-11T03:11:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-11</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/03/11/Linux%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E6%B5%81%E7%95%85%E5%88%87%E6%8D%A2/" target="_blank">Linux应用程序流畅切换</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">linux应用切换</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/linux//" class="article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/03/08/Linux%E4%B8%8B%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1/" class="archive-article-date">
-        <time datetime="2024-03-08T08:36:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-08</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/03/08/Linux%E4%B8%8B%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B%E7%9A%84%E7%BA%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1/" target="_blank">Linux下查看进程的线程任务</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">thread</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/linux//" class="article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/02/29/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%BA%A7%E5%BC%80%E5%8F%91%E8%BF%9B%E9%98%B6%E8%B7%AF%E7%BA%BF/" class="archive-article-date">
-        <time datetime="2024-02-29T07:59:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-29</time>
-</a>
-
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/02/29/C%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%BA%A7%E5%BC%80%E5%8F%91%E8%BF%9B%E9%98%B6%E8%B7%AF%E7%BA%BF/" target="_blank">C语言中级开发进阶路线</a>
-  
-    </h1>
-  
-
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">c_medium</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Program-Language//" class="article-tag-list-link color2">Program_Language</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-    </nav>
-  
 
 
           </div>
@@ -862,8 +577,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
