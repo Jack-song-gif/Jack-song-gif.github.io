@@ -86,6 +86,8 @@
 			
 				<li><a href="/categories/linux" target="_blank">linux系统编程</a></li>
 			
+				<li><a href="/categories/linux-command" target="_blank">linux命令</a></li>
+			
 				<li><a href="/categories/dpdk" target="_blank">走进dpdk</a></li>
 			
 				<li><a href="/categories/Embedded-Develop" target="_blank">嵌入式开发</a></li>
@@ -176,6 +178,8 @@
 			
 				
 			
+				
+			
 			
 			
 			<nav class="header-nav">
@@ -188,31 +192,33 @@
 				<ul style="width: 70%">
 				
 				
-					<li style="width: 7.6923076923076925%"><a href="/">主页</a></li>
+					<li style="width: 7.142857142857143%"><a href="/">主页</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/categories/Architecture">架构</a></li>
+					<li style="width: 7.142857142857143%"><a href="/categories/Architecture">架构</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/categories/Program-Language">编程语言</a></li>
+					<li style="width: 7.142857142857143%"><a href="/categories/Program-Language">编程语言</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/categories/data-store">数据存储</a></li>
+					<li style="width: 7.142857142857143%"><a href="/categories/data-store">数据存储</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/categories/linux">linux系统编程</a></li>
+					<li style="width: 7.142857142857143%"><a href="/categories/linux">linux系统编程</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/categories/dpdk">走进dpdk</a></li>
+					<li style="width: 7.142857142857143%"><a href="/categories/linux-command">linux命令</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/categories/Embedded-Develop">嵌入式开发</a></li>
+					<li style="width: 7.142857142857143%"><a href="/categories/dpdk">走进dpdk</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/categories/Build">工程编译构建</a></li>
+					<li style="width: 7.142857142857143%"><a href="/categories/Embedded-Develop">嵌入式开发</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/categories/Algorithm">算法系列</a></li>
+					<li style="width: 7.142857142857143%"><a href="/categories/Build">工程编译构建</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/categories/Net">网络</a></li>
+					<li style="width: 7.142857142857143%"><a href="/categories/Algorithm">算法系列</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/categories/Design-Pattern">设计模式</a></li>
+					<li style="width: 7.142857142857143%"><a href="/categories/Net">网络</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/categories/book">读书笔记</a></li>
+					<li style="width: 7.142857142857143%"><a href="/categories/Design-Pattern">设计模式</a></li>
 		        
-					<li style="width: 7.6923076923076925%"><a href="/categories/thoughts">思考</a></li>
+					<li style="width: 7.142857142857143%"><a href="/categories/book">读书笔记</a></li>
+		        
+					<li style="width: 7.142857142857143%"><a href="/categories/thoughts">思考</a></li>
 		        
 				</ul>
 			</nav>
@@ -229,6 +235,361 @@
           </div>
           <div id="js-content" class="content-ll">
             
+
+  
+    <article id="post-Linux的三种配置IP方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2024/04/24/Linux%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AEIP%E6%96%B9%E6%B3%95/" target="_blank">Linux的三种配置IP方法</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2024/04/24/Linux%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AEIP%E6%96%B9%E6%B3%95/" class="archive-article-date">
+        <time datetime="2024-04-24T06:45:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-24</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="linux的三种配置ip方法"><a href="#Linux的三种配置IP方法" class="headerlink" title="Linux的三种配置IP方法"></a>Linux的三种配置IP方法</h1><h2 id="方法一使用nmcli命令"><a href="#方法一：使用nmcli命令" class="headerlink" title="方法一：使用nmcli命令"></a>方法一：使用nmcli命令</h2><blockquote>
+<p><strong>说明：</strong><br>使用nmcli命令配置的网络配置可以立即生效且系统重启后配置也不会丢失。</p>
+</blockquote>
+<h4 id="nmcli介绍"><a href="#nmcli介绍" class="headerlink" title="nmcli介绍"></a>nmcli介绍</h4><p><code>nmcli</code>是NetworkManager的一个命令行工具，它提供了使用命令行配置由NetworkManager管理网络连接的方法。nmcli命令的基本格式为：</p>
+<p><code>nmcli [OPTIONS] OBJECT &#123; COMMAND | help &#125;</code></p>
+<p>其中，OBJECT选项可以是general、networking、radio、connection或device等。在日常使用中，最常使用的是-t, –terse（用于脚本）、-p, –pretty选项（用于用户）及-h, –help选项，用户可以使用“ nmcli help”获取更多参数及使用信息。</p>
+<p><code>$ nmcli help</code></p>
+<p>常用命令使用举例如下：</p>
+<ul>
+<li><p>显示NetworkManager状态：</p>
+<p><code>$ nmcli general status</code></p>
+</li>
+<li><p>显示所有连接：</p>
+<p><code>$ nmcli connection show</code></p>
+</li>
+<li><p>只显示当前活动连接，如下所示添加 -a, –active：</p>
+<p><code>$ nmcli connection show --active</code></p>
+</li>
+<li><p>显示由NetworkManager识别到的设备及其状态：</p>
+<p><code>$ nmcli device status</code></p>
+</li>
+<li><p>使用nmcli工具启动和停止网络接口，在root权限下执行如下命令：</p>
+<p><code># nmcli connection up id enp3s0 # nmcli device disconnect enp3s0</code></p>
+</li>
+</ul>
+<h4 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h4><h5 id="连接到设备"><a href="#连接到设备" class="headerlink" title="连接到设备"></a>连接到设备</h5><p>使用如下命令，NetworkManager将连接到对应网络设备，尝试找到合适的连接配置，并激活配置。</p>
+<p><code># nmcli device connect &quot;$IFNAME&quot;</code></p>
+<blockquote>
+<p><strong>说明：</strong></p>
+<p>如果不存在相应的配置连接，NetworkManager将创建并激活具有默认设置的新配置文件。</p>
+</blockquote>
+<h5 id="断开设备连接"><a href="#断开设备连接" class="headerlink" title="断开设备连接"></a>断开设备连接</h5><p>使用如下命令，NetworkManager将断开设备连接，并防止设备自动激活。</p>
+<p><code># nmcli device disconnect &quot;$IFNAME&quot;</code></p>
+<h4 id="设置网络连接"><a href="#设置网络连接" class="headerlink" title="设置网络连接"></a>设置网络连接</h4><p>列出目前可用的网络连接：<code>nmcli con show</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ nmcli con show</span><br><span class="line">NAME        UUID                                  TYPE      DEVICE</span><br><span class="line">有线连接 1  ffce71f8-6121-3024-84b5-192f50f90d25  ethernet  ens160</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>说明：</strong><br>输出结果中的NAME字段代表连接ID（名称）。</p>
+</blockquote>
+<p>添加一个网络连接会生成相应的配置文件，并与相应的设备关联。检查可用的设备，方法如下：</p>
+<p><code>nmcli dev status</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ nmcli dev status</span><br><span class="line">DEVICE  TYPE      STATE   CONNECTION</span><br><span class="line">ens160  ethernet  已连接  有线连接 1</span><br><span class="line">lo      loopback  未托管  --</span><br></pre></td></tr></table></figure>
+
+<h5 id="配置静态ip连接"><a href="#配置静态IP连接" class="headerlink" title="配置静态IP连接"></a>配置静态IP连接</h5><h6 id="配置ip"><a href="#配置IP" class="headerlink" title="配置IP"></a>配置IP</h6><p>添加静态 IPv4 配置的网络连接，可使用以下命令：</p>
+<p><code>nmcli connection add type ethernet con-name connection-name ifname interface-name ip4 address gw4 address</code></p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmcli connection add <span class="built_in">type</span> ethernet con-name eth1_con ifname eth1 ip4 192.168.10.25/24 gw4 192.168.10.1</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>说明：</strong><br>如果要添加 IPv6 地址和网关信息，使用 ip6 和 gw6 选项。</p>
+</blockquote>
+<h2 id="方法二使用ip命令"><a href="#方法二：使用ip命令" class="headerlink" title="方法二：使用ip命令"></a>方法二：使用ip命令</h2><blockquote>
+<p><strong>说明：</strong><br><strong>使用ip命令配置的网络配置可以立即生效但系统重启后配置会丢失</strong>。</p>
+</blockquote>
+<h4 id="配置ip地址"><a href="#配置IP地址" class="headerlink" title="配置IP地址"></a>配置IP地址</h4><p>使用ip命令为接口配置地址，命令格式如下，其中 <em>interface-name</em> 为网络接口名。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr [ add | del ] address dev interface-name</span><br></pre></td></tr></table></figure>
+
+<h5 id="配置静态地址"><a href="#配置静态地址" class="headerlink" title="配置静态地址"></a>配置静态地址</h5><p>在root权限下，配置静态IP地址，使用示例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip address add 192.168.0.10/24 dev enp3s0</span><br></pre></td></tr></table></figure>
+
+<p>在root权限下，查看配置的网口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip addr show dev enp3s0</span><br></pre></td></tr></table></figure>
+
+<h5 id="配置多个地址"><a href="#配置多个地址" class="headerlink" title="配置多个地址"></a>配置多个地址</h5><p>ip 命令支持为同一接口分配多个地址，可在root权限下重复多次使用 ip 命令实现分配多个地址。使用示例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ ip address add 192.168.2.223/24 dev enp4s0</span><br><span class="line">$ ip address add 192.168.4.223/24 dev enp4s0</span><br><span class="line">$ ip addr</span><br><span class="line"></span><br><span class="line">3: enp4s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/ether 52:54:00:aa:da:e2 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.203.12/16 brd 192.168.255.255 scope global dynamic noprefixroute enp4s0</span><br><span class="line">       valid_lft 8389sec preferred_lft 8389sec</span><br><span class="line">    inet 192.168.2.223/24 scope global enp4s0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet 192.168.4.223/24 scope global enp4s0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::1eef:5e24:4b67:f07f/64 scope <span class="built_in">link</span> noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置静态路由"><a href="#配置静态路由" class="headerlink" title="配置静态路由"></a>配置静态路由</h4><p>如果需要静态路由，可使用 ip route add 命令在路由表中添加，使用 ip route del 命令删除。最常使用的 ip route 命令格式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip route [ add | del | change | append | replace ] destination-address</span><br></pre></td></tr></table></figure>
+
+<p>查看路由表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip route</span><br></pre></td></tr></table></figure>
+
+<p>在主机地址中添加一个静态路由，在 root 权限下，使用以下命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ip route add 192.168.2.1 via 10.0.0.1 [dev interface-name]</span><br><span class="line"><span class="comment"># 192.168.2.1是目的主机的ip,10.0.0.1是默认网关，dev ethXX是出去的网口</span></span><br></pre></td></tr></table></figure>
+
+<p>添加到某个网段的静态路由：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ip route add 192.168.2.0/24 via 10.0.0.1 [dev interface-name]</span><br><span class="line"><span class="comment">#表示到达192.168.2.0-192.168.2.255网段的路由</span></span><br></pre></td></tr></table></figure>
+
+<p>添加默认的网关路由：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip route add default via XX.XX.XX.XX ethX</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法三通过ifcfg文件配置网络"><a href="#方法三：通过ifcfg文件配置网络" class="headerlink" title="方法三：通过ifcfg文件配置网络"></a>方法三：通过ifcfg文件配置网络</h2><blockquote>
+<p> <strong>说明：</strong><br>通过ifcfg文件配置的网络配置不会立即生效，需要在root权限下执行<strong>ifup interface-name</strong>命令以激活网络配置后才生效（interface-name处填写具体的网络接口名）。</p>
+</blockquote>
+<h4 id="配置静态网络"><a href="#配置静态网络" class="headerlink" title="配置静态网络"></a>配置静态网络</h4><p>以enp4s0网络接口进行静态网络设置为例，通过在root权限下修改ifcfg文件实现，在<code>/etc/sysconfig/network-scripts/</code>目录中生成名为ifcfg-enp4s0的文件中，修改参数配置，示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">IPADDR=192.168.0.10</span><br><span class="line">GATEWAY=192.168.0.1</span><br><span class="line">PREFIX=24</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line">NAME=enp4s0static</span><br><span class="line">UUID=08c3a30e-c5e2-4d7b-831f-26c3cdc29293</span><br><span class="line">DEVICE=enp4s0</span><br><span class="line">ONBOOT=yes</span><br></pre></td></tr></table></figure>
+
+<p>注意配置静态IP时 ,要设置<strong>BOOTPROTO&#x3D;none</strong></p>
+<p>大家学会了没，感谢大家点赞，收藏加关注，我是CoderSong,永远热爱思考，热爱生活，持续分享更多有价值的文章，与君共勉，共同成长。</p>
+<img title src="https://img.soogif.com/DTLuKBLNA8Lfr64ADTbXe7BVVHN31zxW.gif?scope=mdnice" alt width="405" data-align="center">
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">net</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux-command</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/linux-command//" class="article-tag-list-link color4">linux-command</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2024/04/24/Linux%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AEIP%E6%96%B9%E6%B3%95/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-流畅切换Linux的应用程序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2024/04/24/%E6%B5%81%E7%95%85%E5%88%87%E6%8D%A2Linux%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/" target="_blank">流畅切换Linux的应用程序</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2024/04/24/%E6%B5%81%E7%95%85%E5%88%87%E6%8D%A2Linux%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/" class="archive-article-date">
+        <time datetime="2024-04-24T06:33:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-24</time>
+</a>
+
+  
+  
+    
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="流畅切换linux的应用程序"><a href="#流畅切换Linux的应用程序" class="headerlink" title="流畅切换Linux的应用程序"></a>流畅切换Linux的应用程序</h1><blockquote>
+<p>通过进程的前后台切换方式实现不同应用的切换。</p>
+<p>背景：linux启动一个程序后，切换到后台执行，想继续在linux操作。</p>
+</blockquote>
+<p>在Linux中，你可以使用以下几种方法使一个程序在后台启动并退出，但仍然保持其进程运行：</p>
+<h2 id="一linux启动一个程序在后台执行"><a href="#一-Linux启动一个程序在后台执行" class="headerlink" title="一.Linux启动一个程序在后台执行"></a>一.Linux启动一个程序在后台执行</h2><h3 id="1-使用nohup和amp"><a href="#1-使用nohup和-：" class="headerlink" title="1. 使用nohup和&amp;："></a>1. 使用<code>nohup</code>和<code>&amp;</code>：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">nohup</span> your_program &amp;</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>nohup</code>命令可以使程序忽略挂断信号（SIGHUP），这样即使你退出了终端，程序也会继续运行。<code>&amp;</code>符号使程序在后台运行。  </p>
+<h3 id="2-使用ctrlz"><a href="#2-使用ctrl-Z：" class="headerlink" title="2. 使用ctrl+Z："></a>2. 使用<code>ctrl+Z</code>：</h3><p>如果你已经在前台启动了程序，可以使用<code>ctrl+z</code>命令将其移到后台：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ./your_program  <span class="comment"># 运行在前台    </span></span><br><span class="line">$ 按 Ctrl + Z  <span class="comment"># 将程序暂停，并将其移到后台   </span></span><br><span class="line">$ <span class="built_in">bg</span>  <span class="comment">#在后台继续运行程序  </span></span><br><span class="line">$ <span class="built_in">fg</span>  <span class="comment">#回到前台继续运行程序 </span></span><br><span class="line">$ <span class="built_in">disown</span> -h  <span class="comment"># 使程序在你退出终端时仍然运行</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3使用screen"><a href="#3-使用screen：" class="headerlink" title="3.使用screen："></a>3.使用<code>screen</code>：</h3><p><code>screen</code>是一个在UNIX和Linux系统上运行的终端复用器，它允许用户在同一台机器上的一个物理终端上启动多个虚拟终端。</p>
+<p>它可以创建一个新的会话，并在该会话中运行你的程序。这样，即使你退出了终端，会话仍然保持活动状态。你可以重新连接到这个会话，查看和控制程序。</p>
+<p><strong>screen的功能</strong></p>
+<p>screen的功能大体有三个：</p>
+<ul>
+<li><code>会话恢复</code>：<strong>只要Screen本身没有终止，在其内部运行的会话都可以恢复</strong>。这一点对于远程登录的用户特别有用——即使网络连接中断，用户也不会失去对已经打开的命令行会话的控制。只要再次登录到主机上执行screen -r就可以恢复会话的运行。同样在暂时离开的时候，也可以执行分离命令detach，在保证里面的程序正常运行的情况下让Screen挂起（切换到后台）。这一点和图形界面下的VNC很相似。</li>
+<li><code>多窗口</code>：在Screen环境下，<strong>所有的会话都独立的运行，并拥有各自的编号、输入、输出和窗口缓存</strong>。用户可以通过快捷键在不同的窗口下切换，并可以自由的重定向各个窗口的输入和输出。</li>
+<li><code>会话共享</code>：<strong>Screen可以让一个或多个用户从不同终端多次登录一个会话</strong>，并共享会话的所有特性（比如可以看到完全相同的输出）。它同时提供了窗口访问权限的机制，可以对窗口进行密码保护。</li>
+</ul>
+<p><strong>如何使用<code>screen</code></strong> ：安装 <strong>sudo apt install screen</strong></p>
+<h4 id="31-创建会话"><a href="#3-1-创建会话" class="headerlink" title="3.1 创建会话"></a>3.1 创建会话</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ screen -S session_name your_program</span><br></pre></td></tr></table></figure>
+
+<h4 id="32-要重新连接到此会话"><a href="#3-2-要重新连接到此会话：" class="headerlink" title="3.2 要重新连接到此会话："></a>3.2 要重新连接到此会话：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ screen -r session_name</span><br></pre></td></tr></table></figure>
+
+<h4 id="33-中途退出会话但程序继续运行"><a href="#3-3-中途退出会话，但程序继续运行" class="headerlink" title="3.3 中途退出会话，但程序继续运行:"></a>3.3 中途退出会话，但程序继续运行:</h4><p>如果你想从 <code>screen</code> 会话中退出，但不终止正在运行的程序，你可以按下 <code>Ctrl</code> + <code>A</code>，然后按下 <code>D</code>。这将会从 <code>screen</code> 会话中分离，但程序仍然在后台运行。</p>
+<p>示例：使用secreen开启多个会话在会话中执行程序。每个会话相当于一个逻辑终端，可以退出会话，让程序依然运行。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">screen -S appDemo_session ./appDemo.lua</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">开启新的会话，并执行appDemo脚本程序</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="built_in">help</span></span></span><br><span class="line">Available commands:</span><br><span class="line">  1. show</span><br><span class="line">  2. exit</span><br><span class="line">  3. help</span><br><span class="line">  4. run</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"> </span> </span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">按ctrl+A  D 退出会话</span></span><br><span class="line">[detached from 1546455.appDemo_session]</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">screen -r appDemo_session</span></span><br><span class="line">[detached from 1546455.appDemo_session]</span><br><span class="line"><span class="meta prompt_">$</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash">$</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">screen -<span class="built_in">ls</span>  <span class="comment"># 查看所有会话</span></span></span><br><span class="line">There is a screen on:</span><br><span class="line">        1546455.appDemo_session (2024年01月24日 10时01分53秒)   (Detached)</span><br><span class="line">1 Socket in /run/screen/S-zsh.</span><br><span class="line"><span class="meta prompt_">$</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="34-结束一个-screen-会话"><a href="#3-4-结束一个-screen-会话" class="headerlink" title="3.4 结束一个 screen 会话:"></a>3.4 结束一个 <code>screen</code> 会话:</h4><p>如果你想结束一个 <code>screen</code> 会话并停止其中的程序，你可以首先使用 <code>screen -r [会话名称或ID]</code> 重新连接到该会话，然后按下 <code>Ctrl</code> + <code>C</code> 来终止程序。接着，你可以使用 <code>exit</code> 或按 <code>Ctrl</code> + <code>D</code> 来结束该 <code>screen</code> 会话。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">screen -S appDemo_session ./appDemo.lua</span></span><br><span class="line">-------------以下在在会话中的逻辑终端显示，退出后会消失</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="built_in">help</span></span></span><br><span class="line">Available commands:</span><br><span class="line">  1. show</span><br><span class="line">  2. exit</span><br><span class="line">  3. help</span><br><span class="line">  4. run</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="built_in">exit</span></span></span><br><span class="line">exitCLI</span><br><span class="line">-------------</span><br><span class="line">[screen is terminating]</span><br><span class="line"><span class="meta prompt_">$</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="35-创建多个窗口"><a href="#3-5-创建多个窗口" class="headerlink" title="3.5 创建多个窗口:"></a>3.5 <strong>创建多个窗口</strong>:</h4><p>在同一个 <code>screen</code> 会话中，你可以使用 <code>Ctrl</code> + <code>A</code> 然后再按 <code>C</code> 来创建一个新的窗口。每个窗口可以有自己的命令行历史。要切换窗口，只需按 <code>Ctrl</code> + <code>A</code> 然后按 <code>N</code>（下一个）或 <code>P</code>（上一个）。要关闭窗口，只需按 <code>Ctrl</code> + <code>A</code> 然后按 <code>K</code>，然后选择要关闭的窗口。</p>
+<h4 id="36-命名窗口"><a href="#3-6-命名窗口" class="headerlink" title="3.6 命名窗口:"></a>3.6 <strong>命名窗口</strong>:</h4><p>你可以给窗口命名以方便识别。只需按 <code>Ctrl</code> + <code>A</code> 然后按 <code>A</code>（重命名）。输入新名称并按回车。</p>
+<h4 id="37-查看所有窗口"><a href="#3-7-查看所有窗口，" class="headerlink" title="3.7 查看所有窗口，"></a>3.7 查看所有窗口，</h4><p>可以按下<code>Ctrl+a</code>，然后按下<code>w</code>键。这将显示当前<code>screen</code>会话中的所有窗口列表，包括窗口的编号和名称。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">screen -S appDemo_session ./appDemo.lua</span></span><br><span class="line">-------------以下在在会话中的逻辑终端显示，退出后会消失</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="built_in">help</span></span></span><br><span class="line">Available commands:</span><br><span class="line">  1. show</span><br><span class="line">  2. exit</span><br><span class="line">  3. help</span><br><span class="line">  4. run</span><br><span class="line"><span class="meta prompt_">&gt;</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash"></span><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span></span></span><br><span class="line">appDemo.lua</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">按ctrl+A 然后按K，输入y表示结束当前窗口</span></span><br><span class="line">Really kill this window [y/n]</span><br></pre></td></tr></table></figure>
+
+<p>在一个会话中创建多个窗口</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">ls</span></span></span><br><span class="line">appDemo.lua</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">按三次ctrl+a,然后按c,创建三个各自独立的窗口，每个窗口有自己的命令行历史</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">然后按 ctrl+a,然后按w查看所有窗口</span></span><br><span class="line"><span class="meta prompt_">0$ </span><span class="language-bash">appDemo.lua  1$ bash  2-$ bash  3*$ bash</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">现在相当于一个会话appDemo_session中有四个窗口，需要在四个窗口都<span class="built_in">exit</span>才能退出该会话</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="二ctrlz停止了进程之后怎么再进入该程序"><a href="#二-ctrl-Z停止了进程之后，怎么再进入该程序" class="headerlink" title="二.ctrl+Z停止了进程之后，怎么再进入该程序?"></a>二.ctrl+Z停止了进程之后，怎么再进入该程序?</h2><p>在Unix和Linux系统中，当你使用<code>Ctrl+Z</code>将一个程序暂停并放到后台时，该程序实际上是被挂起（暂停）了。为了再次运行这个程序，你可以使用以下方法：</p>
+<ol>
+<li><strong>bg (Background)</strong> ：<br>使用<code>bg</code>命令可以将挂起的程序放到后台继续运行。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bg</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><strong>fg (Foreground)</strong> ：<br>如果你想要将程序重新移到前台，可以使用<code>fg</code>命令。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">fg</span> %1</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>%1</code>是你想要移到前台的挂起程序的编号。你可以使用<code>jobs</code>命令查看挂起的程序的编号。<br>3. <strong>jobs</strong>：<br>使用<code>jobs</code>命令可以列出当前挂起的程序。这些程序的编号可以帮助你确定要使用<code>fg</code>或<code>bg</code>命令时应该使用的编号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">jobs</span> -l  <span class="comment"># 列出所有挂起的程序及其PID</span></span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li><strong>kill</strong>：<br>如果你想要结束一个挂起的程序，可以使用<code>kill</code>命令。但是，首先确保你真的想要结束它。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> %1</span><br></pre></td></tr></table></figure>
+
+<p>请注意，上述方法主要适用于shell环境中。如果你在图形界面中（如使用X Window System）运行程序，那么你可能需要使用不同的方法来控制程序的运行。</p>
+<h2 id="三综合example示范"><a href="#三-综合example示范" class="headerlink" title="三.综合example示范"></a>三.综合example示范</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./student</span></span><br><span class="line"></span><br><span class="line">===== 学生信息管理系统 =====</span><br><span class="line">1. 录入学生信息</span><br><span class="line">2. 显示学生信息</span><br><span class="line">3. 查询学生信息</span><br><span class="line">4. 修改学生信息</span><br><span class="line">5. 删除学生信息</span><br><span class="line">6. 退出</span><br><span class="line">请选择操作: ^Z</span><br><span class="line">[1]+  已停止               ./student</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">bg</span></span></span><br><span class="line">[1]+ ./student &amp;</span><br><span class="line"></span><br><span class="line">[1]+  已停止               ./student</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">jobs</span> -l</span></span><br><span class="line">[1]+ 1545288 停止 (tty 输入)     ./student</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./stu11</span></span><br><span class="line"></span><br><span class="line">Student Information Management System</span><br><span class="line">1. Add Student</span><br><span class="line">2. Display Students</span><br><span class="line">3. Search Student</span><br><span class="line">4. Delete Student</span><br><span class="line">5. Exit</span><br><span class="line">Enter your choice: ^Z</span><br><span class="line">[2]+  已停止               ./stu11</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">jobs</span> -l</span></span><br><span class="line">[1]- 1545288 停止 (tty 输入)     ./student</span><br><span class="line">[2]+ 1545290 停止                  ./stu11</span><br><span class="line"><span class="meta prompt_">$</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./appDemo.lua</span></span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="built_in">help</span></span></span><br><span class="line">Available commands:</span><br><span class="line">  1. show</span><br><span class="line">  2. exit</span><br><span class="line">  3. help</span><br><span class="line">  4. run</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">^Z</span></span><br><span class="line">[2]+  已停止               ./appDemo.lua</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">jobs</span> -l</span></span><br><span class="line">[1]- 1545480 停止                  ./stu11</span><br><span class="line">[2]+ 1545484 停止                  ./appDemo.lua</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">bg</span></span></span><br><span class="line">[2]+ ./appDemo.lua &amp;</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">fg</span> %2</span></span><br><span class="line">./appDemo.lua</span><br><span class="line"></span><br><span class="line">Unknown command. Type &#x27;help&#x27; for available commands.</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash"><span class="built_in">help</span></span></span><br><span class="line">Available commands:</span><br><span class="line">  1. show</span><br><span class="line">  2. exit</span><br><span class="line">  3. help</span><br><span class="line">  4. run</span><br><span class="line"><span class="meta prompt_">&gt; </span><span class="language-bash">^Z</span></span><br><span class="line">[2]+  已停止               ./appDemo.lua</span><br></pre></td></tr></table></figure>
+
+<p>学会了没，感谢大家<code>点赞，收藏+关注</code>，我是<code>CoderSong</code>,永远热爱思考，热爱生活，持续分享更多有价值的文章，<code>与君共勉，共同成长</code>。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux_command</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/linux-command//" class="article-tag-list-link color4">linux-command</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2024/04/24/%E6%B5%81%E7%95%85%E5%88%87%E6%8D%A2Linux%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
 
   
     <article id="post-学会Makefile" class="article article-type-post  article-index" itemscope itemprop="blogPost">
@@ -1075,215 +1436,6 @@
 
 
   
-    <article id="post-使用tftp协议传输镜像文件到开发板上" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/02/28/%E4%BD%BF%E7%94%A8tftp%E5%8D%8F%E8%AE%AE%E4%BC%A0%E8%BE%93%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E5%88%B0%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B8%8A/" target="_blank">使用tftp协议传输镜像文件到开发板上</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/02/28/%E4%BD%BF%E7%94%A8tftp%E5%8D%8F%E8%AE%AE%E4%BC%A0%E8%BE%93%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E5%88%B0%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B8%8A/" class="archive-article-date">
-        <time datetime="2024-02-28T06:42:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-28</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="使用tftp协议传输镜像文件到开发板上"><a href="#使用tftp协议传输镜像文件到开发板上" class="headerlink" title="使用tftp协议传输镜像文件到开发板上"></a>使用tftp协议传输镜像文件到开发板上</h1><h2 id="一-整体流程"><a href="#一-整体流程" class="headerlink" title=" 一.整体流程"></a><a name="section1"></a> 一.整体流程</h2><p>tftpboot是Linux开发中的非常重要的软件，通过它可以实现服务器与开发板之间收发数据，<code>常用于在开发板下载服务器端交叉编译后的可执行文件</code>。使用tftpboot的步骤如下：</p>
-    
-    <a class="article-more-a" href="/2024/02/28/%E4%BD%BF%E7%94%A8tftp%E5%8D%8F%E8%AE%AE%E4%BC%A0%E8%BE%93%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E5%88%B0%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B8%8A/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">marvell</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">嵌入式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/marvell//" class="article-tag-list-link color3">marvell</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/02/28/%E4%BD%BF%E7%94%A8tftp%E5%8D%8F%E8%AE%AE%E4%BC%A0%E8%BE%93%E9%95%9C%E5%83%8F%E6%96%87%E4%BB%B6%E5%88%B0%E5%BC%80%E5%8F%91%E6%9D%BF%E4%B8%8A/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-原来这就是Linux服务器的内核模块" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-  
-  
-    <h1 itemprop="name">
-	
-	  <a class="article-title" href="/2024/02/28/%E5%8E%9F%E6%9D%A5%E8%BF%99%E5%B0%B1%E6%98%AFLinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/" target="_blank">原来这就是Linux服务器的内核模块</a>
-  
-    </h1>
-  
-
-
-  
-  
-<a href="/2024/02/28/%E5%8E%9F%E6%9D%A5%E8%BF%99%E5%B0%B1%E6%98%AFLinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/" class="archive-article-date">
-        <time datetime="2024-02-28T06:28:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-28</time>
-</a>
-
-  
-  
-    
-
-  
-  </header>
-  
-  <div class="article-entry" itemprop="articleBody">
-    
-    <h1 id="原来这就是Linux服务器的内核模块"><a href="#原来这就是Linux服务器的内核模块" class="headerlink" title="原来这就是Linux服务器的内核模块"></a>原来这就是Linux服务器的内核模块</h1><h2 id="简单介绍一下什么是内核？"><a href="#简单介绍一下什么是内核？" class="headerlink" title="简单介绍一下什么是内核？"></a>简单介绍一下什么是内核？</h2><blockquote>
-<p>我们的应用是跑在服务器上的，不同的服务器的有不同的操作系统，最常见的是linux系统，windows系统，macOS系统，而操作系统最核心的功能就是内核提供的，内核就相当于服务器的心脏，没有了内核操作系统就工作不了了。</p>
-</blockquote>
-<p>内核是操作系统的核心部分，负责管理计算机的硬件资源并提供基本的系统服务。它是一个运行在特权模式下的软件，直接访问计算机的硬件，并提供了一个抽象层，使应用程序能够与硬件交互而不必关心底层硬件的具体细节。</p>
-    
-    <a class="article-more-a" href="/2024/02/28/%E5%8E%9F%E6%9D%A5%E8%BF%99%E5%B0%B1%E6%98%AFLinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/#more">more >></a>
-    
-    
-
-    
-
-    
-
-  </div>
-  <div class="article-info article-info-index">
-    
-    
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">kernel</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">服务器内核</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-    
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/Linux//" class="article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-    
-    <p class="article-more-link">
-      <a class="article-more-a" href="/2024/02/28/%E5%8E%9F%E6%9D%A5%E8%BF%99%E5%B0%B1%E6%98%AFLinux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%86%85%E6%A0%B8%E6%A8%A1%E5%9D%97/">展开全文 >></a>
-    </p>
-    
-
-    
-    <div class="clearfix"></div>
-  </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1461,14 +1613,6 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">读后感</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">book</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">kernel</a>
               </li>
              
@@ -1477,7 +1621,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">dpdk交叉编译</a>
+                <a href="javascript:void(0)" class="js-tag color4">读后感</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">book</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1486,6 +1634,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">build</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">dpdk交叉编译</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1498,6 +1650,18 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">SDK交叉编译</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux_command</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Embedded-Develop</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">linux-command</a>
               </li>
             
             <div class="clearfix"></div>

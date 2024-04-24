@@ -6,20 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://jack-song-gif.github.io">
-  <title>Tag: SDK交叉编译 | CoderSong&#39;s blog</title>
+  <title>Linux的三种配置IP方法 | CoderSong&#39;s blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="recording study linux c programming and so on">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CoderSong&#39;s blog">
-<meta property="og:url" content="https://jack-song-gif.github.io/tags/SDK%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/index.html">
+  <meta name="description" content="Linux的三种配置IP方法方法一：使用nmcli命令 说明：使用nmcli命令配置的网络配置可以立即生效且系统重启后配置也不会丢失。  nmcli介绍nmcli是NetworkManager的一个命令行工具，它提供了使用命令行配置由NetworkManager管理网络连接的方法。nmcli命令的基本格式为： nmcli [OPTIONS] OBJECT &#123; COMMAND | help">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux的三种配置IP方法">
+<meta property="og:url" content="https://jack-song-gif.github.io/2024/04/24/Linux%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AEIP%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="CoderSong&#39;s blog">
-<meta property="og:description" content="recording study linux c programming and so on">
+<meta property="og:description" content="Linux的三种配置IP方法方法一：使用nmcli命令 说明：使用nmcli命令配置的网络配置可以立即生效且系统重启后配置也不会丢失。  nmcli介绍nmcli是NetworkManager的一个命令行工具，它提供了使用命令行配置由NetworkManager管理网络连接的方法。nmcli命令的基本格式为： nmcli [OPTIONS] OBJECT &#123; COMMAND | help">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img.soogif.com/DTLuKBLNA8Lfr64ADTbXe7BVVHN31zxW.gif?scope=mdnice">
+<meta property="article:published_time" content="2024-04-24T06:45:50.000Z">
+<meta property="article:modified_time" content="2024-04-24T06:50:24.392Z">
 <meta property="article:author" content="CoderSong">
-<meta property="article:tag" content="linux,">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="net">
+<meta property="article:tag" content="linux-command">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.soogif.com/DTLuKBLNA8Lfr64ADTbXe7BVVHN31zxW.gif?scope=mdnice">
   
     <link rel="alternative" href="/atom.xml" title="CoderSong&#39;s blog" type="application/atom+xml">
   
@@ -230,84 +236,356 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-Linux的三种配置IP方法" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/03/19/%E7%BC%96%E8%AF%91%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E5%9C%A8RAM%E4%B8%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E9%95%9C%E5%83%8FImage/" class="archive-article-date">
-        <time datetime="2024-03-19T07:49:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-03-19</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/03/19/%E7%BC%96%E8%AF%91%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E5%9C%A8RAM%E4%B8%8B%E8%BF%90%E8%A1%8C%E7%9A%84%E9%95%9C%E5%83%8FImage/" target="_blank">编译可以直接在RAM下运行的镜像Image</a>
   
+    <h1 class="article-title" itemprop="name">
+      Linux的三种配置IP方法
     </h1>
   
 
 
-        <div class="article-info info-on-right">
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2024/04/24/Linux%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AEIP%E6%96%B9%E6%B3%95/" class="archive-article-date">
+        <time datetime="2024-04-24T06:45:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-04-24</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">1.3k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">5分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="linux的三种配置ip方法"><a href="#Linux的三种配置IP方法" class="headerlink" title="Linux的三种配置IP方法"></a>Linux的三种配置IP方法</h1><h2 id="方法一使用nmcli命令"><a href="#方法一：使用nmcli命令" class="headerlink" title="方法一：使用nmcli命令"></a>方法一：使用nmcli命令</h2><blockquote>
+<p><strong>说明：</strong><br>使用nmcli命令配置的网络配置可以立即生效且系统重启后配置也不会丢失。</p>
+</blockquote>
+<h4 id="nmcli介绍"><a href="#nmcli介绍" class="headerlink" title="nmcli介绍"></a>nmcli介绍</h4><p><code>nmcli</code>是NetworkManager的一个命令行工具，它提供了使用命令行配置由NetworkManager管理网络连接的方法。nmcli命令的基本格式为：</p>
+<p><code>nmcli [OPTIONS] OBJECT &#123; COMMAND | help &#125;</code></p>
+<p>其中，OBJECT选项可以是general、networking、radio、connection或device等。在日常使用中，最常使用的是-t, –terse（用于脚本）、-p, –pretty选项（用于用户）及-h, –help选项，用户可以使用“ nmcli help”获取更多参数及使用信息。</p>
+<p><code>$ nmcli help</code></p>
+<p>常用命令使用举例如下：</p>
+<ul>
+<li><p>显示NetworkManager状态：</p>
+<p><code>$ nmcli general status</code></p>
+</li>
+<li><p>显示所有连接：</p>
+<p><code>$ nmcli connection show</code></p>
+</li>
+<li><p>只显示当前活动连接，如下所示添加 -a, –active：</p>
+<p><code>$ nmcli connection show --active</code></p>
+</li>
+<li><p>显示由NetworkManager识别到的设备及其状态：</p>
+<p><code>$ nmcli device status</code></p>
+</li>
+<li><p>使用nmcli工具启动和停止网络接口，在root权限下执行如下命令：</p>
+<p><code># nmcli connection up id enp3s0 # nmcli device disconnect enp3s0</code></p>
+</li>
+</ul>
+<h4 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h4><h5 id="连接到设备"><a href="#连接到设备" class="headerlink" title="连接到设备"></a>连接到设备</h5><p>使用如下命令，NetworkManager将连接到对应网络设备，尝试找到合适的连接配置，并激活配置。</p>
+<p><code># nmcli device connect &quot;$IFNAME&quot;</code></p>
+<blockquote>
+<p><strong>说明：</strong></p>
+<p>如果不存在相应的配置连接，NetworkManager将创建并激活具有默认设置的新配置文件。</p>
+</blockquote>
+<h5 id="断开设备连接"><a href="#断开设备连接" class="headerlink" title="断开设备连接"></a>断开设备连接</h5><p>使用如下命令，NetworkManager将断开设备连接，并防止设备自动激活。</p>
+<p><code># nmcli device disconnect &quot;$IFNAME&quot;</code></p>
+<h4 id="设置网络连接"><a href="#设置网络连接" class="headerlink" title="设置网络连接"></a>设置网络连接</h4><p>列出目前可用的网络连接：<code>nmcli con show</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ nmcli con show</span><br><span class="line">NAME        UUID                                  TYPE      DEVICE</span><br><span class="line">有线连接 1  ffce71f8-6121-3024-84b5-192f50f90d25  ethernet  ens160</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>说明：</strong><br>输出结果中的NAME字段代表连接ID（名称）。</p>
+</blockquote>
+<p>添加一个网络连接会生成相应的配置文件，并与相应的设备关联。检查可用的设备，方法如下：</p>
+<p><code>nmcli dev status</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ nmcli dev status</span><br><span class="line">DEVICE  TYPE      STATE   CONNECTION</span><br><span class="line">ens160  ethernet  已连接  有线连接 1</span><br><span class="line">lo      loopback  未托管  --</span><br></pre></td></tr></table></figure>
+
+<h5 id="配置静态ip连接"><a href="#配置静态IP连接" class="headerlink" title="配置静态IP连接"></a>配置静态IP连接</h5><h6 id="配置ip"><a href="#配置IP" class="headerlink" title="配置IP"></a>配置IP</h6><p>添加静态 IPv4 配置的网络连接，可使用以下命令：</p>
+<p><code>nmcli connection add type ethernet con-name connection-name ifname interface-name ip4 address gw4 address</code></p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmcli connection add <span class="built_in">type</span> ethernet con-name eth1_con ifname eth1 ip4 192.168.10.25/24 gw4 192.168.10.1</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>说明：</strong><br>如果要添加 IPv6 地址和网关信息，使用 ip6 和 gw6 选项。</p>
+</blockquote>
+<h2 id="方法二使用ip命令"><a href="#方法二：使用ip命令" class="headerlink" title="方法二：使用ip命令"></a>方法二：使用ip命令</h2><blockquote>
+<p><strong>说明：</strong><br><strong>使用ip命令配置的网络配置可以立即生效但系统重启后配置会丢失</strong>。</p>
+</blockquote>
+<h4 id="配置ip地址"><a href="#配置IP地址" class="headerlink" title="配置IP地址"></a>配置IP地址</h4><p>使用ip命令为接口配置地址，命令格式如下，其中 <em>interface-name</em> 为网络接口名。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr [ add | del ] address dev interface-name</span><br></pre></td></tr></table></figure>
+
+<h5 id="配置静态地址"><a href="#配置静态地址" class="headerlink" title="配置静态地址"></a>配置静态地址</h5><p>在root权限下，配置静态IP地址，使用示例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip address add 192.168.0.10/24 dev enp3s0</span><br></pre></td></tr></table></figure>
+
+<p>在root权限下，查看配置的网口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip addr show dev enp3s0</span><br></pre></td></tr></table></figure>
+
+<h5 id="配置多个地址"><a href="#配置多个地址" class="headerlink" title="配置多个地址"></a>配置多个地址</h5><p>ip 命令支持为同一接口分配多个地址，可在root权限下重复多次使用 ip 命令实现分配多个地址。使用示例如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ ip address add 192.168.2.223/24 dev enp4s0</span><br><span class="line">$ ip address add 192.168.4.223/24 dev enp4s0</span><br><span class="line">$ ip addr</span><br><span class="line"></span><br><span class="line">3: enp4s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/ether 52:54:00:aa:da:e2 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.203.12/16 brd 192.168.255.255 scope global dynamic noprefixroute enp4s0</span><br><span class="line">       valid_lft 8389sec preferred_lft 8389sec</span><br><span class="line">    inet 192.168.2.223/24 scope global enp4s0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet 192.168.4.223/24 scope global enp4s0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::1eef:5e24:4b67:f07f/64 scope <span class="built_in">link</span> noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
+
+<h4 id="配置静态路由"><a href="#配置静态路由" class="headerlink" title="配置静态路由"></a>配置静态路由</h4><p>如果需要静态路由，可使用 ip route add 命令在路由表中添加，使用 ip route del 命令删除。最常使用的 ip route 命令格式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip route [ add | del | change | append | replace ] destination-address</span><br></pre></td></tr></table></figure>
+
+<p>查看路由表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip route</span><br></pre></td></tr></table></figure>
+
+<p>在主机地址中添加一个静态路由，在 root 权限下，使用以下命令格式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ip route add 192.168.2.1 via 10.0.0.1 [dev interface-name]</span><br><span class="line"><span class="comment"># 192.168.2.1是目的主机的ip,10.0.0.1是默认网关，dev ethXX是出去的网口</span></span><br></pre></td></tr></table></figure>
+
+<p>添加到某个网段的静态路由：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ip route add 192.168.2.0/24 via 10.0.0.1 [dev interface-name]</span><br><span class="line"><span class="comment">#表示到达192.168.2.0-192.168.2.255网段的路由</span></span><br></pre></td></tr></table></figure>
+
+<p>添加默认的网关路由：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip route add default via XX.XX.XX.XX ethX</span><br></pre></td></tr></table></figure>
+
+<h2 id="方法三通过ifcfg文件配置网络"><a href="#方法三：通过ifcfg文件配置网络" class="headerlink" title="方法三：通过ifcfg文件配置网络"></a>方法三：通过ifcfg文件配置网络</h2><blockquote>
+<p> <strong>说明：</strong><br>通过ifcfg文件配置的网络配置不会立即生效，需要在root权限下执行<strong>ifup interface-name</strong>命令以激活网络配置后才生效（interface-name处填写具体的网络接口名）。</p>
+</blockquote>
+<h4 id="配置静态网络"><a href="#配置静态网络" class="headerlink" title="配置静态网络"></a>配置静态网络</h4><p>以enp4s0网络接口进行静态网络设置为例，通过在root权限下修改ifcfg文件实现，在<code>/etc/sysconfig/network-scripts/</code>目录中生成名为ifcfg-enp4s0的文件中，修改参数配置，示例如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">IPADDR=192.168.0.10</span><br><span class="line">GATEWAY=192.168.0.1</span><br><span class="line">PREFIX=24</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line">NAME=enp4s0static</span><br><span class="line">UUID=08c3a30e-c5e2-4d7b-831f-26c3cdc29293</span><br><span class="line">DEVICE=enp4s0</span><br><span class="line">ONBOOT=yes</span><br></pre></td></tr></table></figure>
+
+<p>注意配置静态IP时 ,要设置<strong>BOOTPROTO&#x3D;none</strong></p>
+<p>大家学会了没，感谢大家点赞，收藏加关注，我是CoderSong,永远热爱思考，热爱生活，持续分享更多有价值的文章，与君共勉，共同成长。</p>
+<img title src="https://img.soogif.com/DTLuKBLNA8Lfr64ADTbXe7BVVHN31zxW.gif?scope=mdnice" alt width="405" data-align="center">
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          CoderSong
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://jack-song-gif.github.io/2024/04/24/Linux的三种配置IP方法/" title="Linux的三种配置IP方法" target="_blank">https://jack-song-gif.github.io/2024/04/24/Linux的三种配置IP方法/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">marvell</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">嵌入式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">net</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">SDK交叉编译</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">linux-command</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+    
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/linux//" class="article-tag-list-link color1">linux</a>
+        			<a href="/categories/linux-command//" class="article-tag-list-link color4">linux-command</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+    
 
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://jack-song-gif.github.io/2024/04/24/Linux%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AEIP%E6%96%B9%E6%B3%95/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2024/04/24/%E6%B5%81%E7%95%85%E5%88%87%E6%8D%A2Linux%E7%9A%84%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">流畅切换Linux的应用程序</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#linux%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AEip%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">Linux的三种配置IP方法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%E4%BD%BF%E7%94%A8nmcli%E5%91%BD%E4%BB%A4"><span class="toc-number">1.1.</span> <span class="toc-text">方法一：使用nmcli命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#nmcli%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">nmcli介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">设备管理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E5%88%B0%E8%AE%BE%E5%A4%87"><span class="toc-number">1.1.0.2.1.</span> <span class="toc-text">连接到设备</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%AD%E5%BC%80%E8%AE%BE%E5%A4%87%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.1.0.2.2.</span> <span class="toc-text">断开设备连接</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">设置网络连接</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81ip%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.1.0.3.1.</span> <span class="toc-text">配置静态IP连接</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEip"><span class="toc-number">1.1.0.3.1.1.</span> <span class="toc-text">配置IP</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%E4%BD%BF%E7%94%A8ip%E5%91%BD%E4%BB%A4"><span class="toc-number">1.2.</span> <span class="toc-text">方法二：使用ip命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEip%E5%9C%B0%E5%9D%80"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">配置IP地址</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81%E5%9C%B0%E5%9D%80"><span class="toc-number">1.2.0.1.1.</span> <span class="toc-text">配置静态地址</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E5%A4%9A%E4%B8%AA%E5%9C%B0%E5%9D%80"><span class="toc-number">1.2.0.1.2.</span> <span class="toc-text">配置多个地址</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">配置静态路由</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89%E9%80%9A%E8%BF%87ifcfg%E6%96%87%E4%BB%B6%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C"><span class="toc-number">1.3.</span> <span class="toc-text">方法三：通过ifcfg文件配置网络</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%9D%99%E6%80%81%E7%BD%91%E7%BB%9C"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">配置静态网络</span></a></li></ol></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           </div>
@@ -348,9 +626,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
