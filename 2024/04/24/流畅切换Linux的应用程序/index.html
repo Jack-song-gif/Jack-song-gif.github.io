@@ -18,7 +18,7 @@
 <meta property="og:description" content="流畅切换Linux的应用程序 通过进程的前后台切换方式实现不同应用的切换。 背景：linux启动一个程序后，切换到后台执行，想继续在linux操作。  在Linux中，你可以使用以下几种方法使一个程序在后台启动并退出，但仍然保持其进程运行： 一.Linux启动一个程序在后台执行1. 使用nohup和&amp;：1$ nohup your_program &amp;  使用nohup命令可以使程序忽">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-24T06:33:14.000Z">
-<meta property="article:modified_time" content="2024-04-24T06:41:47.016Z">
+<meta property="article:modified_time" content="2024-04-24T08:37:55.838Z">
 <meta property="article:author" content="CoderSong">
 <meta property="article:tag" content="linux_command">
 <meta name="twitter:card" content="summary">
@@ -293,6 +293,8 @@
 <h2 id="一linux启动一个程序在后台执行"><a href="#一-Linux启动一个程序在后台执行" class="headerlink" title="一.Linux启动一个程序在后台执行"></a>一.Linux启动一个程序在后台执行</h2><h3 id="1-使用nohup和amp"><a href="#1-使用nohup和-：" class="headerlink" title="1. 使用nohup和&amp;："></a>1. 使用<code>nohup</code>和<code>&amp;</code>：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">nohup</span> your_program &amp;</span><br></pre></td></tr></table></figure>
 
 <p>使用<code>nohup</code>命令可以使程序忽略挂断信号（SIGHUP），这样即使你退出了终端，程序也会继续运行。<code>&amp;</code>符号使程序在后台运行。  </p>
+<span id="more"></span>
+
 <h3 id="2-使用ctrlz"><a href="#2-使用ctrl-Z：" class="headerlink" title="2. 使用ctrl+Z："></a>2. 使用<code>ctrl+Z</code>：</h3><p>如果你已经在前台启动了程序，可以使用<code>ctrl+z</code>命令将其移到后台：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ./your_program  <span class="comment"># 运行在前台    </span></span><br><span class="line">$ 按 Ctrl + Z  <span class="comment"># 将程序暂停，并将其移到后台   </span></span><br><span class="line">$ <span class="built_in">bg</span>  <span class="comment">#在后台继续运行程序  </span></span><br><span class="line">$ <span class="built_in">fg</span>  <span class="comment">#回到前台继续运行程序 </span></span><br><span class="line">$ <span class="built_in">disown</span> -h  <span class="comment"># 使程序在你退出终端时仍然运行</span></span><br></pre></td></tr></table></figure>
 
