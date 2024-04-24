@@ -269,46 +269,15 @@
     <p>虚拟机扩容整体思路：</p>
 <p>1.虚拟机关机，使用vmware扩容，然后打开虚拟机设置，扩充磁盘空间容量</p>
 <p>2.重启虚拟机，给磁盘重新分区，如果根文件系统是最后一个分区，可以直接扩容。【否则分区前要先备份】</p>
-<h2 id="一虚拟机扩容"><a href="#一-虚拟机扩容" class="headerlink" title="一.虚拟机扩容"></a>一.虚拟机扩容</h2><p>当你打开虚拟机时会提示：你的磁盘根目录不足，这表明你需要对自己的虚拟机进行扩容，详细步骤如下：</p>
+<h2 id="一-虚拟机扩容"><a href="#一-虚拟机扩容" class="headerlink" title="一.虚拟机扩容"></a>一.虚拟机扩容</h2><p>当你打开虚拟机时会提示：你的磁盘根目录不足，这表明你需要对自己的虚拟机进行扩容，详细步骤如下：</p>
 <p>第一步：你需要将自己的虚拟机关机（即关闭电源）；</p>
 <p>第二步：右键你需要扩容的虚拟机，然后点击设置；</p>
 <p> 第三步：点击硬盘；</p>
 <p>第四步：点击右边进行扩容，将磁盘容量扩展到自己需要的容量；</p>
 <p>（<code>第四步必须在已关闭虚拟机电源和虚拟机快照全部删除的情况下操作，不然无法完成</code>）</p>
-<h2 id="二磁盘重新分区"><a href="#二-磁盘重新分区" class="headerlink" title="二.磁盘重新分区"></a>二.磁盘重新分区</h2><p>现在开始进行分区及磁盘处理步骤</p>
-<p>（<code>虽然扩大了容量，但是没有进行分区和指定文件系统，Linux则会无法识别，扩容将没有完成</code>）</p>
-<p>第五步：打开需要扩容的虚拟机；</p>
-<p>第六步：输入指令查看分区情况；</p>
-<p>指令：df -h</p>
-<p>从上图来看我的系统文件是 &#x2F;dev&#x2F;sda3且当前大小为20G</p>
-<p>第七步：输入指令查看当前磁盘</p>
-<p>指令：<code>sudo fdisk -l</code></p>
-<p>输入指令后可能会出现如下权限不够的情况，不要惊慌，再往下翻会有详解：</p>
-<p>如果出现权限不足则输入如下指令，将执行者从自己改为root</p>
-<p>指令：<code>sudo fdisk -l</code></p>
-<p><strong>sudo后的密码就是开启自己虚拟机的密码</strong></p>
-<p>第八步：然后开始操作磁盘：</p>
-<p>指令：fdisk &#x2F;dev&#x2F;sda</p>
-<p>(注意这里的 &#x2F;dev&#x2F;sda 是自己的磁盘路径。若又出现权限不够的情况请重复上述步骤在指令前加上sudo  示例：sudo fdisk &#x2F;dev&#x2F;sda）</p>
-<p>第九步：输入p,列出分区列表；</p>
-<p>第十步：输入d用来删除分区；</p>
-<p>删除分区时会让你输入数字，因为我的系统文件是sda3，所以当时我输入的是3，这个需要根据自身的虚拟机的系统文件来输入。</p>
-<p>第十一步：输入n用来新建一个分区；</p>
-<p>第十二步：输入p，命名主分区且保存最终结果；</p>
-<p>接下来又会输入数字，这里是将你新建的分区进行命名，你第十步输入的数字几，此时也输入数字几（因为我第十步输入的是3，现在我还是输入3）</p>
-<p>之后一直空格，直到出现Command (m for help):时直接输入w进行保存</p>
-<p>第十三步：输入指令查看sda3的文件格式；</p>
-<p>指令：<code>df -T /dev/sda3</code></p>
-<p> 可以看出它的文件格式是ext4的，所以要在第十五步使用resize2fs进行刷新文件系统容量（如果你的文件格式是xfs，则使用xfs_growfs命令）</p>
-<p>第十四步：重启虚拟机；</p>
-<p>指令：<code>reboot</code></p>
-<p>第十五步：刷新文件系统变量；</p>
-<p>指令：<code>resize2fs  /dev/sda3</code></p>
-<p>如若出现权限不够请重复第七步进行更改执行者来获得权限，示例：<code>sudo resize2fs /dev/sda3</code></p>
-<p>第十六步：查看根目录大小，验证是否扩容完成；</p>
-<p>指令：<code>df -h</code></p>
-<p> 可以清楚的看见 &#x2F;dev&#x2F;sda3 由大小20G变为大小49G，表示扩容完毕。</p>
-
+    
+    <a class="article-more-a" href="/2024/04/24/%E8%99%9A%E6%8B%9F%E6%9C%BA%E6%89%A9%E5%AE%B9%EF%BC%8C%E8%A7%A3%E5%86%B3%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8D%E8%B6%B3/#more">more >></a>
+    
     
 
     
@@ -408,97 +377,16 @@
   
   <div class="article-entry" itemprop="articleBody">
     
-    <h1 id="linux的三种配置ip方法"><a href="#Linux的三种配置IP方法" class="headerlink" title="Linux的三种配置IP方法"></a>Linux的三种配置IP方法</h1><h2 id="方法一使用nmcli命令"><a href="#方法一：使用nmcli命令" class="headerlink" title="方法一：使用nmcli命令"></a>方法一：使用nmcli命令</h2><blockquote>
+    <h1 id="Linux的三种配置IP方法"><a href="#Linux的三种配置IP方法" class="headerlink" title="Linux的三种配置IP方法"></a>Linux的三种配置IP方法</h1><h2 id="方法一：使用nmcli命令"><a href="#方法一：使用nmcli命令" class="headerlink" title="方法一：使用nmcli命令"></a>方法一：使用nmcli命令</h2><blockquote>
 <p><strong>说明：</strong><br>使用nmcli命令配置的网络配置可以立即生效且系统重启后配置也不会丢失。</p>
 </blockquote>
 <h4 id="nmcli介绍"><a href="#nmcli介绍" class="headerlink" title="nmcli介绍"></a>nmcli介绍</h4><p><code>nmcli</code>是NetworkManager的一个命令行工具，它提供了使用命令行配置由NetworkManager管理网络连接的方法。nmcli命令的基本格式为：</p>
 <p><code>nmcli [OPTIONS] OBJECT &#123; COMMAND | help &#125;</code></p>
 <p>其中，OBJECT选项可以是general、networking、radio、connection或device等。在日常使用中，最常使用的是-t, –terse（用于脚本）、-p, –pretty选项（用于用户）及-h, –help选项，用户可以使用“ nmcli help”获取更多参数及使用信息。</p>
 <p><code>$ nmcli help</code></p>
-<p>常用命令使用举例如下：</p>
-<ul>
-<li><p>显示NetworkManager状态：</p>
-<p><code>$ nmcli general status</code></p>
-</li>
-<li><p>显示所有连接：</p>
-<p><code>$ nmcli connection show</code></p>
-</li>
-<li><p>只显示当前活动连接，如下所示添加 -a, –active：</p>
-<p><code>$ nmcli connection show --active</code></p>
-</li>
-<li><p>显示由NetworkManager识别到的设备及其状态：</p>
-<p><code>$ nmcli device status</code></p>
-</li>
-<li><p>使用nmcli工具启动和停止网络接口，在root权限下执行如下命令：</p>
-<p><code># nmcli connection up id enp3s0 # nmcli device disconnect enp3s0</code></p>
-</li>
-</ul>
-<h4 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h4><h5 id="连接到设备"><a href="#连接到设备" class="headerlink" title="连接到设备"></a>连接到设备</h5><p>使用如下命令，NetworkManager将连接到对应网络设备，尝试找到合适的连接配置，并激活配置。</p>
-<p><code># nmcli device connect &quot;$IFNAME&quot;</code></p>
-<blockquote>
-<p><strong>说明：</strong></p>
-<p>如果不存在相应的配置连接，NetworkManager将创建并激活具有默认设置的新配置文件。</p>
-</blockquote>
-<h5 id="断开设备连接"><a href="#断开设备连接" class="headerlink" title="断开设备连接"></a>断开设备连接</h5><p>使用如下命令，NetworkManager将断开设备连接，并防止设备自动激活。</p>
-<p><code># nmcli device disconnect &quot;$IFNAME&quot;</code></p>
-<h4 id="设置网络连接"><a href="#设置网络连接" class="headerlink" title="设置网络连接"></a>设置网络连接</h4><p>列出目前可用的网络连接：<code>nmcli con show</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ nmcli con show</span><br><span class="line">NAME        UUID                                  TYPE      DEVICE</span><br><span class="line">有线连接 1  ffce71f8-6121-3024-84b5-192f50f90d25  ethernet  ens160</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>说明：</strong><br>输出结果中的NAME字段代表连接ID（名称）。</p>
-</blockquote>
-<p>添加一个网络连接会生成相应的配置文件，并与相应的设备关联。检查可用的设备，方法如下：</p>
-<p><code>nmcli dev status</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ nmcli dev status</span><br><span class="line">DEVICE  TYPE      STATE   CONNECTION</span><br><span class="line">ens160  ethernet  已连接  有线连接 1</span><br><span class="line">lo      loopback  未托管  --</span><br></pre></td></tr></table></figure>
-
-<h5 id="配置静态ip连接"><a href="#配置静态IP连接" class="headerlink" title="配置静态IP连接"></a>配置静态IP连接</h5><h6 id="配置ip"><a href="#配置IP" class="headerlink" title="配置IP"></a>配置IP</h6><p>添加静态 IPv4 配置的网络连接，可使用以下命令：</p>
-<p><code>nmcli connection add type ethernet con-name connection-name ifname interface-name ip4 address gw4 address</code></p>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nmcli connection add <span class="built_in">type</span> ethernet con-name eth1_con ifname eth1 ip4 192.168.10.25/24 gw4 192.168.10.1</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p><strong>说明：</strong><br>如果要添加 IPv6 地址和网关信息，使用 ip6 和 gw6 选项。</p>
-</blockquote>
-<h2 id="方法二使用ip命令"><a href="#方法二：使用ip命令" class="headerlink" title="方法二：使用ip命令"></a>方法二：使用ip命令</h2><blockquote>
-<p><strong>说明：</strong><br><strong>使用ip命令配置的网络配置可以立即生效但系统重启后配置会丢失</strong>。</p>
-</blockquote>
-<h4 id="配置ip地址"><a href="#配置IP地址" class="headerlink" title="配置IP地址"></a>配置IP地址</h4><p>使用ip命令为接口配置地址，命令格式如下，其中 <em>interface-name</em> 为网络接口名。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip addr [ add | del ] address dev interface-name</span><br></pre></td></tr></table></figure>
-
-<h5 id="配置静态地址"><a href="#配置静态地址" class="headerlink" title="配置静态地址"></a>配置静态地址</h5><p>在root权限下，配置静态IP地址，使用示例如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip address add 192.168.0.10/24 dev enp3s0</span><br></pre></td></tr></table></figure>
-
-<p>在root权限下，查看配置的网口：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip addr show dev enp3s0</span><br></pre></td></tr></table></figure>
-
-<h5 id="配置多个地址"><a href="#配置多个地址" class="headerlink" title="配置多个地址"></a>配置多个地址</h5><p>ip 命令支持为同一接口分配多个地址，可在root权限下重复多次使用 ip 命令实现分配多个地址。使用示例如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ ip address add 192.168.2.223/24 dev enp4s0</span><br><span class="line">$ ip address add 192.168.4.223/24 dev enp4s0</span><br><span class="line">$ ip addr</span><br><span class="line"></span><br><span class="line">3: enp4s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000</span><br><span class="line">    <span class="built_in">link</span>/ether 52:54:00:aa:da:e2 brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.203.12/16 brd 192.168.255.255 scope global dynamic noprefixroute enp4s0</span><br><span class="line">       valid_lft 8389sec preferred_lft 8389sec</span><br><span class="line">    inet 192.168.2.223/24 scope global enp4s0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet 192.168.4.223/24 scope global enp4s0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::1eef:5e24:4b67:f07f/64 scope <span class="built_in">link</span> noprefixroute</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
-
-<h4 id="配置静态路由"><a href="#配置静态路由" class="headerlink" title="配置静态路由"></a>配置静态路由</h4><p>如果需要静态路由，可使用 ip route add 命令在路由表中添加，使用 ip route del 命令删除。最常使用的 ip route 命令格式如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip route [ add | del | change | append | replace ] destination-address</span><br></pre></td></tr></table></figure>
-
-<p>查看路由表：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip route</span><br></pre></td></tr></table></figure>
-
-<p>在主机地址中添加一个静态路由，在 root 权限下，使用以下命令格式：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ip route add 192.168.2.1 via 10.0.0.1 [dev interface-name]</span><br><span class="line"><span class="comment"># 192.168.2.1是目的主机的ip,10.0.0.1是默认网关，dev ethXX是出去的网口</span></span><br></pre></td></tr></table></figure>
-
-<p>添加到某个网段的静态路由：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ip route add 192.168.2.0/24 via 10.0.0.1 [dev interface-name]</span><br><span class="line"><span class="comment">#表示到达192.168.2.0-192.168.2.255网段的路由</span></span><br></pre></td></tr></table></figure>
-
-<p>添加默认的网关路由：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ip route add default via XX.XX.XX.XX ethX</span><br></pre></td></tr></table></figure>
-
-<h2 id="方法三通过ifcfg文件配置网络"><a href="#方法三：通过ifcfg文件配置网络" class="headerlink" title="方法三：通过ifcfg文件配置网络"></a>方法三：通过ifcfg文件配置网络</h2><blockquote>
-<p> <strong>说明：</strong><br>通过ifcfg文件配置的网络配置不会立即生效，需要在root权限下执行<strong>ifup interface-name</strong>命令以激活网络配置后才生效（interface-name处填写具体的网络接口名）。</p>
-</blockquote>
-<h4 id="配置静态网络"><a href="#配置静态网络" class="headerlink" title="配置静态网络"></a>配置静态网络</h4><p>以enp4s0网络接口进行静态网络设置为例，通过在root权限下修改ifcfg文件实现，在<code>/etc/sysconfig/network-scripts/</code>目录中生成名为ifcfg-enp4s0的文件中，修改参数配置，示例如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">TYPE=Ethernet</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">IPADDR=192.168.0.10</span><br><span class="line">GATEWAY=192.168.0.1</span><br><span class="line">PREFIX=24</span><br><span class="line">DEFROUTE=yes</span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=yes</span><br><span class="line">IPV6_AUTOCONF=yes</span><br><span class="line">IPV6_DEFROUTE=yes</span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line">NAME=enp4s0static</span><br><span class="line">UUID=08c3a30e-c5e2-4d7b-831f-26c3cdc29293</span><br><span class="line">DEVICE=enp4s0</span><br><span class="line">ONBOOT=yes</span><br></pre></td></tr></table></figure>
-
-<p>注意配置静态IP时 ,要设置<strong>BOOTPROTO&#x3D;none</strong></p>
-<p>大家学会了没，感谢大家点赞，收藏加关注，我是CoderSong,永远热爱思考，热爱生活，持续分享更多有价值的文章，与君共勉，共同成长。</p>
-<img title src="https://img.soogif.com/DTLuKBLNA8Lfr64ADTbXe7BVVHN31zxW.gif?scope=mdnice" alt width="405" data-align="center">
-
+    
+    <a class="article-more-a" href="/2024/04/24/Linux%E7%9A%84%E4%B8%89%E7%A7%8D%E9%85%8D%E7%BD%AEIP%E6%96%B9%E6%B3%95/#more">more >></a>
+    
     
 
     
