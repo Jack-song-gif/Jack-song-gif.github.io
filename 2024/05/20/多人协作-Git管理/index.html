@@ -6,20 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="https://jack-song-gif.github.io">
-  <title>Tag: dpdk交叉编译 | CoderSong&#39;s blog</title>
+  <title>多人协作-Git管理 | CoderSong&#39;s blog</title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="description" content="recording study linux c programming and so on">
-<meta property="og:type" content="website">
-<meta property="og:title" content="CoderSong&#39;s blog">
-<meta property="og:url" content="https://jack-song-gif.github.io/tags/dpdk%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/index.html">
+  <meta name="description" content="多人协作-Git管理[TOC] 序：对Git有个基本的认识Git 是一种分布式版本控制系统，它允许多个开发者在不同的环境中并行工作，同时提供了一种高效且可靠的方式来管理代码版本和历史。Git 的工作模式和流程主要包括以下几个方面： 【多人开发整体流程】 【同步主线分支工作流程】 1. 分布式架构Git 是分布式的，每个开发者的工作目录包含整个项目的完整版本历史。这意味着每个本地存储库（reposi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多人协作-Git管理">
+<meta property="og:url" content="https://jack-song-gif.github.io/2024/05/20/%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C-Git%E7%AE%A1%E7%90%86/index.html">
 <meta property="og:site_name" content="CoderSong&#39;s blog">
-<meta property="og:description" content="recording study linux c programming and so on">
+<meta property="og:description" content="多人协作-Git管理[TOC] 序：对Git有个基本的认识Git 是一种分布式版本控制系统，它允许多个开发者在不同的环境中并行工作，同时提供了一种高效且可靠的方式来管理代码版本和历史。Git 的工作模式和流程主要包括以下几个方面： 【多人开发整体流程】 【同步主线分支工作流程】 1. 分布式架构Git 是分布式的，每个开发者的工作目录包含整个项目的完整版本历史。这意味着每个本地存储库（reposi">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jack-song-gif.github.io/2024/05/20/%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C-Git%E7%AE%A1%E7%90%86/001.png">
+<meta property="og:image" content="https://jack-song-gif.github.io/2024/05/20/%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C-Git%E7%AE%A1%E7%90%86/002.png">
+<meta property="article:published_time" content="2024-05-20T07:42:38.000Z">
+<meta property="article:modified_time" content="2024-05-20T07:52:50.364Z">
 <meta property="article:author" content="CoderSong">
-<meta property="article:tag" content="linux,">
+<meta property="article:tag" content="tools">
+<meta property="article:tag" content="Git">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jack-song-gif.github.io/2024/05/20/%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C-Git%E7%AE%A1%E7%90%86/001.png">
   
     <link rel="alternative" href="/atom.xml" title="CoderSong&#39;s blog" type="application/atom+xml">
   
@@ -242,80 +248,526 @@
               class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-多人协作-Git管理" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2024" class="archive-year">2024</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	
-<a href="/2024/02/28/%E5%9C%A8Ubuntu%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7%E9%93%BE%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91arm%E6%9E%B6%E6%9E%84%E7%9A%84DPDK/" class="archive-article-date">
-        <time datetime="2024-02-28T07:45:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-02-28</time>
-</a>
-
-        </div>
-    	 
+      <header class="article-header">
   
-    <h1 itemprop="name">
-	
-	  <a class="archive-article-title" href="/2024/02/28/%E5%9C%A8Ubuntu%E4%BD%BF%E7%94%A8%E5%B7%A5%E5%85%B7%E9%93%BE%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91arm%E6%9E%B6%E6%9E%84%E7%9A%84DPDK/" target="_blank">在Ubuntu使用工具链交叉编译arm架构的DPDK</a>
   
+    <h1 class="article-title" itemprop="name">
+      多人协作-Git管理
     </h1>
   
 
 
-        <div class="article-info info-on-right">
+  
+  
+        
+        <span id="busuanzi_container_page_pv" style='display:none' class="archive-article-date">
+              <i class="icon-smile icon"></i> 阅读数：<span id="busuanzi_value_page_pv"></span>次
+        </span>
+
+<a href="/2024/05/20/%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C-Git%E7%AE%A1%E7%90%86/" class="archive-article-date">
+        <time datetime="2024-05-20T07:42:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-05-20</time>
+</a>
+
+  
+  
+    
+<div style="margin-top:10px;">
+  <span class="post-time">
+    <span class="post-meta-item-icon">
+      <!-- fonts.scss -->
+      <!-- 百度字体平台:http://fontstore.baidu.com/static/editor/index.html -->
+      <i class="icon-statistics"></i>
+      <span class="post-meta-item-text"> 字数统计:</span>
+      <span class="post-count">4.2k字</span>
+    </span>
+  </span>
+
+  <span class="post-time">
+    &nbsp; | &nbsp;
+    <span class="post-meta-item-icon">
+      <i class="icon-book icon"></i>
+      <span class="post-meta-item-text"> 阅读时长≈</span>
+      <span class="post-count">15分</span>
+    </span>
+  </span>
+</div>
+
+
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="多人协作-git管理"><a href="#多人协作-Git管理" class="headerlink" title="多人协作-Git管理"></a>多人协作-Git管理</h1><p>[TOC]</p>
+<h2 id="序对git有个基本的认识"><a href="#序：对Git有个基本的认识" class="headerlink" title="序：对Git有个基本的认识"></a>序：对Git有个基本的认识</h2><p>Git 是一种分布式版本控制系统，它允许多个开发者在不同的环境中并行工作，同时提供了一种高效且可靠的方式来管理代码版本和历史。Git 的工作模式和流程主要包括以下几个方面：</p>
+<h3 id="多人开发整体流程"><a href="#【多人开发整体流程】" class="headerlink" title="【多人开发整体流程】"></a>【多人开发整体流程】</h3><p><img src="/2024/05/20/%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C-Git%E7%AE%A1%E7%90%86/001.png"></p>
+<h3 id="同步主线分支工作流程"><a href="#【同步主线分支工作流程】" class="headerlink" title="【同步主线分支工作流程】"></a>【同步主线分支工作流程】</h3><p><img src="/2024/05/20/%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C-Git%E7%AE%A1%E7%90%86/002.png"></p>
+<h3 id="1-分布式架构"><a href="#1-分布式架构" class="headerlink" title="1. 分布式架构"></a>1. 分布式架构</h3><p>Git 是分布式的，每个开发者的工作目录包含整个项目的完整版本历史。<strong>这意味着每个本地存储库（repository）都是一个全功能的版本库，不需要始终依赖中央服务器</strong>。【换句话说就是所有人的本地存储库都有全部分支的代码】</p>
+<h3 id="2-工作区和暂存区"><a href="#2-工作区和暂存区" class="headerlink" title="2. 工作区和暂存区"></a>2. 工作区和暂存区</h3><p>Git 工作模式中，常见的术语和概念包括：</p>
+<ul>
+<li><strong>工作区（Working Directory&#x2F;Working Tree）</strong>：这是你当前正在开发的文件系统目录，包括所有源代码文件和目录。</li>
+<li><strong>暂存区（Staging Area&#x2F;Index）</strong>：这是一个临时区域，用于存放将要提交到版本库中的更改。你可以选择哪些更改需要提交。</li>
+<li><strong>版本库（Repository）</strong>：这是一个存储所有已提交变更记录的地方，包含了所有的历史提交（commits）。</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="3-常见命令和工作流程"><a href="#3-常见命令和工作流程" class="headerlink" title="3. 常见命令和工作流程"></a>3. 常见命令和工作流程</h3><h4 id="克隆仓库"><a href="#克隆仓库" class="headerlink" title="克隆仓库"></a>克隆仓库</h4><p>从远程仓库获取代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;repository-url&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h4><p>查看当前工作区的状态，包括未跟踪文件、已修改文件和已暂存文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
+
+<h4 id="添加文件到暂存区"><a href="#添加文件到暂存区" class="headerlink" title="添加文件到暂存区"></a>添加文件到暂存区</h4><p>将文件从工作区添加到暂存区：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;file-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="提交更改"><a href="#提交更改" class="headerlink" title="提交更改"></a>提交更改</h4><p>将暂存区的内容提交到本地版本库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">&quot;Commit message&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查看提交历史"><a href="#查看提交历史" class="headerlink" title="查看提交历史"></a>查看提交历史</h4><p>查看项目的提交历史记录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h4><p>Git 允许同时开发多个分支，每个分支都是一个独立的开发环境：</p>
+<ul>
+<li><p>列出所有分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建新分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切换到另一个分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>新建并切换到新分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b &lt;branch-name&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h4><p>将一个分支的更改合并到当前分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="处理冲突"><a href="#处理冲突" class="headerlink" title="处理冲突"></a>处理冲突</h4><p>合并过程中如果发生冲突，需要手动解决冲突并继续完成合并。</p>
+<h4 id="推送更改到远程仓库"><a href="#推送更改到远程仓库" class="headerlink" title="推送更改到远程仓库"></a>推送更改到远程仓库</h4><p>将本地提交推送到远程仓库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="拉取远程仓库的更改"><a href="#拉取远程仓库的更改" class="headerlink" title="拉取远程仓库的更改"></a>拉取远程仓库的更改</h4><p>从远程仓库获取并合并更改到本地分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-分布式开发"><a href="#4-分布式开发" class="headerlink" title="4. 分布式开发"></a>4. 分布式开发</h3><p>由于 Git 是分布式的，每个开发者可以独立地工作，提交更改，创建和合并分支。因为每个仓库都包含完整的历史记录，开发者可以在离线状态下执行大部分操作。最后，使用 <code>git push</code> 和 <code>git pull</code> 同步远程仓库中的变更，与团队成员进行共享和协作。</p>
+<h2 id="常见操作tips"><a href="#常见操作Tips" class="headerlink" title="常见操作Tips"></a>常见操作Tips</h2><h2 id="一个人分支同步主线代码"><a href="#一-个人分支同步主线代码" class="headerlink" title="一.个人分支同步主线代码"></a>一.个人分支同步主线代码</h2><p>一般步骤如下：</p>
+<ol>
+<li><p>确认当前所在分支，使用 <code>git branch</code> 命令查看当前所在分支，如果不在个人分支上，可以使用 <code>git checkout</code> 命令切换到个人分支。</p>
+</li>
+<li><p>拉取主线代码，使用 <code>git fetch</code> 命令拉取主线代码，该命令会将主线代码的最新版本下载到本地，但不会自动合并到当前分支。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin main</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>合并主线代码，使用 <code>git merge</code> 命令将主线代码合并到个人分支上，该命令会将主线代码合并到当前分支，并生成一个新的合并提交。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge origin/main</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解决冲突，如果合并过程中出现冲突，需要手动解决冲突，然后使用 <code>git add</code> 命令将修改后的文件添加到暂存区，最后使用 <code>git commit</code> 命令提交合并结果。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;Merge main branch&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>推送个人分支，使用 <code>git push</code> 命令将个人分支推送到远程仓库。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;personal-branch&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>以上是个人分支同步主线代码的一般步骤，具体操作时需要根据实际情况进行调整。</p>
+<p>2.手动解决 Git 冲突的一般步骤如下：</p>
+<ol>
+<li><p>执行 <code>git status</code> 命令，查看哪些文件存在冲突。</p>
+</li>
+<li><p>打开存在冲突的文件，查看冲突的内容。冲突的内容通常会被包含在一对 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>、<code>=======</code>、<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> 标记之间，其中 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> 标记之前的内容是当前分支的修改，<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> 标记之后的内容是合并分支的修改，<code>=======</code> 标记之间是两个分支的修改内容。</p>
+</li>
+<li><p>根据需要修改冲突的内容，删除不需要的标记，保留需要的修改内容。</p>
+</li>
+<li><p>使用 <code>git add</code> 命令将修改后的文件添加到暂存区。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;conflicted-file&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果还有其他存在冲突的文件，重复步骤 2-4。</p>
+</li>
+<li><p>执行 <code>git commit</code> 命令提交合并结果。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;Resolve conflicts&quot;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如果还有其他需要合并的分支，重复步骤 1-6。</p>
+</li>
+<li><p>最后执行 <code>git push</code> 命令将合并结果推送到远程仓库。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;branch-name&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>以上是手动解决 Git 冲突的一般步骤，具体操作时需要根据实际情况进行调整。</p>
+<h2 id="二-git怎么cherry-pick某个提交或者某几个提交"><a href="#二、Git怎么cherry-pick某个提交或者某几个提交" class="headerlink" title="二、Git怎么cherry-pick某个提交或者某几个提交"></a>二、Git怎么cherry-pick某个提交或者某几个提交</h2><p>在Gitee上进行cherry-pick操作，可以按照以下步骤进行：</p>
+<p>1.打开需要进行cherry-pick操作的仓库，找到需要合并的提交记录的commit ID。</p>
+<p>2.在本地克隆该仓库，并切换到需要合并的分支。</p>
+<p>3.执行以下命令，将需要合并的提交记录应用到当前分支：</p>
+<p><code>git cherry-pick &lt;commit ID&gt;</code><br>其中，<commit id>是需要合并的提交记录的commit ID。</commit></p>
+<p>4.如果合并过程中出现冲突，需要手动解决冲突，并执行以下命令，将解决冲突后的代码提交到当前分支：</p>
+<ul>
+<li><code>git add .</code></li>
+<li><code>git commit -m &quot;Merge commit message&quot;</code><br>其中，”Merge commit message”是合并提交的说明信息。</li>
+</ul>
+<p>5.将合并后的代码推送到远程仓库：</p>
+<p><code>git push origin &lt;branch name&gt;</code><br>其中，<branch name>是当前分支的名称。【与远程仓库同名】</branch></p>
+<p>需要注意的是，cherry-pick操作会将指定的提交记录应用到当前分支，并生成一个新的提交记录。因此，在进行cherry-pick操作时，需要仔细检查合并的提交记录，以避免不必要的错误和冲突。</p>
+<h3 id="详细介绍"><a href="#【详细介绍】：" class="headerlink" title="【详细介绍】："></a>【详细介绍】：</h3><p><code>git cherry-pick</code> 是 Git 中用于将一个或多个特定提交（commit）从一个分支应用到另一个分支的命令。这个操作的目的是有选择性地在不同分支之间移动特定的修改，而无需合并整个分支。</p>
+<h3 id="cherry-pick-的用法示例"><a href="#Cherry-pick-的用法示例" class="headerlink" title="Cherry-pick 的用法示例"></a>Cherry-pick 的用法示例</h3><p>假设你在一个分支（如 <code>feature-branch</code>）上做了一些修改，并进行了提交，现在你想把其中一个或多个提交<strong>应用</strong>到主分支（如 <code>main</code>）上，那么你可以使用 <code>git cherry-pick</code>。</p>
+<h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout main <span class="comment">#先切换到main分支</span></span><br><span class="line">git cherry-pick &lt;commit-hash&gt;  <span class="comment">#main分支将&lt;commitid&gt;的提交应用到自己身上</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="多个提交"><a href="#多个提交" class="headerlink" title="多个提交"></a>多个提交</h4><p>如果你想一次性 cherry-pick 多个提交，你可以指定一系列提交的哈希：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick &lt;commit-hash1&gt; &lt;commit-hash2&gt; ... &lt;commit-hashN&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="连续范围的提交"><a href="#连续范围的提交" class="headerlink" title="连续范围的提交"></a>连续范围的提交</h4><p>可以使用范围指定连续的提交：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git cherry-pick &lt;commit-hash1&gt;^..&lt;commit-hash5&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>假设 <code>feature-branch</code> 上有以下提交：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a---b---c---d---e (feature-branch)</span><br></pre></td></tr></table></figure>
+
+<p>而你现在在 <code>main</code> 分支上，想要将提交 <code>c</code> 和 <code>d</code> 应用到 <code>main</code> 上：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git checkout main</span><br><span class="line">git cherry-pick c d</span><br></pre></td></tr></table></figure>
+
+<p>这将把 <code>feature-branch</code> 上的 <code>c</code> 和 <code>d</code> 提交应用到 <code>main</code> 分支。</p>
+<h4 id="使用-cherry-pick-的情景"><a href="#使用-Cherry-pick-的情景" class="headerlink" title="使用 Cherry-pick 的情景"></a>使用 Cherry-pick 的情景</h4><ul>
+<li><strong>错误修复</strong>：在功能分支上修复了一个严重的 bug，想立即将修复应用到主分支。</li>
+<li><strong>功能迁移</strong>：将某些功能或更改从一个实验性分支移动到主分支或其他分支。</li>
+<li><strong>精细控制</strong>：需要更高的合并控制而不是整个分支的合并。</li>
+</ul>
+<h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4><ol>
+<li><strong>冲突处理</strong>：cherry-pick 操作中可能会产生代码冲突，需要手动解决冲突并完成提交。</li>
+<li><strong>原始提交信息保留</strong>：cherry-pick 会保留原始提交的信息（如提交消息和作者），但会生成新的提交哈希。</li>
+</ol>
+<p><code>git cherry-pick</code> 是一个非常有用的工具，它提供了在 Git 中细粒度控制版本历史的功能，使得在不同分支之间移动特定修改变得简单和高效。</p>
+<h2 id="三问如果下载一个git仓库有多个分支本地默认只有一个main分支怎么从其他远程分支创建子分支并与之关联起来"><a href="#三-问：如果下载一个git仓库，有多个分支，本地默认只有一个main分支，怎么从其他远程分支创建子分支，并与之关联起来？" class="headerlink" title="三.问：如果下载一个git仓库，有多个分支，本地默认只有一个main分支，怎么从其他远程分支创建子分支，并与之关联起来？"></a>三.问：如果下载一个git仓库，有多个分支，本地默认只有一个main分支，怎么从其他远程分支创建子分支，并与之关联起来？</h2><h3 id="方法一使用checkout从指定的远程分支派生本地分支"><a href="#方法一：使用checkout从指定的远程分支派生本地分支" class="headerlink" title="方法一：使用checkout从指定的远程分支派生本地分支"></a>方法一：使用checkout从指定的远程分支派生本地分支</h3><p>如果你下载了一个Git仓库，其中有多个分支，但本地默认只有 <code>main</code> 分支，想要从其他远程分支创建一个本地子分支并与之关联起来，可以按照以下步骤操作：</p>
+<h4 id="步骤一查看远程分支"><a href="#步骤一：查看远程分支" class="headerlink" title="步骤一：查看远程分支"></a>步骤一：查看远程分支</h4><ol>
+<li><p><strong>查看所有远程分支</strong>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -r</span><br></pre></td></tr></table></figure>
+
+<p>这将列出所有远程分支，你可以选择其中一个作为你要创建的本地分支的源头。</p>
+</li>
+</ol>
+<h4 id="步骤二创建从远程分支派生的本地分支"><a href="#步骤二：创建从远程分支派生的本地分支" class="headerlink" title="步骤二：创建从远程分支派生的本地分支"></a>步骤二：创建从远程分支派生的本地分支</h4><ol start="2">
+<li><p><strong>从远程分支创建本地分支</strong>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b new_local_branch_name remote_branch_name</span><br></pre></td></tr></table></figure>
+
+<p>这会创建一个名为 <code>new_local_branch_name</code> 的本地分支，并与 <code>remote_branch_name</code> 的远程分支关联。</p>
+</li>
+</ol>
+<h4 id="步骤三推送本地分支到远程仓库"><a href="#步骤三：推送本地分支到远程仓库" class="headerlink" title="步骤三：推送本地分支到远程仓库"></a>步骤三：推送本地分支到远程仓库</h4><ol start="3">
+<li><p><strong>推送本地分支到远程仓库</strong>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin new_local_branch_name</span><br></pre></td></tr></table></figure>
+
+<p>这会将你新建的本地分支推送到远程仓库，并建立起本地分支和远程分支之间的追踪关系。</p>
+</li>
+</ol>
+<p>现在，你已经成功地创建了一个从其他远程分支派生的本地子分支，并与其关联起来。可以在这个新的本地分支上继续开发工作，提交更改，并将更改推送到远程仓库的相关分支上。</p>
+<h4 id="步骤四查看本地分支和远程分支关联关系"><a href="#步骤四：查看本地分支和远程分支关联关系" class="headerlink" title="步骤四：查看本地分支和远程分支关联关系"></a>步骤四：查看本地分支和远程分支关联关系</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">test@DESKTOP-11QS5CC MINGW64 /e/my_github_repo/Coding_fragment (test)</span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git branch -vv</span></span><br><span class="line">  main aba3c69 [origin/main] 左移和与运算的巧妙结合</span><br><span class="line">* test aba3c69 [origin/test] 左移和与运算的巧妙结合</span><br></pre></td></tr></table></figure>
+
+<h2 id="四git-怎么回退版本切换版本"><a href="#四-git-怎么回退版本，切换版本" class="headerlink" title="四.git 怎么回退版本，切换版本"></a>四.git 怎么回退版本，切换版本</h2><p>在 Git 中，有多种方法可以回退版本或切换版本，取决于你具体的需求和场景。以下是常见的操作方法：</p>
+<h3 id="1-查看提交历史"><a href="#1-查看提交历史" class="headerlink" title="1. 查看提交历史"></a>1. 查看提交历史</h3><p>首先，使用 <code>git log</code> 查看提交历史，找到你希望回退或切换到的版本对应的提交哈希（commit hash）。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br></pre></td></tr></table></figure>
+
+<p>这会显示提交历史记录，其中包括每个提交的哈希值、提交消息、作者和日期等信息。</p>
+<h3 id="2-回退到特定提交"><a href="#2-回退到特定提交" class="headerlink" title="2. 回退到特定提交"></a>2. 回退到特定提交</h3><h4 id="使用-git-reset"><a href="#使用-git-reset" class="headerlink" title="使用 git reset"></a>使用 <code>git reset</code></h4><p><code>git reset</code> 命令可以用来回退到某个特定的提交。它有多种模式，每种模式的作用不同。</p>
+<ul>
+<li><strong>Mixed 模式</strong>（默认模式）：保留工作目录中的更改，但将当前分支的指针移回到指定的提交。暂存区（index）也会回退到指定的提交。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset &lt;commit-hash&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Soft 模式</strong>：保留工作目录和暂存区中的更改，仅仅移动当前分支指针。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft &lt;commit-hash&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Hard 模式</strong>：彻底回退到指定的提交，所有本地的更改和提交历史后退至该提交之后的内容会被完全删除，工作区也会被重置。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard &lt;commit-hash&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用-git-revert"><a href="#使用-git-revert" class="headerlink" title="使用 git revert"></a>使用 <code>git revert</code></h4><p><code>git revert</code> 命令不删除提交历史，而是创建一个新的提交，应用一个反向更改，从而达到回退的效果。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert &lt;commit-hash&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这对团队协作非常有用，因为它不会破坏已有的提交历史。</p>
+<h3 id="3-切换到特定版本"><a href="#3-切换到特定版本" class="headerlink" title="3. 切换到特定版本"></a>3. 切换到特定版本</h3><h4 id="使用-git-checkout"><a href="#使用-git-checkout" class="headerlink" title="使用 git checkout"></a>使用 <code>git checkout</code></h4><p><code>git checkout</code> 命令可以用来切换到特定的提交或分支。</p>
+<ul>
+<li><strong>切换到指定的提交</strong>：这会将你的 HEAD 移动到指定的提交，但不会修改当前分支的指针。这种状态被称为“分离头指针”（detached HEAD）状态。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;commit-hash&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>切换到指定的分支</strong>：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用-git-switch"><a href="#使用-git-switch" class="headerlink" title="使用 git switch"></a>使用 <code>git switch</code></h4><p>从 Git 2.23 开始，引入了 <code>git switch</code> 命令，用于切换分支，语法上更明确，不容易误用。</p>
+<ul>
+<li><strong>切换到指定的分支</strong>：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch &lt;branch-name&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>切换到指定的提交（分离头指针状态）</strong>：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch --detach &lt;commit-hash&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-回退合并提交"><a href="#4-回退合并提交" class="headerlink" title="4. 回退合并提交"></a>4. 回退合并提交</h3><p>如果你想回退一次合并，可以使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git revert -m 1 &lt;merge-commit-hash&gt;</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>-m 1</code> 参数指定了哪个父提交应该保存，通常是1。</p>
+<h3 id="结合实际示例"><a href="#结合实际示例" class="headerlink" title="结合实际示例"></a>结合实际示例</h3><p>假设你有以下提交历史：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">commit abcdef1 (HEAD -&gt; main)</span><br><span class="line">commit abcdef2</span><br><span class="line">commit abcdef3</span><br><span class="line">commit abcdef4</span><br></pre></td></tr></table></figure>
+
+<h4 id="回退到-abcdef3"><a href="#回退到-abcdef3-：" class="headerlink" title="回退到 abcdef3 ："></a>回退到 <code>abcdef3</code> ：</h4><ul>
+<li>使用 <code>reset --hard</code>：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard abcdef3</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>revert</code>：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git revert abcdef1</span><br><span class="line">git revert abcdef2</span><br></pre></td></tr></table></figure>
+
+<h4 id="切换到-abcdef2分离头指针状态"><a href="#切换到-abcdef2（分离头指针状态）：" class="headerlink" title="切换到 abcdef2（分离头指针状态）："></a>切换到 <code>abcdef2</code>（分离头指针状态）：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout abcdef2</span><br></pre></td></tr></table></figure>
+
+<p>或者：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch --detach abcdef2</span><br></pre></td></tr></table></figure>
+
+<h4 id="返回到主分支从分离头指针状态返回"><a href="#返回到主分支（从分离头指针状态返回）：" class="headerlink" title="返回到主分支（从分离头指针状态返回）："></a>返回到主分支（从分离头指针状态返回）：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git switch main</span><br></pre></td></tr></table></figure>
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>选择哪种方法取决于你具体的需求：</p>
+<ul>
+<li><code>git reset</code> 用于彻底回退，尤其是本地仓库。</li>
+<li><code>git revert</code> 在协作环境中更安全，因为它通过创建新的提交来实现回退。</li>
+<li><code>git checkout</code> 和 <code>git switch</code> 用于直接切换到指定的提交或分支。</li>
+</ul>
+<p>记住，操作前一定要确保已经了解这些命令的作用，尤其是在牵涉到删除历史记录或变更的情况下。</p>
+<h2 id="五git-如何撤销工作区修改撤销暂存区修改撤销提交"><a href="#五-git-如何撤销工作区修改，撤销暂存区修改，撤销提交" class="headerlink" title="五.git 如何撤销工作区修改，撤销暂存区修改，撤销提交"></a>五.git 如何撤销工作区修改，撤销暂存区修改，撤销提交</h2><p>在 Git 中，可以使用不同的命令来撤销工作区修改、撤销暂存区修改以及撤销提交。下面分别介绍这三种情况下的撤销操作：</p>
+<h3 id="1-撤销工作区修改"><a href="#1-撤销工作区修改" class="headerlink" title="1. 撤销工作区修改"></a>1. 撤销工作区修改</h3><p>如果你对某个文件做出了修改，但想要撤销这些修改，可以使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这条命令会从最近的提交中恢复 <code>&lt;file&gt;</code> 文件，覆盖掉工作区的更改。</p>
+<h3 id="2-撤销暂存区修改"><a href="#2-撤销暂存区修改" class="headerlink" title="2. 撤销暂存区修改"></a>2. 撤销暂存区修改</h3><p>如果你已经将文件添加到暂存区（使用 <code>git add</code>），但后悔了想要撤销对暂存区的修改，可以使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD &lt;file&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这个命令会将暂存区中 <code>&lt;file&gt;</code> 的修改撤回到工作区，但会保留在工作区中的更改。</p>
+<h3 id="3-撤销提交"><a href="#3-撤销提交" class="headerlink" title="3. 撤销提交"></a>3. 撤销提交</h3><p>如果你已经提交了一个或多个提交，想要撤销最近的提交，可以使用以下命令：</p>
+<h4 id="撤销最近一次提交在不改变工作区内容的情况下"><a href="#撤销最近一次提交（在不改变工作区内容的情况下）" class="headerlink" title="撤销最近一次提交（在不改变工作区内容的情况下）"></a>撤销最近一次提交（在不改变工作区内容的情况下）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft HEAD^</span><br></pre></td></tr></table></figure>
+
+<p>这个命令会将 HEAD 指向的提交撤销，并且保留工作区和暂存区中的更改。你可以根据需要修改文件然后重新提交。</p>
+<h4 id="撤销最近一次提交以及更改回退工作目录中的文件内容同时保留这些修改到暂存区"><a href="#撤销最近一次提交以及更改（回退工作目录中的文件内容，同时保留这些修改到暂存区）" class="headerlink" title="撤销最近一次提交以及更改（回退工作目录中的文件内容，同时保留这些修改到暂存区）"></a>撤销最近一次提交以及更改（回退工作目录中的文件内容，同时保留这些修改到暂存区）</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --mixed HEAD^</span><br></pre></td></tr></table></figure>
+
+<p>此命令将 HEAD 指向的提交撤销，并且将修改放回到工作目录，但不会删除它们。你可以重新使用 <code>git add</code> 将需要提交的更改加入暂存区。</p>
+<h4 id="撤销提交并删除工作目录中的更改"><a href="#撤销提交并删除工作目录中的更改" class="headerlink" title="撤销提交并删除工作目录中的更改"></a>撤销提交并删除工作目录中的更改</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^</span><br></pre></td></tr></table></figure>
+
+<p>这会将 HEAD 指向的提交撤销，同时从工作目录中彻底删除这些更改。</p>
+<h4 id="撤销多个提交"><a href="#撤销多个提交" class="headerlink" title="撤销多个提交"></a>撤销多个提交</h4><p>如果需要撤销多个提交，可以将 <code>HEAD~N</code> 替换为你想要撤销的提交数量，例如撤销最近三次提交：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --soft HEAD~3</span><br></pre></td></tr></table></figure>
+
+<p>请注意，撤销提交会改变仓库历史，确保你真正需要这样做。</p>
+<h3 id="注意事项"><a href="#注意事项-1" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>在任何情况下，使用这些命令前请确保明白其影响。</li>
+<li>如果你与他人共享仓库，则应慎重使用撤销提交的命令，避免干扰其他开发者的工作。</li>
+<li>当操作不确定时，可以使用 <code>git status</code> 来查看当前的状态，并确保你理解要执行的操作的影响。</li>
+</ul>
+<p>以上是在 Git 中撤销工作区修改、撤销暂存区修改以及撤销提交的常见操作。</p>
+
+    
+
+    
+    <div class="page-reward">
+      <a href="javascript:void(0);" class="page-reward-btn tooltip-top" target="_self">
+        <div class="tooltip tooltip-east">
+          <span class="tooltip-item">
+            赏
+          </span>
+          <span class="tooltip-content">
+            <span class="tooltip-text">
+              <span class="tooltip-inner">
+                <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i
+                    class="icon icon-quo-right"></i></p>
+                <div class="reward-box">
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/alipay.jpg">
+                    <span class="reward-type">支付宝</span>
+                  </div>
+                  
+                  
+                  <div class="reward-box-item">
+                    <img class="reward-img" src="/img/weixin.jpg">
+                    <span class="reward-type">微信</span>
+                  </div>
+                  
+                </div>
+              </span>
+            </span>
+          </span>
+        </div>
+      </a>
+    </div>
+    
+
+    
+    <div class="declare"> 
+      <ul class="post-copyright">
+        <li>
+          <strong>本文作者：</strong>
+          CoderSong
+        </li>
+        <li>
+          <strong>本文链接：</strong>
+          <a href="https://jack-song-gif.github.io/2024/05/20/多人协作-Git管理/" title="多人协作-Git管理" target="_blank">https://jack-song-gif.github.io/2024/05/20/多人协作-Git管理/</a>
+        </li>
+        
+        <li>
+          <strong>版权声明： </strong>
           
+          本博客所有文章除特别声明外，均采用 <a href="https://github.com/JoeyBling/hexo-theme-yilia-plus/blob/master/LICENSE" rel="external nofollow" target="_blank">MIT</a> 许可协议。转载请注明出处！
+        </li>
+        
+      </ul>
+    </div>
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">marvell</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">tools</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">dpdk交叉编译</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+    
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/dpdk//" class="article-tag-list-link color5">dpdk</a>
+        			<a href="/categories/tools//" class="article-tag-list-link color1">tools</a>
         		</li>
       		
 		</ul>
 	</div>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+    
 
     
+    
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <!-- <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a> -->
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+     <!-- <img src="//pan.baidu.com/share/qrcode?url=https://jack-song-gif.github.io/2024/05/20/%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C-Git%E7%AE%A1%E7%90%86/" alt="微信分享二维码"> -->
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2024/05/16/%E5%BF%AB%E9%80%9F%E6%8E%8C%E6%8F%A1%E4%B8%80%E4%B8%AA%E8%AF%AD%E8%A8%80%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%8450/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">快速掌握一个语言最常用的50%</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A4%9A%E4%BA%BA%E5%8D%8F%E4%BD%9C-git%E7%AE%A1%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">多人协作-Git管理</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BA%8F%E5%AF%B9git%E6%9C%89%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84%E8%AE%A4%E8%AF%86"><span class="toc-number">1.1.</span> <span class="toc-text">序：对Git有个基本的认识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E4%BA%BA%E5%BC%80%E5%8F%91%E6%95%B4%E4%BD%93%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.1.</span> <span class="toc-text">【多人开发整体流程】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%AD%A5%E4%B8%BB%E7%BA%BF%E5%88%86%E6%94%AF%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.2.</span> <span class="toc-text">【同步主线分支工作流程】</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%88%86%E5%B8%83%E5%BC%8F%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.3.</span> <span class="toc-text">1. 分布式架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%92%8C%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="toc-number">1.1.4.</span> <span class="toc-text">2. 工作区和暂存区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E5%92%8C%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.5.</span> <span class="toc-text">3. 常见命令和工作流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%8B%E9%9A%86%E4%BB%93%E5%BA%93"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">克隆仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%8A%B6%E6%80%81"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">查看状态</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%87%E4%BB%B6%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="toc-number">1.1.5.3.</span> <span class="toc-text">添加文件到暂存区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E6%9B%B4%E6%94%B9"><span class="toc-number">1.1.5.4.</span> <span class="toc-text">提交更改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2"><span class="toc-number">1.1.5.5.</span> <span class="toc-text">查看提交历史</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C"><span class="toc-number">1.1.5.6.</span> <span class="toc-text">分支操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%88%E5%B9%B6%E5%88%86%E6%94%AF"><span class="toc-number">1.1.5.7.</span> <span class="toc-text">合并分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%86%B2%E7%AA%81"><span class="toc-number">1.1.5.8.</span> <span class="toc-text">处理冲突</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A8%E9%80%81%E6%9B%B4%E6%94%B9%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">1.1.5.9.</span> <span class="toc-text">推送更改到远程仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E7%9A%84%E6%9B%B4%E6%94%B9"><span class="toc-number">1.1.5.10.</span> <span class="toc-text">拉取远程仓库的更改</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%88%86%E5%B8%83%E5%BC%8F%E5%BC%80%E5%8F%91"><span class="toc-number">1.1.6.</span> <span class="toc-text">4. 分布式开发</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%93%8D%E4%BD%9Ctips"><span class="toc-number">1.2.</span> <span class="toc-text">常见操作Tips</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%B8%AA%E4%BA%BA%E5%88%86%E6%94%AF%E5%90%8C%E6%AD%A5%E4%B8%BB%E7%BA%BF%E4%BB%A3%E7%A0%81"><span class="toc-number">1.3.</span> <span class="toc-text">一.个人分支同步主线代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C-git%E6%80%8E%E4%B9%88cherry-pick%E6%9F%90%E4%B8%AA%E6%8F%90%E4%BA%A4%E6%88%96%E8%80%85%E6%9F%90%E5%87%A0%E4%B8%AA%E6%8F%90%E4%BA%A4"><span class="toc-number">1.4.</span> <span class="toc-text">二、Git怎么cherry-pick某个提交或者某几个提交</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.4.1.</span> <span class="toc-text">【详细介绍】：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cherry-pick-%E7%9A%84%E7%94%A8%E6%B3%95%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.4.2.</span> <span class="toc-text">Cherry-pick 的用法示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%9A%E4%B8%AA%E6%8F%90%E4%BA%A4"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">多个提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9E%E7%BB%AD%E8%8C%83%E5%9B%B4%E7%9A%84%E6%8F%90%E4%BA%A4"><span class="toc-number">1.4.2.3.</span> <span class="toc-text">连续范围的提交</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90"><span class="toc-number">1.4.2.4.</span> <span class="toc-text">例子</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-cherry-pick-%E7%9A%84%E6%83%85%E6%99%AF"><span class="toc-number">1.4.2.5.</span> <span class="toc-text">使用 Cherry-pick 的情景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.4.2.6.</span> <span class="toc-text">注意事项</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E9%97%AE%E5%A6%82%E6%9E%9C%E4%B8%8B%E8%BD%BD%E4%B8%80%E4%B8%AAgit%E4%BB%93%E5%BA%93%E6%9C%89%E5%A4%9A%E4%B8%AA%E5%88%86%E6%94%AF%E6%9C%AC%E5%9C%B0%E9%BB%98%E8%AE%A4%E5%8F%AA%E6%9C%89%E4%B8%80%E4%B8%AAmain%E5%88%86%E6%94%AF%E6%80%8E%E4%B9%88%E4%BB%8E%E5%85%B6%E4%BB%96%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E5%88%9B%E5%BB%BA%E5%AD%90%E5%88%86%E6%94%AF%E5%B9%B6%E4%B8%8E%E4%B9%8B%E5%85%B3%E8%81%94%E8%B5%B7%E6%9D%A5"><span class="toc-number">1.5.</span> <span class="toc-text">三.问：如果下载一个git仓库，有多个分支，本地默认只有一个main分支，怎么从其他远程分支创建子分支，并与之关联起来？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%E4%BD%BF%E7%94%A8checkout%E4%BB%8E%E6%8C%87%E5%AE%9A%E7%9A%84%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E6%B4%BE%E7%94%9F%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF"><span class="toc-number">1.5.1.</span> <span class="toc-text">方法一：使用checkout从指定的远程分支派生本地分支</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%E4%B8%80%E6%9F%A5%E7%9C%8B%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF"><span class="toc-number">1.5.1.1.</span> <span class="toc-text">步骤一：查看远程分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%E4%BA%8C%E5%88%9B%E5%BB%BA%E4%BB%8E%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E6%B4%BE%E7%94%9F%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF"><span class="toc-number">1.5.1.2.</span> <span class="toc-text">步骤二：创建从远程分支派生的本地分支</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%E4%B8%89%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-number">1.5.1.3.</span> <span class="toc-text">步骤三：推送本地分支到远程仓库</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4%E5%9B%9B%E6%9F%A5%E7%9C%8B%E6%9C%AC%E5%9C%B0%E5%88%86%E6%94%AF%E5%92%8C%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%E5%85%B3%E8%81%94%E5%85%B3%E7%B3%BB"><span class="toc-number">1.5.1.4.</span> <span class="toc-text">步骤四：查看本地分支和远程分支关联关系</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9Bgit-%E6%80%8E%E4%B9%88%E5%9B%9E%E9%80%80%E7%89%88%E6%9C%AC%E5%88%87%E6%8D%A2%E7%89%88%E6%9C%AC"><span class="toc-number">1.6.</span> <span class="toc-text">四.git 怎么回退版本，切换版本</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9F%A5%E7%9C%8B%E6%8F%90%E4%BA%A4%E5%8E%86%E5%8F%B2"><span class="toc-number">1.6.1.</span> <span class="toc-text">1. 查看提交历史</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9B%9E%E9%80%80%E5%88%B0%E7%89%B9%E5%AE%9A%E6%8F%90%E4%BA%A4"><span class="toc-number">1.6.2.</span> <span class="toc-text">2. 回退到特定提交</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-git-reset"><span class="toc-number">1.6.2.1.</span> <span class="toc-text">使用 git reset</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-git-revert"><span class="toc-number">1.6.2.2.</span> <span class="toc-text">使用 git revert</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%88%87%E6%8D%A2%E5%88%B0%E7%89%B9%E5%AE%9A%E7%89%88%E6%9C%AC"><span class="toc-number">1.6.3.</span> <span class="toc-text">3. 切换到特定版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-git-checkout"><span class="toc-number">1.6.3.1.</span> <span class="toc-text">使用 git checkout</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8-git-switch"><span class="toc-number">1.6.3.2.</span> <span class="toc-text">使用 git switch</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%9B%9E%E9%80%80%E5%90%88%E5%B9%B6%E6%8F%90%E4%BA%A4"><span class="toc-number">1.6.4.</span> <span class="toc-text">4. 回退合并提交</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E5%90%88%E5%AE%9E%E9%99%85%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.6.5.</span> <span class="toc-text">结合实际示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9E%E9%80%80%E5%88%B0-abcdef3"><span class="toc-number">1.6.5.1.</span> <span class="toc-text">回退到 abcdef3 ：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%87%E6%8D%A2%E5%88%B0-abcdef2%E5%88%86%E7%A6%BB%E5%A4%B4%E6%8C%87%E9%92%88%E7%8A%B6%E6%80%81"><span class="toc-number">1.6.5.2.</span> <span class="toc-text">切换到 abcdef2（分离头指针状态）：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%88%B0%E4%B8%BB%E5%88%86%E6%94%AF%E4%BB%8E%E5%88%86%E7%A6%BB%E5%A4%B4%E6%8C%87%E9%92%88%E7%8A%B6%E6%80%81%E8%BF%94%E5%9B%9E"><span class="toc-number">1.6.5.3.</span> <span class="toc-text">返回到主分支（从分离头指针状态返回）：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.6.6.</span> <span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94git-%E5%A6%82%E4%BD%95%E6%92%A4%E9%94%80%E5%B7%A5%E4%BD%9C%E5%8C%BA%E4%BF%AE%E6%94%B9%E6%92%A4%E9%94%80%E6%9A%82%E5%AD%98%E5%8C%BA%E4%BF%AE%E6%94%B9%E6%92%A4%E9%94%80%E6%8F%90%E4%BA%A4"><span class="toc-number">1.7.</span> <span class="toc-text">五.git 如何撤销工作区修改，撤销暂存区修改，撤销提交</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%92%A4%E9%94%80%E5%B7%A5%E4%BD%9C%E5%8C%BA%E4%BF%AE%E6%94%B9"><span class="toc-number">1.7.1.</span> <span class="toc-text">1. 撤销工作区修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%92%A4%E9%94%80%E6%9A%82%E5%AD%98%E5%8C%BA%E4%BF%AE%E6%94%B9"><span class="toc-number">1.7.2.</span> <span class="toc-text">2. 撤销暂存区修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%92%A4%E9%94%80%E6%8F%90%E4%BA%A4"><span class="toc-number">1.7.3.</span> <span class="toc-text">3. 撤销提交</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%92%A4%E9%94%80%E6%9C%80%E8%BF%91%E4%B8%80%E6%AC%A1%E6%8F%90%E4%BA%A4%E5%9C%A8%E4%B8%8D%E6%94%B9%E5%8F%98%E5%B7%A5%E4%BD%9C%E5%8C%BA%E5%86%85%E5%AE%B9%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B"><span class="toc-number">1.7.3.1.</span> <span class="toc-text">撤销最近一次提交（在不改变工作区内容的情况下）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%92%A4%E9%94%80%E6%9C%80%E8%BF%91%E4%B8%80%E6%AC%A1%E6%8F%90%E4%BA%A4%E4%BB%A5%E5%8F%8A%E6%9B%B4%E6%94%B9%E5%9B%9E%E9%80%80%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95%E4%B8%AD%E7%9A%84%E6%96%87%E4%BB%B6%E5%86%85%E5%AE%B9%E5%90%8C%E6%97%B6%E4%BF%9D%E7%95%99%E8%BF%99%E4%BA%9B%E4%BF%AE%E6%94%B9%E5%88%B0%E6%9A%82%E5%AD%98%E5%8C%BA"><span class="toc-number">1.7.3.2.</span> <span class="toc-text">撤销最近一次提交以及更改（回退工作目录中的文件内容，同时保留这些修改到暂存区）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%92%A4%E9%94%80%E6%8F%90%E4%BA%A4%E5%B9%B6%E5%88%A0%E9%99%A4%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95%E4%B8%AD%E7%9A%84%E6%9B%B4%E6%94%B9"><span class="toc-number">1.7.3.3.</span> <span class="toc-text">撤销提交并删除工作目录中的更改</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%92%A4%E9%94%80%E5%A4%9A%E4%B8%AA%E6%8F%90%E4%BA%A4"><span class="toc-number">1.7.3.4.</span> <span class="toc-text">撤销多个提交</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.7.4.</span> <span class="toc-text">注意事项</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           </div>
@@ -356,9 +808,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
